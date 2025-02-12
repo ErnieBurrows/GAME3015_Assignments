@@ -18,15 +18,15 @@ Aircraft::Aircraft(Type type, Game* game) : Entity(game)
 	}
 }
 
-void Aircraft::drawCurrent() const
+void Aircraft::DrawCurrent() const
 {	
 }
 
-void Aircraft::buildCurrent()
+void Aircraft::BuildCurrent()
 {
 	auto render = std::make_unique<RenderItem>();
 	renderer = render.get();
-	renderer->World = getTransform();
+	renderer->World = GetTransform();
 	renderer->ObjCBIndex = game->getRenderItems().size();
 	renderer->Mat = game->getMaterials()[mSprite].get();
 	renderer->Geo = game->getGeometries()["boxGeo"].get();

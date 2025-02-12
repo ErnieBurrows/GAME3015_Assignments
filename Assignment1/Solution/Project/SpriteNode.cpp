@@ -5,17 +5,17 @@ SpriteNode::SpriteNode(Game* game) : Entity(game)
 {
 }
 
-void SpriteNode::drawCurrent() const
+void SpriteNode::DrawCurrent() const
 {
-	renderer->World = getTransform();
+	renderer->World = GetTransform();
 	renderer->NumFramesDirty++;
 }
 
-void SpriteNode::buildCurrent()
+void SpriteNode::BuildCurrent()
 {
 	auto render = std::make_unique<RenderItem>();
 	renderer = render.get();
-	renderer->World = getTransform();
+	renderer->World = GetTransform();
 	XMStoreFloat4x4(&renderer->TexTransform, XMMatrixScaling(10.0f, 10.0f, 10.0f));
 	renderer->ObjCBIndex = game->getRenderItems().size();
 	renderer->Mat = game->getMaterials()["Desert"].get();

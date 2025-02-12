@@ -58,41 +58,41 @@ public:
 public:
 	SceneNode(Game* game);
 
-	void					attachChild(Ptr child);
-	Ptr						detachChild(const SceneNode& node);
+	void AttachChild(Ptr child);
+	Ptr	DetachChild(const SceneNode& node);
 
-	void					update(const GameTimer& gt);
-	void					draw() const;
-	void					build();
+	void Update(const GameTimer& gt);
+	void Draw() const;
+	void Build();
 
-	XMFLOAT3				getWorldPosition() const;
-	void					setPosition(float x, float y, float z);
-	XMFLOAT3				getWorldRotation() const;
-	void					setWorldRotation(float x, float y, float z);
-	XMFLOAT3				getWorldScale() const;
-	void					setScale(float x, float y, float z);
+	XMFLOAT3 GetWorldPosition() const;
+	void SetPosition(float x, float y, float z);
+	XMFLOAT3 GetWorldRotation() const;
+	void SetWorldRotation(float x, float y, float z);
+	XMFLOAT3 GetWorldScale() const;
+	void SetScale(float x, float y, float z);
 
-	XMFLOAT4X4				getWorldTransform() const;
-	XMFLOAT4X4				getTransform() const;
+	XMFLOAT4X4 GetWorldTransform() const;
+	XMFLOAT4X4 GetTransform() const;
 
-	void					move(float x, float y, float z);
+	void Move(float x, float y, float z);
 private:
-	virtual void			updateCurrent(const GameTimer& gt);
-	void					updateChildren(const GameTimer& gt);
+	virtual void UpdateCurrent(const GameTimer& gt);
+	void UpdateChildren(const GameTimer& gt);
 
-	virtual void			drawCurrent() const;
-	void					drawChildren() const;
-	virtual void			buildCurrent();
-	void					buildChildren();
+	virtual void DrawCurrent() const;
+	void DrawChildren() const;
+	virtual void BuildCurrent();
+	void BuildChildren();
 
 protected:
-	Game*					game;
-	RenderItem*				renderer;
+	Game* game;
+	RenderItem* renderer;
 private:
-	XMFLOAT3				mWorldPosition;
-	XMFLOAT3				mWorldRotation;
-	XMFLOAT3				mWorldScaling;
-	std::vector<Ptr>		mChildren;
-	SceneNode*				mParent;
+	XMFLOAT3 mWorldPosition;
+	XMFLOAT3 mWorldRotation;
+	XMFLOAT3 mWorldScaling;
+	std::vector<Ptr> mChildren;
+	SceneNode* mParent;
 };
 

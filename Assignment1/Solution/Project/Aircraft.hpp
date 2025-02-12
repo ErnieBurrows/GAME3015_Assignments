@@ -2,8 +2,7 @@
 #include "Entity.hpp"
 #include <string>
 
-class Aircraft :
-    public Entity
+class Aircraft : public Entity
 {
 public:
 	enum Type
@@ -18,11 +17,11 @@ public:
 
 
 private:
-	virtual void		drawCurrent() const;
-	virtual void		buildCurrent();
+	virtual void DrawCurrent() const;
+	virtual void BuildCurrent();
 
 
 private:
-	Type				mType;
-	std::string			mSprite;
+	Type mType;
+	std::string mSprite;
 };

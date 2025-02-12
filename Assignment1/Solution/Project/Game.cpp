@@ -65,7 +65,7 @@ void Game::OnResize()
 void Game::Update(const GameTimer& gt)
 {
 	OnKeyboardInput(gt);
-	mWorld.update(gt);
+	mWorld.Update(gt);
 	//UpdateCamera(gt);
 
 	// Cycle through the circular frame resource array.
@@ -131,7 +131,7 @@ void Game::Draw(const GameTimer& gt)
 	auto passCB = mCurrFrameResource->PassCB->Resource();
 	mCommandList->SetGraphicsRootConstantBufferView(2, passCB->GetGPUVirtualAddress());
 
-	mWorld.draw();
+	mWorld.Draw();
 	DrawRenderItems(mCommandList.Get(), mOpaqueRitems);
 
 	// Indicate a state transition on the resource usage.
@@ -629,7 +629,7 @@ void Game::BuildMaterials()
 
 void Game::BuildRenderItems()
 {
-	mWorld.buildScene();
+	mWorld.BuildScene();
 
 	// All the render items are opaque.
 	for (auto& e : mAllRitems)

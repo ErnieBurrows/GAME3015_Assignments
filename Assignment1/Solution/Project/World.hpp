@@ -6,12 +6,12 @@
 class World 
 {
 public:
-	explicit							World(Game* window);
-	void								update(const GameTimer& gt);
-	void								draw();
+	explicit World(Game* window);
+	void Update(const GameTimer& gt);
+	void Draw();
 
-	//void								loadTextures();
-	void								buildScene();
+	//void LoadTextures();
+	void BuildScene();
 
 
 private:
@@ -24,15 +24,15 @@ private:
 
 
 private:
-	Game*								mGame;
+	Game* mGame;
 
-	SceneNode*							mSceneGraph;
-	std::array<SceneNode*, LayerCount>	mSceneLayers;
+	SceneNode* mSceneGraph;
+	std::array<SceneNode*, LayerCount> mSceneLayers;
 
-	XMFLOAT4							mWorldBounds;
-	XMFLOAT2		    				mSpawnPosition;
-	float								mScrollSpeed;
-	Aircraft*							mPlayerAircraft;
-	SpriteNode*							mBackground;
-	Aircraft*							mEnemy;
+	XMFLOAT4 mWorldBounds;
+	XMFLOAT2 mSpawnPosition;
+	float mScrollSpeed;
+	Aircraft* mPlayerAircraft;
+	SpriteNode*	mBackground;
+	Aircraft* mEnemy;
 };

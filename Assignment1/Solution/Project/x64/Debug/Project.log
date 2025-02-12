@@ -1,21 +1,8 @@
-﻿  Camera.cpp
-  d3dApp.cpp
-  d3dUtil.cpp
-  DDSTextureLoader.cpp
-  GameTimer.cpp
-  GeometryGenerator.cpp
-  MathHelper.cpp
-  Aircraft.cpp
-C:\Users\101034096\Downloads\Assignment1_Helper\Solution\Project\Aircraft.cpp(30,52): warning C4267: '=': conversion from 'size_t' to 'UINT', possible loss of data
-  Entity.cpp
-  FrameResource.cpp
-  Game.cpp
-C:\Users\101034096\Downloads\Assignment1_Helper\Solution\Project\Game.cpp(24,21): warning C4305: 'argument': truncation from 'double' to 'float'
-  main.cpp
-  SceneNode.cpp
+﻿  Game.cpp
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\Game.cpp(24,21): warning C4305: 'argument': truncation from 'double' to 'float'
   SpriteNode.cpp
-C:\Users\101034096\Downloads\Assignment1_Helper\Solution\Project\SpriteNode.cpp(20,52): warning C4267: '=': conversion from 'size_t' to 'UINT', possible loss of data
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\SpriteNode.cpp(20,52): warning C4267: '=': conversion from 'size_t' to 'UINT', possible loss of data
   World.cpp
-C:\Users\101034096\Downloads\Assignment1_Helper\Solution\Project\World.cpp(28,34): warning C4305: 'argument': truncation from 'double' to 'float'
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\World.cpp(28,34): warning C4305: 'argument': truncation from 'double' to 'float'
   Generating Code...
-  Project.vcxproj -> C:\Users\101034096\Downloads\Assignment1_Helper\Solution\x64\Debug\Project.exe
+  Project.vcxproj -> D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\x64\Debug\Project.exe

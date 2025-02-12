@@ -11,46 +11,46 @@ World::World(Game* game)
 {
 }
 
-void World::update(const GameTimer& gt)
+void World::Update(const GameTimer& gt)
 {
-	mSceneGraph->update(gt);
+	mSceneGraph->Update(gt);
 }
 
-void World::draw()
+void World::Draw()
 {
-	mSceneGraph->draw();
+	mSceneGraph->Draw();
 }
 
-void World::buildScene()
+void World::BuildScene()
 {
 	std::unique_ptr<Aircraft> player(new Aircraft(Aircraft::Eagle, mGame));
 	mPlayerAircraft = player.get();
-	mPlayerAircraft->setPosition(0, 0.1, 0.0);
-	mPlayerAircraft->setScale(0.5, 0.5, 0.5);
-	//mPlayerAircraft->setVelocity(mScrollSpeed, 0.0, 0.0);
-	mSceneGraph->attachChild(std::move(player));
+	mPlayerAircraft->SetPosition(0, 0.1, 0.0);
+	mPlayerAircraft->SetScale(0.5, 0.5, 0.5);
+	mPlayerAircraft->SetVelocity(mScrollSpeed, 0.0, 0.0);
+	mSceneGraph->AttachChild(std::move(player));
 
 	std::unique_ptr<Aircraft> enemy1(new Aircraft(Aircraft::Raptor, mGame));
 	auto raptor = enemy1.get();
-	raptor->setPosition(0.5, 0, 1);
-	raptor->setScale(1.0, 1.0, 1.0);
-	raptor->setWorldRotation(0, XM_PI, 0);
-	mPlayerAircraft->attachChild(std::move(enemy1));
+	raptor->SetPosition(0.5, 0, 1);
+	raptor->SetScale(1.0, 1.0, 1.0);
+	raptor->SetWorldRotation(0, XM_PI, 0);
+	mPlayerAircraft->AttachChild(std::move(enemy1));
 
 	std::unique_ptr<Aircraft> enemy2(new Aircraft(Aircraft::Raptor, mGame));
 	auto raptor2 = enemy2.get();
-	raptor2->setPosition(-0.5, 0, 1);
-	raptor2->setScale(1.0, 1.0, 1.0);
-	raptor2->setWorldRotation(0, XM_PI, 0);
-	mPlayerAircraft->attachChild(std::move(enemy2));
+	raptor2->SetPosition(-0.5, 0, 1);
+	raptor2->SetScale(1.0, 1.0, 1.0);
+	raptor2->SetWorldRotation(0, XM_PI, 0);
+	mPlayerAircraft->AttachChild(std::move(enemy2));
 
 	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(mGame));
 	mBackground = backgroundSprite.get();
 	//mBackground->setPosition(mWorldBounds.left, mWorldBounds.top);
-	mBackground->setPosition(0, 0, 0.0);
-	mBackground->setScale(10.0, 1.0, 200.0);
+	mBackground->SetPosition(0, 0, 0.0);
+	mBackground->SetScale(10.0, 1.0, 200.0);
 	//mBackground->setVelocity(0, 0, -mScrollSpeed);
-	mSceneGraph->attachChild(std::move(backgroundSprite));
+	mSceneGraph->AttachChild(std::move(backgroundSprite));
 
-	mSceneGraph->build();
+	mSceneGraph->Build();
 }

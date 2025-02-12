@@ -27,13 +27,13 @@ void Aircraft::BuildCurrent()
 	auto render = std::make_unique<RenderItem>();
 	renderer = render.get();
 	renderer->World = GetTransform();
-	renderer->ObjCBIndex = game->getRenderItems().size();
-	renderer->Mat = game->getMaterials()[mSprite].get();
-	renderer->Geo = game->getGeometries()["boxGeo"].get();
+	renderer->ObjCBIndex = game->GetRenderItems().size();
+	renderer->Mat = game->GetMaterials()[mSprite].get();
+	renderer->Geo = game->GetGeometries()["boxGeo"].get();
 	renderer->PrimitiveType = D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 	renderer->IndexCount = renderer->Geo->DrawArgs["box"].IndexCount;
 	renderer->StartIndexLocation = renderer->Geo->DrawArgs["box"].StartIndexLocation;
 	renderer->BaseVertexLocation = renderer->Geo->DrawArgs["box"].BaseVertexLocation;
 
-	game->getRenderItems().push_back(std::move(render));
+	game->GetRenderItems().push_back(std::move(render));
 }

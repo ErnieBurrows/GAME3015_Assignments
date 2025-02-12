@@ -89,7 +89,7 @@ private:
 	World mWorld;
 
 public:
-	std::vector<std::unique_ptr<RenderItem>>& getRenderItems() { return mAllRitems; }
-	std::unordered_map<std::string, std::unique_ptr<Material>>& getMaterials() { return mMaterials; }
-	std::unordered_map<std::string, std::unique_ptr<MeshGeometry>>& getGeometries() { return mGeometries; }
+	std::vector<std::unique_ptr<RenderItem>>& GetRenderItems() { return mAllRitems; }
+	std::unordered_map<std::string, std::unique_ptr<Material>>& GetMaterials() { return mMaterials; }
+	std::unordered_map<std::string, std::unique_ptr<MeshGeometry>>& GetGeometries() { return mGeometries; }
 };

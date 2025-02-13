@@ -3,6 +3,7 @@
 
 SpriteNode::SpriteNode(Game* game) : Entity(game)
 {
+
 }
 
 void SpriteNode::DrawCurrent() const
@@ -19,11 +20,11 @@ void SpriteNode::BuildCurrent()
 	XMStoreFloat4x4(&renderer->TexTransform, XMMatrixScaling(10.0f, 10.0f, 10.0f));
 	renderer->ObjCBIndex = game->GetRenderItems().size();
 	renderer->Mat = game->GetMaterials()["Desert"].get();
-	renderer->Geo = game->GetGeometries()["boxGeo"].get();
+	renderer->Geo = game->GetGeometries()["Aircraft"].get();
 	renderer->PrimitiveType = D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
-	renderer->IndexCount = renderer->Geo->DrawArgs["box"].IndexCount;
-	renderer->StartIndexLocation = renderer->Geo->DrawArgs["box"].StartIndexLocation;
-	renderer->BaseVertexLocation = renderer->Geo->DrawArgs["box"].BaseVertexLocation;
+	renderer->IndexCount = renderer->Geo->DrawArgs["Aircraft"].IndexCount;
+	renderer->StartIndexLocation = renderer->Geo->DrawArgs["Aircraft"].StartIndexLocation;
+	renderer->BaseVertexLocation = renderer->Geo->DrawArgs["Aircraft"].BaseVertexLocation;
 
 	game->GetRenderItems().push_back(std::move(render));
 }

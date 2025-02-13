@@ -1,4 +1,5 @@
 #include "World.hpp"
+#include <iostream>
 
 World::World(Game* game)
 	: mSceneGraph(new SceneNode(game))
@@ -23,34 +24,24 @@ void World::Draw()
 
 void World::BuildScene()
 {
-	std::unique_ptr<Aircraft> player(new Aircraft(Aircraft::Eagle, mGame));
-	mPlayerAircraft = player.get();
-	mPlayerAircraft->SetPosition(0, 0.1, 0.0);
-	mPlayerAircraft->SetScale(0.5, 0.5, 0.5);
-	mPlayerAircraft->SetVelocity(mScrollSpeed, 0.0, 0.0);
-	mSceneGraph->AttachChild(std::move(player));
+    std::cout << "Building Scene..." << std::endl;
 
-	std::unique_ptr<Aircraft> enemy1(new Aircraft(Aircraft::Raptor, mGame));
-	auto raptor = enemy1.get();
-	raptor->SetPosition(0.5, 0, 1);
-	raptor->SetScale(1.0, 1.0, 1.0);
-	raptor->SetWorldRotation(0, XM_PI, 0);
-	mPlayerAircraft->AttachChild(std::move(enemy1));
+    std::unique_ptr<Aircraft> player(new Aircraft(Aircraft::Eagle, mGame));
+    mPlayerAircraft = player.get();
+    mPlayerAircraft->SetPosition(0, 0.1, 0.0);
+    mSceneGraph->AttachChild(std::move(player));
 
-	std::unique_ptr<Aircraft> enemy2(new Aircraft(Aircraft::Raptor, mGame));
-	auto raptor2 = enemy2.get();
-	raptor2->SetPosition(-0.5, 0, 1);
-	raptor2->SetScale(1.0, 1.0, 1.0);
-	raptor2->SetWorldRotation(0, XM_PI, 0);
-	mPlayerAircraft->AttachChild(std::move(enemy2));
 
-	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(mGame));
-	mBackground = backgroundSprite.get();
-	//mBackground->SetPosition(mWorldBounds.Left, mWorldBounds.top);
-	mBackground->SetPosition(0, 0, 0.0);
-	mBackground->SetScale(10.0, 1.0, 200.0);
-	mBackground->SetVelocity(0, 0, -mScrollSpeed);
-	mSceneGraph->AttachChild(std::move(backgroundSprite));
+    //std::unique_ptr<Aircraft> enemy1(new Aircraft(Aircraft::Raptor, mGame));
+    //auto raptor = enemy1.get();
+    //raptor->SetPosition(0.5, 0, 1);
+    //mPlayerAircraft->AttachChild(std::move(enemy1));
 
-	mSceneGraph->Build();
+    //std::unique_ptr<Aircraft> enemy2(new Aircraft(Aircraft::Raptor, mGame));
+    //auto raptor2 = enemy2.get();
+    //raptor2->SetPosition(-0.5, 0, 1);
+    //mPlayerAircraft->AttachChild(std::move(enemy2));
+
+    mSceneGraph->Build();
 }
+

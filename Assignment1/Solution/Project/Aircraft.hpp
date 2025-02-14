@@ -1,22 +1,27 @@
 #pragma once
-
 #include "Entity.hpp"
-#include "Game.hpp"
+#include <string>
 
 class Aircraft : public Entity
 {
 public:
-    enum Type { Eagle, Raptor };
+	enum Type
+	{
+		Eagle,
+		Raptor,
+	};
 
-    Aircraft(Type type, Game* game);
 
-    void DrawCurrent() const override;
-    void BuildCurrent() override;
+public:
+	Aircraft(Type type, Game* game);
+
 
 private:
-    Type mType;
-    std::string mModelName;
-    std::string mMaterialName;
+	virtual void DrawCurrent() const;
+	virtual void BuildCurrent();
 
-    RenderItem* renderer = nullptr;  
+
+private:
+	Type mType;
+	std::string mSprite;
 };

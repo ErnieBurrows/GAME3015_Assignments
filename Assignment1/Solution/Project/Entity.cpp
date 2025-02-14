@@ -2,7 +2,6 @@
 
 Entity::Entity(Game* game) : SceneNode(game), mVelocity(0, 0, 0)
 {
-
 }
 
 void Entity::SetVelocity(XMFLOAT3 velocity)

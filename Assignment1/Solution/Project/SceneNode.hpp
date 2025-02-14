@@ -66,11 +66,10 @@ public:
 	void Build();
 
 	XMFLOAT3 GetWorldPosition() const;
-	XMFLOAT3 GetWorldRotation() const;
-	XMFLOAT3 GetWorldScale() const;
-
 	void SetPosition(float x, float y, float z);
+	XMFLOAT3 GetWorldRotation() const;
 	void SetWorldRotation(float x, float y, float z);
+	XMFLOAT3 GetWorldScale() const;
 	void SetScale(float x, float y, float z);
 
 	XMFLOAT4X4 GetWorldTransform() const;

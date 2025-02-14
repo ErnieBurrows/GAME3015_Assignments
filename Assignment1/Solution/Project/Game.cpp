@@ -1,5 +1,4 @@
 #include "Game.hpp"
-#include "ObjLoader.h" 
 
 const int gNumFrameResources = 3;
 
@@ -21,7 +20,7 @@ bool Game::Initialize()
 		return false;
 
 
-	mCamera.SetPosition(0.0f, 5.0f, -10.0f);
+	mCamera.SetPosition(0, 5, 0);
 	mCamera.Pitch(3.14 / 2);
 
 	// Reset the command list to prep for initialization commands.
@@ -60,8 +59,7 @@ void Game::OnResize()
 	//XMMATRIX P = XMMatrixPerspectiveFovLH(0.25f * MathHelper::Pi, AspectRatio(), 1.0f, 1000.0f);
 	//XMStoreFloat4x4(&mProj, P);
 
-	//mCamera.SetLens(0.25f * MathHelper::Pi, AspectRatio(), 1.0f, 1000.0f);
-	mCamera.SetLens(0.25f * MathHelper::Pi, AspectRatio(), 0.1f, 5000.0f);
+	mCamera.SetLens(0.25f * MathHelper::Pi, AspectRatio(), 1.0f, 1000.0f);
 }
 
 void Game::Update(const GameTimer& gt)
@@ -133,7 +131,6 @@ void Game::Draw(const GameTimer& gt)
 	auto passCB = mCurrFrameResource->PassCB->Resource();
 	mCommandList->SetGraphicsRootConstantBufferView(2, passCB->GetGPUVirtualAddress());
 
-	//Todo: Remove this and make entities draw themselves
 	mWorld.Draw();
 	DrawRenderItems(mCommandList.Get(), mOpaqueRitems);
 
@@ -507,34 +504,39 @@ void Game::BuildShadersAndInputLayout()
 
 void Game::BuildShapeGeometry()
 {
-	std::vector<VertexData> vertices;
-	std::vector<unsigned short> indices;
+	GeometryGenerator geoGen;
+	GeometryGenerator::MeshData box = geoGen.CreateBox(1, 0, 1, 1);
+	SubmeshGeometry boxSubmesh;
+	boxSubmesh.IndexCount = (UINT)box.Indices32.size();
+	boxSubmesh.StartIndexLocation = 0;
+	boxSubmesh.BaseVertexLocation = 0;
 
-	if (!ObjLoader::LoadOBJModel("../../Models/plane.obj", vertices, indices)) {
-		throw std::runtime_error("Failed to load OBJ model.");
+
+	std::vector<Vertex> vertices(box.Vertices.size());
+
+	for (size_t i = 0; i < box.Vertices.size(); ++i)
+	{
+		vertices[i].Pos = box.Vertices[i].Position;
+		vertices[i].Normal = box.Vertices[i].Normal;
+		vertices[i].TexC = box.Vertices[i].TexC;
 	}
 
-	std::vector<Vertex> dxVertices(vertices.size());
-	for (size_t i = 0; i < vertices.size(); ++i) {
-		dxVertices[i].Pos = DirectX::XMFLOAT3(vertices[i].Position.x, vertices[i].Position.y, vertices[i].Position.z);
-		dxVertices[i].Normal = DirectX::XMFLOAT3(vertices[i].Normal.x, vertices[i].Normal.y, vertices[i].Normal.z);
-		dxVertices[i].TexC = DirectX::XMFLOAT2(vertices[i].Uv.x, vertices[i].Uv.y);
-	}
+	std::vector<std::uint16_t> indices = box.GetIndices16();
 
-	const UINT vbByteSize = static_cast<UINT>(dxVertices.size() * sizeof(Vertex));
-	const UINT ibByteSize = static_cast<UINT>(indices.size() * sizeof(uint16_t));
+	const UINT vbByteSize = (UINT)vertices.size() * sizeof(Vertex);
+	const UINT ibByteSize = (UINT)indices.size() * sizeof(std::uint16_t);
 
 	auto geo = std::make_unique<MeshGeometry>();
-	geo->Name = "AircraftGeo"; 
+	geo->Name = "boxGeo";
 
 	ThrowIfFailed(D3DCreateBlob(vbByteSize, &geo->VertexBufferCPU));
-	CopyMemory(geo->VertexBufferCPU->GetBufferPointer(), dxVertices.data(), vbByteSize);
+	CopyMemory(geo->VertexBufferCPU->GetBufferPointer(), vertices.data(), vbByteSize);
 
 	ThrowIfFailed(D3DCreateBlob(ibByteSize, &geo->IndexBufferCPU));
 	CopyMemory(geo->IndexBufferCPU->GetBufferPointer(), indices.data(), ibByteSize);
 
 	geo->VertexBufferGPU = d3dUtil::CreateDefaultBuffer(md3dDevice.Get(),
-		mCommandList.Get(), dxVertices.data(), vbByteSize, geo->VertexBufferUploader);
+		mCommandList.Get(), vertices.data(), vbByteSize, geo->VertexBufferUploader);
 
 	geo->IndexBufferGPU = d3dUtil::CreateDefaultBuffer(md3dDevice.Get(),
 		mCommandList.Get(), indices.data(), ibByteSize, geo->IndexBufferUploader);
@@ -544,15 +546,10 @@ void Game::BuildShapeGeometry()
 	geo->IndexFormat = DXGI_FORMAT_R16_UINT;
 	geo->IndexBufferByteSize = ibByteSize;
 
-	SubmeshGeometry aircraftSubmesh;
-	aircraftSubmesh.IndexCount = static_cast<UINT>(indices.size());
-	aircraftSubmesh.StartIndexLocation = 0;
-	aircraftSubmesh.BaseVertexLocation = 0;
+	geo->DrawArgs["box"] = boxSubmesh;
 
-	geo->DrawArgs["AircraftGeo"] = aircraftSubmesh;  
-	mGeometries["AircraftGeo"] = std::move(geo);
+	mGeometries[geo->Name] = std::move(geo);
 }
-
 
 void Game::BuildPSOs()
 {
@@ -575,7 +572,6 @@ void Game::BuildPSOs()
 		mShaders["opaquePS"]->GetBufferSize()
 	};
 	opaquePsoDesc.RasterizerState = CD3DX12_RASTERIZER_DESC(D3D12_DEFAULT);
-	opaquePsoDesc.RasterizerState.CullMode = D3D12_CULL_MODE_NONE; // Disable culling
 	opaquePsoDesc.BlendState = CD3DX12_BLEND_DESC(D3D12_DEFAULT);
 	opaquePsoDesc.DepthStencilState = CD3DX12_DEPTH_STENCIL_DESC(D3D12_DEFAULT);
 	opaquePsoDesc.SampleMask = UINT_MAX;
@@ -599,7 +595,7 @@ void Game::BuildFrameResources()
 //step13
 void Game::BuildMaterials()
 {
-	/*auto Eagle = std::make_unique<Material>();
+	auto Eagle = std::make_unique<Material>();
 	Eagle->Name = "Eagle";
 	Eagle->MatCBIndex = 0;
 	Eagle->DiffuseSrvHeapIndex = 0;
@@ -607,18 +603,7 @@ void Game::BuildMaterials()
 	Eagle->FresnelR0 = XMFLOAT3(0.05f, 0.05f, 0.05f);
 	Eagle->Roughness = 0.2f;
 
-	mMaterials["Eagle"] = std::move(Eagle);*/
-
-
-	auto AircraftMat = std::make_unique<Material>();
-	AircraftMat->Name = "Aircraft";
-	AircraftMat->MatCBIndex = 0;
-	AircraftMat->DiffuseSrvHeapIndex = 0;
-	AircraftMat->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	AircraftMat->FresnelR0 = XMFLOAT3(0.05f, 0.05f, 0.05f);
-	AircraftMat->Roughness = 0.2f;
-
-	mMaterials["Aircraft"] = std::move(AircraftMat);
+	mMaterials["Eagle"] = std::move(Eagle);
 
 	auto Raptor = std::make_unique<Material>();
 	Raptor->Name = "Raptor";
@@ -640,7 +625,6 @@ void Game::BuildMaterials()
 
 	mMaterials["Desert"] = std::move(Desert);
 
-
 }
 
 void Game::BuildRenderItems()
@@ -654,9 +638,6 @@ void Game::BuildRenderItems()
 
 void Game::DrawRenderItems(ID3D12GraphicsCommandList* cmdList, const std::vector<RenderItem*>& ritems)
 {
-
-	//Todo: Make a virtual Draw function in entities 
-
 	UINT objCBByteSize = d3dUtil::CalcConstantBufferByteSize(sizeof(ObjectConstants));
 	UINT matCBByteSize = d3dUtil::CalcConstantBufferByteSize(sizeof(MaterialConstants));
 

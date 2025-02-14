@@ -1,7 +1,8 @@
 #pragma once
 #include "SceneNode.hpp"
 
-class Entity : public SceneNode
+class Entity :
+    public SceneNode
 {
 public:
 	Entity(Game* game);

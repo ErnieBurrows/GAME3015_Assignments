@@ -1,6 +1,5 @@
 #include "SceneNode.hpp"
 #include "Game.hpp"
-#include <iostream>
 
 SceneNode::SceneNode(Game* game)
 	: mChildren()
@@ -14,19 +13,9 @@ SceneNode::SceneNode(Game* game)
 
 void SceneNode::AttachChild(Ptr child)
 {
-	std::cout << "Attaching child..." << std::endl;
-
-	if (!child) {
-		std::cerr << "ERROR: Trying to attach a null child!" << std::endl;
-		return;
-	}
-
 	child->mParent = this;
 	mChildren.push_back(std::move(child));
-
-	std::cout << "Child attached! Current child count: " << mChildren.size() << std::endl;
 }
-
 
 SceneNode::Ptr SceneNode::DetachChild(const SceneNode& node)
 {
@@ -85,12 +74,8 @@ void SceneNode::Build()
 
 void SceneNode::BuildCurrent()
 {
-	if (auto aircraft = dynamic_cast<Aircraft*>(this)) 
-	{
-		aircraft->Build();  
-	}
+	//Empty for now
 }
-
 
 void SceneNode::BuildChildren()
 {

@@ -92,4 +92,10 @@ public:
 	std::vector<std::unique_ptr<RenderItem>>& GetRenderItems() { return mAllRitems; }
 	std::unordered_map<std::string, std::unique_ptr<Material>>& GetMaterials() { return mMaterials; }
 	std::unordered_map<std::string, std::unique_ptr<MeshGeometry>>& GetGeometries() { return mGeometries; }
+
+	void LoadObJModel(const std::string& filename, std::unique_ptr<MeshGeometry>& mesh);
+
+	void LoadTextureFromFile(const std::string& fileName, const std::string& textureName);
+
+
 };

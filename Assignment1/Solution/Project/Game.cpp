@@ -1,4 +1,5 @@
 #include "Game.hpp"
+#include "tiny_obj_loader.h"
 
 const int gNumFrameResources = 3;
 
@@ -356,35 +357,40 @@ void Game::UpdateMainPassCB(const GameTimer& gt)
 
 void Game::LoadTextures()
 {
-	//Eagle
-	auto EagleTex = std::make_unique<Texture>();
-	EagleTex->Name = "EagleTex";
-	EagleTex->Filename = L"../../Textures/Eagle.dds";
-	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-		mCommandList.Get(), EagleTex->Filename.c_str(),
-		EagleTex->Resource, EagleTex->UploadHeap));
+   // LoadTextureFromFile("../../Textures/Eagle.dds", "EagleTex");
+	LoadTextureFromFile("../../Textures/canada.dds", "EagleTex");
+    LoadTextureFromFile("../../Textures/Raptor.dds", "RaptorTex");
+    LoadTextureFromFile("../../Textures/Desert.dds", "DesertTex");
 
-	mTextures[EagleTex->Name] = std::move(EagleTex);
+    ////Eagle
+    //auto EagleTex = std::make_unique<Texture>();
+    //EagleTex->Name = "EagleTex";
+    //EagleTex->Filename = L"../../Textures/Eagle.dds";
+    //ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
+    //    mCommandList.Get(), EagleTex->Filename.c_str(),
+    //    EagleTex->Resource, EagleTex->UploadHeap));
 
-	//Raptor
-	auto RaptorTex = std::make_unique<Texture>();
-	RaptorTex->Name = "RaptorTex";
-	RaptorTex->Filename = L"../../Textures/Raptor.dds";
-	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-		mCommandList.Get(), RaptorTex->Filename.c_str(),
-		RaptorTex->Resource, RaptorTex->UploadHeap));
+    //mTextures[EagleTex->Name] = std::move(EagleTex);
 
-	mTextures[RaptorTex->Name] = std::move(RaptorTex);
+    ////Raptor
+    //auto RaptorTex = std::make_unique<Texture>();
+    //RaptorTex->Name = "RaptorTex";
+    //RaptorTex->Filename = L"../../Textures/Raptor.dds";
+    //ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
+    //    mCommandList.Get(), RaptorTex->Filename.c_str(),
+    //    RaptorTex->Resource, RaptorTex->UploadHeap));
 
-	//Desert
-	auto DesertTex = std::make_unique<Texture>();
-	DesertTex->Name = "DesertTex";
-	DesertTex->Filename = L"../../Textures/Desert.dds";
-	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-		mCommandList.Get(), DesertTex->Filename.c_str(),
-		DesertTex->Resource, DesertTex->UploadHeap));
+    //mTextures[RaptorTex->Name] = std::move(RaptorTex);
 
-	mTextures[DesertTex->Name] = std::move(DesertTex);
+    ////Desert
+    //auto DesertTex = std::make_unique<Texture>();
+    //DesertTex->Name = "DesertTex";
+    //DesertTex->Filename = L"../../Textures/Desert.dds";
+    //ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
+    //    mCommandList.Get(), DesertTex->Filename.c_str(),
+    //    DesertTex->Resource, DesertTex->UploadHeap));
+
+    //mTextures[DesertTex->Name] = std::move(DesertTex);
 }
 
 void Game::BuildRootSignature()
@@ -504,6 +510,8 @@ void Game::BuildShadersAndInputLayout()
 
 void Game::BuildShapeGeometry()
 {
+	LoadObJModel("../../Models/Passenger_Aircraft.obj", mGeometries["planeGeo"]);
+
 	GeometryGenerator geoGen;
 	GeometryGenerator::MeshData box = geoGen.CreateBox(1, 0, 1, 1);
 	SubmeshGeometry boxSubmesh;
@@ -644,7 +652,6 @@ void Game::DrawRenderItems(ID3D12GraphicsCommandList* cmdList, const std::vector
 	auto objectCB = mCurrFrameResource->ObjectCB->Resource();
 	auto matCB = mCurrFrameResource->MaterialCB->Resource();
 
-	// For each render item...
 	for (size_t i = 0; i < ritems.size(); ++i)
 	{
 		auto ri = ritems[i];
@@ -656,14 +663,12 @@ void Game::DrawRenderItems(ID3D12GraphicsCommandList* cmdList, const std::vector
 		cmdList->IASetIndexBuffer(&ibv);
 		cmdList->IASetPrimitiveTopology(ri->PrimitiveType);
 
-		//step18
 		CD3DX12_GPU_DESCRIPTOR_HANDLE tex(mSrvDescriptorHeap->GetGPUDescriptorHandleForHeapStart());
 		tex.Offset(ri->Mat->DiffuseSrvHeapIndex, mCbvSrvDescriptorSize);
 
 		D3D12_GPU_VIRTUAL_ADDRESS objCBAddress = objectCB->GetGPUVirtualAddress() + ri->ObjCBIndex * objCBByteSize;
 		D3D12_GPU_VIRTUAL_ADDRESS matCBAddress = matCB->GetGPUVirtualAddress() + ri->Mat->MatCBIndex * matCBByteSize;
 
-		//step19
 		cmdList->SetGraphicsRootDescriptorTable(0, tex);
 		cmdList->SetGraphicsRootConstantBufferView(1, objCBAddress);
 		cmdList->SetGraphicsRootConstantBufferView(3, matCBAddress);
@@ -671,6 +676,7 @@ void Game::DrawRenderItems(ID3D12GraphicsCommandList* cmdList, const std::vector
 		cmdList->DrawIndexedInstanced(ri->IndexCount, 1, ri->StartIndexLocation, ri->BaseVertexLocation, 0);
 	}
 }
+
 
 //step21
 std::array<const CD3DX12_STATIC_SAMPLER_DESC, 6> Game::GetStaticSamplers()
@@ -728,4 +734,111 @@ std::array<const CD3DX12_STATIC_SAMPLER_DESC, 6> Game::GetStaticSamplers()
 		pointWrap, pointClamp,
 		linearWrap, linearClamp,
 		anisotropicWrap, anisotropicClamp };
+}
+
+
+/*-----------------------------3D Model loading----------------------------------------*/
+
+void Game::LoadObJModel(const std::string& filename, std::unique_ptr<MeshGeometry>& mesh)
+{
+	tinyobj::attrib_t attrib;
+	std::vector<tinyobj::shape_t> shapes;
+	std::vector<tinyobj::material_t> materials;
+	std::string warn, err;
+
+	if (!tinyobj::LoadObj(&attrib, &shapes, &materials, &warn, &err, filename.c_str()))
+	{
+		throw std::runtime_error("Failed to load OBJ file: " + filename);
+	}
+
+	std::vector<Vertex> vertices;
+	std::vector<std::uint32_t> indices;
+
+	for (const auto& shape : shapes)
+	{
+		for (const auto& index : shape.mesh.indices)
+		{
+			Vertex vertex = {};
+
+			// Positions
+			vertex.Pos = XMFLOAT3(
+				attrib.vertices[3 * index.vertex_index + 0],
+				attrib.vertices[3 * index.vertex_index + 1],
+				attrib.vertices[3 * index.vertex_index + 2]);
+
+			// Normals if avalible
+			if (index.normal_index >= 0)
+			{
+				vertex.Normal = XMFLOAT3(
+					attrib.normals[3 * index.normal_index + 0],
+					attrib.normals[3 * index.normal_index + 1],
+					attrib.normals[3 * index.normal_index + 2]);
+			}
+			else
+			{
+				vertex.Normal = XMFLOAT3(0.0f, 0.0f, 0.0f); //Set default normal
+			}
+
+			// Texture coordinates if avalible
+			if (index.texcoord_index >= 0)
+			{
+				vertex.TexC = XMFLOAT2(
+					attrib.texcoords[2 * index.texcoord_index + 0],
+					1.0f - attrib.texcoords[2 * index.texcoord_index + 1]); //Flip the Y coordinate
+			}
+			else
+			{
+				vertex.TexC = XMFLOAT2(0.0f, 0.0f); //Set default texture coordinates
+			}
+
+			indices.push_back(static_cast<std::uint32_t>(indices.size()));
+			vertices.push_back(vertex);
+
+		}
+	}
+
+	// Create the mesh geometry
+	const UINT vbByteSize = static_cast<UINT>(vertices.size()) * sizeof(Vertex);
+	const UINT ibByteSize = static_cast<UINT>(indices.size()) * sizeof(std::uint32_t);
+
+	mesh = std::make_unique<MeshGeometry>();
+	mesh->Name = "objMesh";
+
+	ThrowIfFailed(D3DCreateBlob(vbByteSize, &mesh->VertexBufferCPU));
+	CopyMemory(mesh->VertexBufferCPU->GetBufferPointer(), vertices.data(), vbByteSize);
+
+	ThrowIfFailed(D3DCreateBlob(ibByteSize, &mesh->IndexBufferCPU));
+	CopyMemory(mesh->IndexBufferCPU->GetBufferPointer(), indices.data(), ibByteSize);
+
+	mesh->VertexBufferGPU = d3dUtil::CreateDefaultBuffer(md3dDevice.Get(), 
+		mCommandList.Get(), vertices.data(), vbByteSize, mesh->VertexBufferUploader);
+
+	mesh->IndexBufferGPU = d3dUtil::CreateDefaultBuffer(md3dDevice.Get(),
+		mCommandList.Get(), indices.data(), ibByteSize, mesh->IndexBufferUploader);
+
+	mesh->VertexByteStride = sizeof(Vertex);
+	mesh->VertexBufferByteSize = vbByteSize;
+	mesh->IndexFormat = DXGI_FORMAT_R32_UINT;
+	mesh->IndexBufferByteSize = ibByteSize;
+
+	SubmeshGeometry submesh;
+	submesh.IndexCount = static_cast<UINT>(indices.size());
+	submesh.StartIndexLocation = 0;
+	submesh.BaseVertexLocation = 0;
+
+	mesh->DrawArgs["obj"] = submesh;
+}
+
+void Game::LoadTextureFromFile(const std::string& fileName, const std::string& textureName)
+{
+	auto texture = std::make_unique<Texture>();
+	texture->Name = textureName;
+    texture->Filename = std::wstring(fileName.begin(), fileName.end());
+
+	ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
+		mCommandList.Get(), texture->Filename.c_str(),
+		texture->Resource, texture->UploadHeap));
+
+
+	mTextures[texture->Name] = std::move(texture);
 }

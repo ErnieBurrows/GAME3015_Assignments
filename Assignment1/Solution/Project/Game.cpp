@@ -357,40 +357,9 @@ void Game::UpdateMainPassCB(const GameTimer& gt)
 
 void Game::LoadTextures()
 {
-   // LoadTextureFromFile("../../Textures/Eagle.dds", "EagleTex");
-	LoadTextureFromFile("../../Textures/canada.dds", "EagleTex");
+	LoadTextureFromFile("../../Textures/Airplane_Metal.dds", "EagleTex");
     LoadTextureFromFile("../../Textures/Raptor.dds", "RaptorTex");
     LoadTextureFromFile("../../Textures/Desert.dds", "DesertTex");
-
-    ////Eagle
-    //auto EagleTex = std::make_unique<Texture>();
-    //EagleTex->Name = "EagleTex";
-    //EagleTex->Filename = L"../../Textures/Eagle.dds";
-    //ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-    //    mCommandList.Get(), EagleTex->Filename.c_str(),
-    //    EagleTex->Resource, EagleTex->UploadHeap));
-
-    //mTextures[EagleTex->Name] = std::move(EagleTex);
-
-    ////Raptor
-    //auto RaptorTex = std::make_unique<Texture>();
-    //RaptorTex->Name = "RaptorTex";
-    //RaptorTex->Filename = L"../../Textures/Raptor.dds";
-    //ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-    //    mCommandList.Get(), RaptorTex->Filename.c_str(),
-    //    RaptorTex->Resource, RaptorTex->UploadHeap));
-
-    //mTextures[RaptorTex->Name] = std::move(RaptorTex);
-
-    ////Desert
-    //auto DesertTex = std::make_unique<Texture>();
-    //DesertTex->Name = "DesertTex";
-    //DesertTex->Filename = L"../../Textures/Desert.dds";
-    //ThrowIfFailed(DirectX::CreateDDSTextureFromFile12(md3dDevice.Get(),
-    //    mCommandList.Get(), DesertTex->Filename.c_str(),
-    //    DesertTex->Resource, DesertTex->UploadHeap));
-
-    //mTextures[DesertTex->Name] = std::move(DesertTex);
 }
 
 void Game::BuildRootSignature()
@@ -603,36 +572,14 @@ void Game::BuildFrameResources()
 //step13
 void Game::BuildMaterials()
 {
-	auto Eagle = std::make_unique<Material>();
-	Eagle->Name = "Eagle";
-	Eagle->MatCBIndex = 0;
-	Eagle->DiffuseSrvHeapIndex = 0;
-	Eagle->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	Eagle->FresnelR0 = XMFLOAT3(0.05f, 0.05f, 0.05f);
-	Eagle->Roughness = 0.2f;
+	mMaterials["Eagle"] = CreateMaterial("Eagle", 0, 0,
+		XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),
+		XMFLOAT3(0.05f, 0.05f, 0.05f),
+		0.8f);
 
-	mMaterials["Eagle"] = std::move(Eagle);
+	mMaterials["Raptor"] = CreateMaterial("Raptor", 1, 1);
 
-	auto Raptor = std::make_unique<Material>();
-	Raptor->Name = "Raptor";
-	Raptor->MatCBIndex = 1;
-	Raptor->DiffuseSrvHeapIndex = 1;
-	Raptor->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	Raptor->FresnelR0 = XMFLOAT3(0.05f, 0.05f, 0.05f);
-	Raptor->Roughness = 0.2f;
-
-	mMaterials["Raptor"] = std::move(Raptor);
-
-	auto Desert = std::make_unique<Material>();
-	Desert->Name = "Desert";
-	Desert->MatCBIndex = 2;
-	Desert->DiffuseSrvHeapIndex = 2;
-	Desert->DiffuseAlbedo = XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f);
-	Desert->FresnelR0 = XMFLOAT3(0.05f, 0.05f, 0.05f);
-	Desert->Roughness = 0.2f;
-
-	mMaterials["Desert"] = std::move(Desert);
-
+	mMaterials["Desert"] = CreateMaterial("Desert", 2, 2);
 }
 
 void Game::BuildRenderItems()
@@ -841,4 +788,25 @@ void Game::LoadTextureFromFile(const std::string& fileName, const std::string& t
 
 
 	mTextures[texture->Name] = std::move(texture);
+}
+
+std::unique_ptr<Material> Game::CreateMaterial(const std::string& name, int matCBIndex, int diffuseSrvHeapIndex, const XMFLOAT4& diffuseAlbedo, const XMFLOAT3& fresnelR0, float roughness)
+{
+	auto material = std::make_unique<Material>();
+	material->Name = name;
+	material->MatCBIndex = matCBIndex;
+	material->DiffuseSrvHeapIndex = diffuseSrvHeapIndex;
+	material->DiffuseAlbedo = diffuseAlbedo;
+	material->FresnelR0 = fresnelR0;
+	material->Roughness = roughness;
+
+	return material;
+}
+
+std::unique_ptr<Material> Game::CreateMaterial(const std::string& name, int matCBIndex, int diffuseSrvHeapIndex)
+{
+	return CreateMaterial(name, matCBIndex, diffuseSrvHeapIndex,
+		XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f),
+		XMFLOAT3(0.05f, 0.05f, 0.05f),
+		0.2f);
 }

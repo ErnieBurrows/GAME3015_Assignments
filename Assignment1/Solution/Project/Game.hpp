@@ -97,5 +97,16 @@ public:
 
 	void LoadTextureFromFile(const std::string& fileName, const std::string& textureName);
 
+	//Function to create custom material
+	std::unique_ptr<Material> CreateMaterial(
+		const std::string& name,
+		int matCBIndex,
+		int diffuseSrvHeapIndex,
+		const XMFLOAT4& diffuseAlbedo,
+		const XMFLOAT3& fresnelR0,
+		float roughness);
+
+	//Function to create default material
+	std::unique_ptr<Material> CreateMaterial(const std::string& name, int matCBIndex, int diffuseSrvHeapIndex);
 
 };

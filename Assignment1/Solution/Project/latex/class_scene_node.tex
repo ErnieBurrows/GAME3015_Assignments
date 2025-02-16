@@ -1,0 +1,80 @@
+\doxysection{Scene\+Node Class Reference}
+\hypertarget{class_scene_node}{}\label{class_scene_node}\index{SceneNode@{SceneNode}}
+Inheritance diagram for Scene\+Node\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_scene_node}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_scene_node_aaf5c9ad8475874b51b70e400822f2e9a}\label{class_scene_node_aaf5c9ad8475874b51b70e400822f2e9a} 
+typedef std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_scene_node}{Scene\+Node}} $>$ {\bfseries Ptr}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_scene_node_af1f3bf5e98c8b2c90b36057df2577d1a}\label{class_scene_node_af1f3bf5e98c8b2c90b36057df2577d1a} 
+{\bfseries Scene\+Node} (\mbox{\hyperlink{class_game}{Game}} \texorpdfstring{$\ast$}{*}game)
+\item 
+\Hypertarget{class_scene_node_a7ba065dcc419234283a0086823a09068}\label{class_scene_node_a7ba065dcc419234283a0086823a09068} 
+void {\bfseries Attach\+Child} (Ptr child)
+\item 
+\Hypertarget{class_scene_node_a3e1fdad8f981e2baec06b8294dd1daac}\label{class_scene_node_a3e1fdad8f981e2baec06b8294dd1daac} 
+Ptr {\bfseries Detach\+Child} (const \mbox{\hyperlink{class_scene_node}{Scene\+Node}} \&node)
+\item 
+\Hypertarget{class_scene_node_a50153339c54a2666853e3991559077cf}\label{class_scene_node_a50153339c54a2666853e3991559077cf} 
+void {\bfseries Update} (const Game\+Timer \&gt)
+\item 
+\Hypertarget{class_scene_node_af4fc014b1d1ecf1dc561bd252854f6ba}\label{class_scene_node_af4fc014b1d1ecf1dc561bd252854f6ba} 
+void {\bfseries Draw} () const
+\item 
+\Hypertarget{class_scene_node_a92bfd6e959118f3f592fbb429529a63c}\label{class_scene_node_a92bfd6e959118f3f592fbb429529a63c} 
+void {\bfseries Build} ()
+\item 
+\Hypertarget{class_scene_node_a8aabb12b69d6eaee73feb4835853d7cd}\label{class_scene_node_a8aabb12b69d6eaee73feb4835853d7cd} 
+XMFLOAT3 {\bfseries Get\+World\+Position} () const
+\item 
+\Hypertarget{class_scene_node_a76385a93c4a707f4321f136ab3084bdc}\label{class_scene_node_a76385a93c4a707f4321f136ab3084bdc} 
+void {\bfseries Set\+Position} (float x, float y, float z)
+\item 
+\Hypertarget{class_scene_node_a5bfa57ef91b0d2ec0a6df7734baa0ead}\label{class_scene_node_a5bfa57ef91b0d2ec0a6df7734baa0ead} 
+XMFLOAT3 {\bfseries Get\+World\+Rotation} () const
+\item 
+\Hypertarget{class_scene_node_a1dd565216dde601f02c32c0ae3b063c2}\label{class_scene_node_a1dd565216dde601f02c32c0ae3b063c2} 
+void {\bfseries Set\+World\+Rotation} (float x, float y, float z)
+\item 
+\Hypertarget{class_scene_node_a5a7ad8a1df910235fc32529373ac6f83}\label{class_scene_node_a5a7ad8a1df910235fc32529373ac6f83} 
+XMFLOAT3 {\bfseries Get\+World\+Scale} () const
+\item 
+\Hypertarget{class_scene_node_a8b3f450fde826723e0e0c66c9fe77d68}\label{class_scene_node_a8b3f450fde826723e0e0c66c9fe77d68} 
+void {\bfseries Set\+Scale} (float x, float y, float z)
+\item 
+\Hypertarget{class_scene_node_abb9def4312fbc47afbf440716deda415}\label{class_scene_node_abb9def4312fbc47afbf440716deda415} 
+XMFLOAT4\+X4 {\bfseries Get\+World\+Transform} () const
+\item 
+\Hypertarget{class_scene_node_ab67c47082fbe3e5bad5daeabaaabf065}\label{class_scene_node_ab67c47082fbe3e5bad5daeabaaabf065} 
+XMFLOAT4\+X4 {\bfseries Get\+Transform} () const
+\item 
+\Hypertarget{class_scene_node_a272ad455fd176527733f7ed4c8202079}\label{class_scene_node_a272ad455fd176527733f7ed4c8202079} 
+void {\bfseries Move} (float x, float y, float z)
+\item 
+\Hypertarget{class_scene_node_a6159039d6c8e8c76348134a177ee1972}\label{class_scene_node_a6159039d6c8e8c76348134a177ee1972} 
+void {\bfseries Rotate} (float x, float y, float z)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_scene_node_a06d1261ef839789469f228e7a7f2bfb9}\label{class_scene_node_a06d1261ef839789469f228e7a7f2bfb9} 
+\mbox{\hyperlink{class_game}{Game}} \texorpdfstring{$\ast$}{*} {\bfseries game}
+\item 
+\Hypertarget{class_scene_node_a51b22a4d6789039a96ebab097ed03db0}\label{class_scene_node_a51b22a4d6789039a96ebab097ed03db0} 
+\mbox{\hyperlink{struct_render_item}{Render\+Item}} \texorpdfstring{$\ast$}{*} {\bfseries renderer}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Scene\+Node.\+hpp\item 
+Scene\+Node.\+cpp\end{DoxyCompactItemize}

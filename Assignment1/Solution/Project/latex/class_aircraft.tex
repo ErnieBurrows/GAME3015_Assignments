@@ -1,0 +1,94 @@
+\doxysection{Aircraft Class Reference}
+\hypertarget{class_aircraft}{}\label{class_aircraft}\index{Aircraft@{Aircraft}}
+Inheritance diagram for Aircraft\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_aircraft}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Types}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_aircraft_a7dae28542933e088032b753600046acd}\label{class_aircraft_a7dae28542933e088032b753600046acd} 
+enum {\bfseries Type} \{ {\bfseries Eagle}
+, {\bfseries Raptor}
+ \}
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Types inherited from \mbox{\hyperlink{class_scene_node}{Scene\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_scene_node}{Scene\+Node}} $>$ {\bfseries Ptr}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_aircraft_ae9d52b44a62c33bf411185829158fba4}\label{class_aircraft_ae9d52b44a62c33bf411185829158fba4} 
+{\bfseries Aircraft} (Type type, \mbox{\hyperlink{class_game}{Game}} \texorpdfstring{$\ast$}{*}game)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_entity}{Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Entity} (\mbox{\hyperlink{class_game}{Game}} \texorpdfstring{$\ast$}{*}game)
+\item 
+void {\bfseries Set\+Velocity} (XMFLOAT3 velocity)
+\item 
+void {\bfseries Set\+Velocity} (float vx, float vy, float vz)
+\item 
+XMFLOAT3 {\bfseries Get\+Velocity} () const
+\item 
+virtual void \mbox{\hyperlink{class_entity_aa967b1dcdb929d54d36f402530d96881}{Update\+Current}} (const Game\+Timer \&gt)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_scene_node}{Scene\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Scene\+Node} (\mbox{\hyperlink{class_game}{Game}} \texorpdfstring{$\ast$}{*}game)
+\item 
+void {\bfseries Attach\+Child} (Ptr child)
+\item 
+Ptr {\bfseries Detach\+Child} (const \mbox{\hyperlink{class_scene_node}{Scene\+Node}} \&node)
+\item 
+void {\bfseries Update} (const Game\+Timer \&gt)
+\item 
+void {\bfseries Draw} () const
+\item 
+void {\bfseries Build} ()
+\item 
+XMFLOAT3 {\bfseries Get\+World\+Position} () const
+\item 
+void {\bfseries Set\+Position} (float x, float y, float z)
+\item 
+XMFLOAT3 {\bfseries Get\+World\+Rotation} () const
+\item 
+void {\bfseries Set\+World\+Rotation} (float x, float y, float z)
+\item 
+XMFLOAT3 {\bfseries Get\+World\+Scale} () const
+\item 
+void {\bfseries Set\+Scale} (float x, float y, float z)
+\item 
+XMFLOAT4\+X4 {\bfseries Get\+World\+Transform} () const
+\item 
+XMFLOAT4\+X4 {\bfseries Get\+Transform} () const
+\item 
+void {\bfseries Move} (float x, float y, float z)
+\item 
+void {\bfseries Rotate} (float x, float y, float z)
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Attributes inherited from \mbox{\hyperlink{class_entity}{Entity}}}
+\begin{DoxyCompactItemize}
+\item 
+XMFLOAT3 {\bfseries m\+Velocity}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_scene_node}{Scene\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_game}{Game}} \texorpdfstring{$\ast$}{*} {\bfseries game}
+\item 
+\mbox{\hyperlink{struct_render_item}{Render\+Item}} \texorpdfstring{$\ast$}{*} {\bfseries renderer}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Aircraft.\+hpp\item 
+Aircraft.\+cpp\end{DoxyCompactItemize}

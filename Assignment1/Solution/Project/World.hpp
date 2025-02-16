@@ -13,6 +13,8 @@ public:
 	//void LoadTextures();
 	void BuildScene();
 
+	void ProcessInput(const GameTimer& gt);
+
 
 private:
 	enum Layer

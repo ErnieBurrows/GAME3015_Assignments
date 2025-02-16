@@ -1,3 +1,5 @@
-﻿  Game.cpp
-D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\Game.cpp(25,21): warning C4305: 'argument': truncation from 'double' to 'float'
+﻿  World.cpp
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\World.cpp(31,44): warning C4305: 'argument': truncation from 'double' to 'float'
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\World.cpp(31,36): warning C4305: 'argument': truncation from 'double' to 'float'
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\World.cpp(31,28): warning C4305: 'argument': truncation from 'double' to 'float'
   Project.vcxproj -> D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\x64\Debug\Project.exe

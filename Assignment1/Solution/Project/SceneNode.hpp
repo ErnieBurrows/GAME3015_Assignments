@@ -76,6 +76,7 @@ public:
 	XMFLOAT4X4 GetTransform() const;
 
 	void Move(float x, float y, float z);
+	void Rotate(float x, float y, float z);
 private:
 	virtual void UpdateCurrent(const GameTimer& gt);
 	void UpdateChildren(const GameTimer& gt);

@@ -148,3 +148,9 @@ void SceneNode::Move(float x, float y, float z)
 	mWorldPosition.y += y;
 	mWorldPosition.z += z;
 }
+
+void SceneNode::Rotate(float x, float y, float z)
+{
+	XMFLOAT3 rot = GetWorldRotation();
+	SetWorldRotation(rot.x + x, rot.y + y, rot.z + z);
+}

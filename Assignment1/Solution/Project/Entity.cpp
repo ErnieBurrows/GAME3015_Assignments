@@ -33,3 +33,12 @@ void Entity::UpdateCurrent(const GameTimer& gt)
 	renderer->World = GetWorldTransform();
 	renderer->NumFramesDirty++;
 }
+
+void Entity::DrawCurrent() const
+{
+	if (renderer) 
+	{
+		renderer->World = GetWorldTransform();
+		renderer->NumFramesDirty++;
+	}
+}

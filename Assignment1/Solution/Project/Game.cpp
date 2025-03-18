@@ -203,7 +203,7 @@ void Game::OnKeyboardInput(const GameTimer& gt)
 	XMFLOAT3  oppositef3(-1, -1, -1);
 	XMVECTOR opposite = XMLoadFloat3(&oppositef3);
 
-	if (GetAsyncKeyState('W') & 0x8000)
+	/*if (GetAsyncKeyState('W') & 0x8000)
 	{
 		bool hit = false;
 
@@ -240,7 +240,7 @@ void Game::OnKeyboardInput(const GameTimer& gt)
 		{
 			mCamera.Strafe(10.0f * dt);
 		}
-	}
+	}*/
 
 
 	mCamera.UpdateViewMatrix();
@@ -630,7 +630,6 @@ void Game::DrawRenderItems(ID3D12GraphicsCommandList* cmdList, const std::vector
 	}
 }
 
-
 //step21
 std::array<const CD3DX12_STATIC_SAMPLER_DESC, 6> Game::GetStaticSamplers()
 {
@@ -690,16 +689,8 @@ std::array<const CD3DX12_STATIC_SAMPLER_DESC, 6> Game::GetStaticSamplers()
 }
 
 void Game::ProcessInput()
-{
-	CommandQueue& commands = mWorld.GetCommandQueue();
-
-	// Let the player handle events and real-time input
-
-	mPlayer.HandleEvent(commands);
-	mPlayer.HandleRealtimeInput(commands);
-	
+{	
 }
-
 
 /*-----------------------------3D Model loading----------------------------------------*/
 

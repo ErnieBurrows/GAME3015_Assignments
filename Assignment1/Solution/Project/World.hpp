@@ -3,6 +3,7 @@
 #include "Aircraft.hpp"
 #include "SpriteNode.h"
 #include "CommandQueue.h"
+#include "Player.h"
 
 class World 
 {
@@ -45,4 +46,6 @@ public:
 
 private:
 	CommandQueue mCommandQueue;
+
+	Player mPlayer;
 };

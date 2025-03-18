@@ -75,12 +75,6 @@
     <ClCompile Include="Game.cpp">
       <Filter>GameEngine</Filter>
     </ClCompile>
-    <ClCompile Include="Command.cpp">
-      <Filter>GameEngine</Filter>
-    </ClCompile>
-    <ClCompile Include="CommandQueue.cpp">
-      <Filter>GameEngine</Filter>
-    </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "Windows.h"
+#include "Actions.h"
 
 const float playerMoveSpeed = 30.0f;
 
@@ -11,23 +12,10 @@ Player::Player()
 	mKeyBinding[VK_UP] = MoveUp;
 	mKeyBinding[VK_DOWN] = MoveDown;
 
-	// Associate actions with commands.
-	mActionBinding[MoveLeft].action = [](SceneNode& node, const GameTimer& dt)
-		{
-			node.Move(-playerMoveSpeed * dt.DeltaTime(), 0.0f, 0.0f);
-		};
-	mActionBinding[MoveRight].action = [](SceneNode& node, const GameTimer& dt)
-		{
-			node.Move(playerMoveSpeed * dt.DeltaTime(), 0.0f, 0.0f);
-		};
-	mActionBinding[MoveUp].action = [](SceneNode& node, const GameTimer& dt)
-		{
-			node.Move(0.0f, playerMoveSpeed * dt.DeltaTime(), 0.0f);
-		};
-	mActionBinding[MoveDown].action = [](SceneNode& node, const GameTimer& dt)
-		{
-			node.Move(0.0f, -playerMoveSpeed * dt.DeltaTime(), 0.0f);
-		};
+	mActionBinding[MoveLeft] = Actions::CreateMoveLeftCommand(playerMoveSpeed, Category::PlayerAircraft);
+	mActionBinding[MoveRight] = Actions::CreateMoveRightCommand(playerMoveSpeed, Category::PlayerAircraft);
+	mActionBinding[MoveUp] = Actions::CreateMoveUpCommand(playerMoveSpeed, Category::PlayerAircraft);
+	mActionBinding[MoveDown] = Actions::CreateMoveDownCommand(playerMoveSpeed, Category::PlayerAircraft);
 
 	// Make sure the commands ONLY affect the player aircraft
 	for (auto& pair : mActionBinding)

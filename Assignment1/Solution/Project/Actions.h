@@ -3,6 +3,7 @@
 #include "SceneNode.hpp"
 #include "../../Common/GameTimer.h"
 #include "Category.h"
+#include "Aircraft.hpp"
 
 
 namespace Actions
@@ -60,5 +61,15 @@ namespace Actions
 		return command;
 	}
 
-
+	inline Command CreateBarrelRollCommand(Category::Type category)
+	{
+		Command command;
+		command.category = category;
+		command.action = [](SceneNode& node, const GameTimer& dt)
+			{
+				Aircraft& aircraft = static_cast<Aircraft&>(node);
+				aircraft.StartBarrelRoll();
+			};
+		return command;
+	}
 }

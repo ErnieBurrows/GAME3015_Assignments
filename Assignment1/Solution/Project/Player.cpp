@@ -10,11 +10,15 @@ Player::Player()
 	mKeyBinding['D'] = MoveRight;
 	mKeyBinding['W'] = MoveUp;
 	mKeyBinding['S'] = MoveDown;
+	mKeyBinding['E'] = Roll;
+
 
 	mActionBinding[MoveLeft] = Actions::CreateMoveLeftCommand(moveSpeed, Category::PlayerAircraft);
 	mActionBinding[MoveRight] = Actions::CreateMoveRightCommand(moveSpeed, Category::PlayerAircraft);
 	mActionBinding[MoveUp] = Actions::CreateMoveUpCommand(moveSpeed, Category::PlayerAircraft);
 	mActionBinding[MoveDown] = Actions::CreateMoveDownCommand(moveSpeed, Category::PlayerAircraft);
+	mActionBinding[Roll] = Actions::CreateBarrelRollCommand(Category::PlayerAircraft);
+
 
 	// Make sure the commands ONLY affect the player aircraft
 	for (auto& pair : mActionBinding)

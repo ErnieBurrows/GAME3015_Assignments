@@ -67,8 +67,6 @@ void Game::Update(const GameTimer& gt)
 {
 	OnKeyboardInput(gt);
 
-	ProcessInput();
-
 	mWorld.Update(gt);
 	//UpdateCamera(gt);
 
@@ -686,10 +684,6 @@ std::array<const CD3DX12_STATIC_SAMPLER_DESC, 6> Game::GetStaticSamplers()
 		pointWrap, pointClamp,
 		linearWrap, linearClamp,
 		anisotropicWrap, anisotropicClamp };
-}
-
-void Game::ProcessInput()
-{	
 }
 
 /*-----------------------------3D Model loading----------------------------------------*/

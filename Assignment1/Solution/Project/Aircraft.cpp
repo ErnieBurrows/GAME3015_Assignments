@@ -10,7 +10,7 @@ Aircraft::Aircraft(Type type, Game* game) : Entity(game)
 		mSprite = "Eagle";
 		break;
 	case (Raptor):
-		mSprite = "Raptor";
+		mSprite = "Eagle";
 		break;
 	default:
 		mSprite = "Eagle";
@@ -51,13 +51,35 @@ unsigned int Aircraft::GetCategory() const
 	return (mType == Eagle) ? Category::PlayerAircraft : Category::Player2Aircraft;
 }
 
-void Aircraft::Accelerate(XMFLOAT3& velocity)
+void Aircraft::StartBarrelRoll()
 {
-	XMFLOAT3 currentVelocity = GetVelocity();
+	if (!mIsBarrelRolling)
+	{
+		mIsBarrelRolling = true;
+		mRollAccumulated = 0.0f;
+	}
+}
 
-	currentVelocity.x += velocity.x;
-	currentVelocity.y += velocity.y;
-	currentVelocity.z += velocity.z;
+void Aircraft::UpdateCurrent(const GameTimer& gt)
+{
+	if (mIsBarrelRolling)
+	{
+		const float rollSpeed = XM_PI / 0.5f;
+		float dt = gt.DeltaTime();
+		float rollStep = rollSpeed * dt;
+		mRollAccumulated += rollStep;
 
-	SetVelocity(currentVelocity);
+		Rotate(0.0f, 0.0f, rollStep);
+
+		if (mRollAccumulated >= XM_PI)
+		{
+			mIsBarrelRolling = false;
+		}
+
+		if (renderer)
+		{
+			renderer->World = GetWorldTransform();
+			renderer->NumFramesDirty++;
+		}
+	}
 }

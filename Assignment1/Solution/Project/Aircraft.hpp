@@ -29,5 +29,12 @@ private:
 public:
 	virtual unsigned int GetCategory() const override;
 
-	void Accelerate(XMFLOAT3& velocity);
+	void StartBarrelRoll();
+
+	virtual void UpdateCurrent(const GameTimer& gt) override;
+
+private:
+	bool mIsBarrelRolling = false;
+	float mRollAccumulated = 0.0f;
+
 };

@@ -35,8 +35,8 @@ void World::BuildScene()
 	/*--- Player Plane ---*/
 	std::unique_ptr<Aircraft> player(new Aircraft(Aircraft::Eagle, mGame));
 	mPlayerAircraft = player.get();
-	mPlayerAircraft->SetPosition(0, 1.5, 0.0);
-	mPlayerAircraft->SetScale(0.0009, 0.0009, 0.0009);
+	mPlayerAircraft->SetPosition(-0.75, 1.5, 0.0);
+	mPlayerAircraft->SetScale(0.0002, 0.0002, 0.0002);
 	mPlayerAircraft->SetWorldRotation(XMConvertToRadians(270), XMConvertToRadians(270), 0.0f);
 	mPlayerAircraft->SetVelocity(0.0, 0.0, 0.0);
 	mSceneGraph->AttachChild(std::move(player));
@@ -44,8 +44,8 @@ void World::BuildScene()
 	/*--- Enemy Plane ---*/
 	std::unique_ptr<Aircraft> player2(new Aircraft(Aircraft::Raptor, mGame));
 	mPlayer2Aircraft = player2.get();
-	mPlayer2Aircraft->SetPosition(0, 1.5, 0.0);
-	mPlayer2Aircraft->SetScale(0.0009, 0.0009, 0.0009);
+	mPlayer2Aircraft->SetPosition(0.75, 1.5, 0.0);
+	mPlayer2Aircraft->SetScale(0.0002, 0.0002, 0.0002);
 	mPlayer2Aircraft->SetWorldRotation(XMConvertToRadians(270), XMConvertToRadians(270), 0.0f);
 	mPlayer2Aircraft->SetVelocity(0, 0, 0);
 	mSceneGraph->AttachChild(std::move(player2));

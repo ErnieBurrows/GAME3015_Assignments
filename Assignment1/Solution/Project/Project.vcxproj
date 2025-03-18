@@ -159,7 +159,6 @@
     <ClInclude Include="..\..\Common\UploadBuffer.h" />
     <ClInclude Include="Actions.h" />
     <ClInclude Include="Aircraft.hpp" />
-    <ClInclude Include="AircraftMover.h" />
     <ClInclude Include="Category.h" />
     <ClInclude Include="Command.h" />
     <ClInclude Include="CommandQueue.h" />

@@ -44,3 +44,20 @@ void Aircraft::BuildCurrent()
 
 	game->GetRenderItems().push_back(std::move(render));
 }
+
+unsigned int Aircraft::GetCategory() const
+{
+	// For now this assumes "Eagle is the player aircraft"
+	return (mType == Eagle) ? Category::PlayerAircraft : Category::EnemyAircraft;
+}
+
+void Aircraft::Accelerate(XMFLOAT3& velocity)
+{
+	XMFLOAT3 currentVelocity = GetVelocity();
+
+	currentVelocity.x += velocity.x;
+	currentVelocity.y += velocity.y;
+	currentVelocity.z += velocity.z;
+
+	SetVelocity(currentVelocity);
+}

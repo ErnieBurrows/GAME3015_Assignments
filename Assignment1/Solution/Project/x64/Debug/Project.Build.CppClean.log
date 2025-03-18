@@ -9,8 +9,6 @@ d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\
 d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\project\x64\debug\game.obj
 d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\project\x64\debug\frameresource.obj
 d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\project\x64\debug\entity.obj
-d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\project\x64\debug\commandqueue.obj
-d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\project\x64\debug\command.obj
 d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\project\x64\debug\aircraft.obj
 d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\project\x64\debug\mathhelper.obj
 d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\project\x64\debug\geometrygenerator.obj
@@ -19,6 +17,8 @@ d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\
 d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\project\x64\debug\d3dutil.obj
 d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\project\x64\debug\d3dapp.obj
 d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\project\x64\debug\camera.obj
+d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\project\x64\debug\playerbase.obj
+d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\project\x64\debug\player2.obj
 d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\x64\debug\project.exe
 d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\x64\debug\project.pdb
 d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\project\x64\debug\project.ilk

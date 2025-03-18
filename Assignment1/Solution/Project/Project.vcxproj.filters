@@ -51,9 +51,6 @@
     <ClCompile Include="World.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="SpriteNode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="SceneNode.cpp">
       <Filter>GameEngine</Filter>
     </ClCompile>
@@ -75,13 +72,16 @@
     <ClCompile Include="Game.cpp">
       <Filter>GameEngine</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Source Files</Filter>
+    <ClCompile Include="SpriteNode.cpp">
+      <Filter>GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerBase.cpp">
+      <Filter>GameEngine</Filter>
     </ClCompile>
     <ClCompile Include="Player2.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="PlayerBase.cpp">
+    <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -116,9 +116,6 @@
     <ClInclude Include="World.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="SpriteNode.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="SceneNode.hpp">
       <Filter>GameEngine</Filter>
     </ClInclude>
@@ -146,16 +143,19 @@
     <ClInclude Include="Category.h">
       <Filter>GameEngine</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Actions.h">
-      <Filter>Source Files</Filter>
+    <ClInclude Include="SpriteNode.h">
+      <Filter>GameEngine</Filter>
     </ClInclude>
     <ClInclude Include="PlayerBase.h">
-      <Filter>Source Files</Filter>
+      <Filter>GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Actions.h">
+      <Filter>GameEngine</Filter>
     </ClInclude>
     <ClInclude Include="Player2.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -63,6 +63,7 @@ void World::BuildScene()
 
 void World::ProcessInput()
 {
+
 	mPlayer.HandleRealtimeInput(GetCommandQueue());
 
 	mPlayer2.HandleRealtimeInput(GetCommandQueue());

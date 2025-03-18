@@ -44,18 +44,20 @@ private:
 
 	std::array<const CD3DX12_STATIC_SAMPLER_DESC, 6> GetStaticSamplers();
 
-private:
-
+public:
 	std::vector<std::unique_ptr<FrameResource>> mFrameResources;
 	FrameResource* mCurrFrameResource = nullptr;
 	int mCurrFrameResourceIndex = 0;
 
 	UINT mCbvSrvDescriptorSize = 0;
+	ComPtr<ID3D12DescriptorHeap> mSrvDescriptorHeap = nullptr;
+private:
+
+	
 
 	ComPtr<ID3D12RootSignature> mRootSignature = nullptr;
 
 	//step11
-	ComPtr<ID3D12DescriptorHeap> mSrvDescriptorHeap = nullptr;
 
 	std::unordered_map<std::string, std::unique_ptr<MeshGeometry>> mGeometries;
 	std::unordered_map<std::string, std::unique_ptr<Material>> mMaterials;
@@ -102,5 +104,7 @@ public:
 
 	//Function to create default material
 	std::unique_ptr<Material> CreateMaterial(const std::string& name, int matCBIndex, int diffuseSrvHeapIndex);
+
+	ID3D12GraphicsCommandList* getCmdList() { return mCommandList.Get(); }
 
 };

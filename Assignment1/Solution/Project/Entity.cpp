@@ -41,4 +41,5 @@ void Entity::DrawCurrent() const
 		renderer->World = GetWorldTransform();
 		renderer->NumFramesDirty++;
 	}
+
 }

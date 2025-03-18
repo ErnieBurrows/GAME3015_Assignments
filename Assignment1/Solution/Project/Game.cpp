@@ -135,7 +135,6 @@ void Game::Draw(const GameTimer& gt)
 
 	mWorld.Draw();
 
-	//Todo: The line before should not be needed. Comment it out and everythingf should work
 	DrawRenderItems(mCommandList.Get(), mOpaqueRitems);
 
 	// Indicate a state transition on the resource usage.
@@ -200,47 +199,6 @@ void Game::OnKeyboardInput(const GameTimer& gt)
 	float buffer = 0.5;
 	XMFLOAT3  oppositef3(-1, -1, -1);
 	XMVECTOR opposite = XMLoadFloat3(&oppositef3);
-
-	/*if (GetAsyncKeyState('W') & 0x8000)
-	{
-		bool hit = false;
-
-		if (!hit)
-		{
-			mCamera.Walk(10.0f * dt);
-
-		}
-	}
-
-	if (GetAsyncKeyState('S') & 0x8000)
-	{
-		bool hit = false;
-		if (!hit)
-		{
-			mCamera.Walk(-10.0f * dt);
-		}
-
-	}
-	if (GetAsyncKeyState('A') & 0x8000)
-	{
-		bool hit = false;
-		if (!hit)
-		{
-			mCamera.Strafe(-10.0f * dt);
-		}
-
-
-	}
-	if (GetAsyncKeyState('D') & 0x8000)
-	{
-		bool hit = false;
-		if (!hit)
-		{
-			mCamera.Strafe(10.0f * dt);
-		}
-	}*/
-
-
 	mCamera.UpdateViewMatrix();
 }
 
@@ -589,7 +547,7 @@ void Game::BuildRenderItems()
 {
 	mWorld.BuildScene();
 
-	// All the render items are opaque.
+	//// All the render items are opaque.
 	for (auto& e : mAllRitems)
 		mOpaqueRitems.push_back(e.get());
 }

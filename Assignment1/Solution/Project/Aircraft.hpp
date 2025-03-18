@@ -37,4 +37,6 @@ private:
 	bool mIsBarrelRolling = false;
 	float mRollAccumulated = 0.0f;
 
+	RenderItem* mAircraftRitem;
+
 };

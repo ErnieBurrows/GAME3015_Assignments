@@ -85,6 +85,21 @@ void SceneNode::BuildChildren()
 	}
 }
 
+void SceneNode::OnCommand(const Command& command, const GameTimer& dt)
+{
+	// Check if this node should respond to the command.
+	if (command.category & GetCategory())
+	{
+		command.action(*this, dt);
+	}
+
+	// Pass the command to children
+	for (const Ptr& child : mChildren)
+	{
+		child->OnCommand(command, dt);
+	}
+}
+
 XMFLOAT3 SceneNode::GetWorldPosition() const
 {
 	return mWorldPosition;

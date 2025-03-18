@@ -4,6 +4,8 @@
 #include "../../Common/UploadBuffer.h"
 #include "../../Common/GeometryGenerator.h"
 #include "../../Common/Camera.h"
+#include "Command.h"
+#include "Category.h"
 #include "FrameResource.h"
 
 using Microsoft::WRL::ComPtr;
@@ -89,11 +91,17 @@ private:
 protected:
 	Game* game;
 	RenderItem* renderer;
+
 private:
 	XMFLOAT3 mWorldPosition;
 	XMFLOAT3 mWorldRotation;
 	XMFLOAT3 mWorldScaling;
 	std::vector<Ptr> mChildren;
 	SceneNode* mParent;
+
+	/*--- Command Stuff ---*/
+public:
+	virtual unsigned int GetCategory() const { return Category::Scene; }
+	void OnCommand(const Command& command, const GameTimer& gt);
 };
 

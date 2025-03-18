@@ -24,4 +24,7 @@ private:
 private:
 	Type mType;
 	std::string mSprite;
+
+	/*--- Command Stuff ---*/
+public:
 };

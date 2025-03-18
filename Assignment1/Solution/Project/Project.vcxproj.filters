@@ -19,6 +19,12 @@
     <Filter Include="Shaders">
       <UniqueIdentifier>{90359444-794c-4779-bada-b3ee38eff0ee}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine">
+      <UniqueIdentifier>{66a2ae0c-05e9-4e9f-b35f-cd93730815c8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ExternalCode">
+      <UniqueIdentifier>{c361e8a8-5f65-4f39-8deb-c7e319bf932c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Common\Camera.cpp">
@@ -42,29 +48,32 @@
     <ClCompile Include="..\..\Common\MathHelper.cpp">
       <Filter>Common</Filter>
     </ClCompile>
-    <ClCompile Include="Aircraft.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Entity.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="FrameResource.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="main.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneNode.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="World.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SpriteNode.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneNode.cpp">
+      <Filter>GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="FrameResource.cpp">
+      <Filter>GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="tiny_obj_loader.cc">
+      <Filter>ExternalCode</Filter>
+    </ClCompile>
+    <ClCompile Include="Aircraft.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>GameEngine</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -95,26 +104,29 @@
     <ClInclude Include="..\..\Common\UploadBuffer.h">
       <Filter>Common</Filter>
     </ClInclude>
-    <ClInclude Include="Aircraft.hpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity.hpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="FrameResource.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.hpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SceneNode.hpp">
-      <Filter>Source Files</Filter>
-    </ClInclude>
     <ClInclude Include="World.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="SpriteNode.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneNode.hpp">
+      <Filter>GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.hpp">
+      <Filter>GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="FrameResource.h">
+      <Filter>GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="tiny_obj_loader.h">
+      <Filter>ExternalCode</Filter>
+    </ClInclude>
+    <ClInclude Include="Aircraft.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.hpp">
+      <Filter>GameEngine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

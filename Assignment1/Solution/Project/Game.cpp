@@ -133,6 +133,8 @@ void Game::Draw(const GameTimer& gt)
 	mCommandList->SetGraphicsRootConstantBufferView(2, passCB->GetGPUVirtualAddress());
 
 	mWorld.Draw();
+
+	//Todo: The line before should not be needed. Comment it out and everythingf should work
 	DrawRenderItems(mCommandList.Get(), mOpaqueRitems);
 
 	// Indicate a state transition on the resource usage.
@@ -591,6 +593,7 @@ void Game::BuildRenderItems()
 		mOpaqueRitems.push_back(e.get());
 }
 
+//Todo: Move this to entities
 void Game::DrawRenderItems(ID3D12GraphicsCommandList* cmdList, const std::vector<RenderItem*>& ritems)
 {
 	UINT objCBByteSize = d3dUtil::CalcConstantBufferByteSize(sizeof(ObjectConstants));

@@ -552,7 +552,6 @@ void Game::BuildRenderItems()
 		mOpaqueRitems.push_back(e.get());
 }
 
-//Todo: Move this to entities
 void Game::DrawRenderItems(ID3D12GraphicsCommandList* cmdList, const std::vector<RenderItem*>& ritems)
 {
 	UINT objCBByteSize = d3dUtil::CalcConstantBufferByteSize(sizeof(ObjectConstants));

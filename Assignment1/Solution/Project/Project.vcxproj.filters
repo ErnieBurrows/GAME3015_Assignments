@@ -75,6 +75,12 @@
     <ClCompile Include="Game.cpp">
       <Filter>GameEngine</Filter>
     </ClCompile>
+    <ClCompile Include="Command.cpp">
+      <Filter>GameEngine</Filter>
+    </ClCompile>
+    <ClCompile Include="CommandQueue.cpp">
+      <Filter>GameEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Common\Camera.h">
@@ -127,6 +133,18 @@
     </ClInclude>
     <ClInclude Include="Game.hpp">
       <Filter>GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Command.h">
+      <Filter>GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="CommandQueue.h">
+      <Filter>GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Category.h">
+      <Filter>GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="AircraftMover.h">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

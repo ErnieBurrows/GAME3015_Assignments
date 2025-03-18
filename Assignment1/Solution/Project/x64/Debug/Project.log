@@ -1,24 +1,86 @@
-﻿  Camera.cpp
-  d3dApp.cpp
-  d3dUtil.cpp
-  DDSTextureLoader.cpp
-  GameTimer.cpp
-  GeometryGenerator.cpp
-  MathHelper.cpp
-  Aircraft.cpp
+﻿  Aircraft.cpp
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\Command.h(8,21): error C2065: 'SceneNode': undeclared identifier
+  (compiling source file 'Aircraft.cpp')
+  
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\Command.h(8,31): error C2059: syntax error: ','
+  (compiling source file 'Aircraft.cpp')
+  
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\Command.h(8,49): error C2059: syntax error: ')'
+  (compiling source file 'Aircraft.cpp')
+  
 D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\Aircraft.cpp(36,52): warning C4267: '=': conversion from 'size_t' to 'UINT', possible loss of data
+  Command.cpp
+  CommandQueue.cpp
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\SceneNode.hpp(105,30): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+  (compiling source file 'CommandQueue.cpp')
+  
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\SceneNode.hpp(105,30): error C2143: syntax error: missing ',' before '&'
+  (compiling source file 'CommandQueue.cpp')
+  
   Entity.cpp
-  FrameResource.cpp
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\Command.h(8,21): error C2065: 'SceneNode': undeclared identifier
+  (compiling source file 'Entity.cpp')
+  
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\Command.h(8,31): error C2059: syntax error: ','
+  (compiling source file 'Entity.cpp')
+  
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\Command.h(8,49): error C2059: syntax error: ')'
+  (compiling source file 'Entity.cpp')
+  
   Game.cpp
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\Command.h(8,21): error C2065: 'SceneNode': undeclared identifier
+  (compiling source file 'Game.cpp')
+  
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\Command.h(8,31): error C2059: syntax error: ','
+  (compiling source file 'Game.cpp')
+  
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\Command.h(8,49): error C2059: syntax error: ')'
+  (compiling source file 'Game.cpp')
+  
 D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\Game.cpp(25,21): warning C4305: 'argument': truncation from 'double' to 'float'
   main.cpp
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\Command.h(8,21): error C2065: 'SceneNode': undeclared identifier
+  (compiling source file 'main.cpp')
+  
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\Command.h(8,31): error C2059: syntax error: ','
+  (compiling source file 'main.cpp')
+  
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\Command.h(8,49): error C2059: syntax error: ')'
+  (compiling source file 'main.cpp')
+  
   SceneNode.cpp
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\Command.h(8,21): error C2065: 'SceneNode': undeclared identifier
+  (compiling source file 'SceneNode.cpp')
+  
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\Command.h(8,31): error C2059: syntax error: ','
+  (compiling source file 'SceneNode.cpp')
+  
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\Command.h(8,49): error C2059: syntax error: ')'
+  (compiling source file 'SceneNode.cpp')
+  
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\SceneNode.cpp(93,10): error C2064: term does not evaluate to a function taking 2 arguments
   SpriteNode.cpp
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\Command.h(8,21): error C2065: 'SceneNode': undeclared identifier
+  (compiling source file 'SpriteNode.cpp')
+  
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\Command.h(8,31): error C2059: syntax error: ','
+  (compiling source file 'SpriteNode.cpp')
+  
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\Command.h(8,49): error C2059: syntax error: ')'
+  (compiling source file 'SpriteNode.cpp')
+  
 D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\SpriteNode.cpp(20,52): warning C4267: '=': conversion from 'size_t' to 'UINT', possible loss of data
-  tiny_obj_loader.cc
   World.cpp
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\Command.h(8,21): error C2065: 'SceneNode': undeclared identifier
+  (compiling source file 'World.cpp')
+  
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\Command.h(8,31): error C2059: syntax error: ','
+  (compiling source file 'World.cpp')
+  
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\Command.h(8,49): error C2059: syntax error: ')'
+  (compiling source file 'World.cpp')
+  
 D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\World.cpp(31,44): warning C4305: 'argument': truncation from 'double' to 'float'
 D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\World.cpp(31,36): warning C4305: 'argument': truncation from 'double' to 'float'
 D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\World.cpp(31,28): warning C4305: 'argument': truncation from 'double' to 'float'
   Generating Code...
-  Project.vcxproj -> D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\x64\Debug\Project.exe

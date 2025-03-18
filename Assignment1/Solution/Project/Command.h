@@ -1,7 +1,8 @@
 #pragma once
 #include <functional>
-#include "SceneNode.hpp"
 #include "../../Common/GameTimer.h"
+
+class SceneNode;
 
 struct Command
 {

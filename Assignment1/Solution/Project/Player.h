@@ -2,6 +2,7 @@
 #include <map>
 #include "Command.h"
 #include "CommandQueue.h"
+#include "SceneNode.hpp"
 
 class Player
 {

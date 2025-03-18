@@ -81,6 +81,9 @@
     <ClCompile Include="CommandQueue.cpp">
       <Filter>GameEngine</Filter>
     </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Common\Camera.h">
@@ -144,6 +147,9 @@
       <Filter>GameEngine</Filter>
     </ClInclude>
     <ClInclude Include="AircraftMover.h">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
       <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>

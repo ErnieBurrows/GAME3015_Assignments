@@ -8,6 +8,7 @@
 #include "Category.h"
 #include "FrameResource.h"
 
+
 using Microsoft::WRL::ComPtr;
 using namespace DirectX;
 using namespace DirectX::PackedVector;
@@ -17,6 +18,8 @@ using namespace DirectX::PackedVector;
 
 // Lightweight structure stores parameters to draw a shape.  This will
 // vary from app-to-app.
+
+
 struct RenderItem
 {
 	RenderItem() = default;
@@ -51,11 +54,11 @@ struct RenderItem
 
 class Game;
 
+
 class SceneNode
 {
 public:
 	typedef std::unique_ptr<SceneNode> Ptr;
-
 
 public:
 	SceneNode(Game* game);
@@ -102,6 +105,7 @@ private:
 	/*--- Command Stuff ---*/
 public:
 	virtual unsigned int GetCategory() const { return Category::Scene; }
-	void OnCommand(const Command& command, const GameTimer& gt);
+
+	void OnCommand(const Command& command, const GameTimer& dt);
 };
 

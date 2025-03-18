@@ -1,4 +1,5 @@
 #include "World.hpp"
+#include "Player.h"
 
 class Game : public D3DApp
 {
@@ -44,6 +45,13 @@ private:
 	std::array<const CD3DX12_STATIC_SAMPLER_DESC, 6> GetStaticSamplers();
 
 private:
+	/*--- Command Stuff ---*/
+	void ProcessInput();
+
+	Player mPlayer;
+	World mWorld;
+
+private:
 
 	std::vector<std::unique_ptr<FrameResource>> mFrameResources;
 	FrameResource* mCurrFrameResource = nullptr;
@@ -86,7 +94,7 @@ private:
 
 	POINT mLastMousePos;
 	Camera mCamera;
-	World mWorld;
+	
 
 public:
 	std::vector<std::unique_ptr<RenderItem>>& GetRenderItems() { return mAllRitems; }

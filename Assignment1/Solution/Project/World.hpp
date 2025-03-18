@@ -2,6 +2,7 @@
 #include "SceneNode.hpp"
 #include "Aircraft.hpp"
 #include "SpriteNode.h"
+#include "CommandQueue.h"
 
 class World 
 {
@@ -13,7 +14,7 @@ public:
 	//void LoadTextures();
 	void BuildScene();
 
-	void ProcessInput(const GameTimer& gt);
+	void ProcessInput();
 
 
 private:
@@ -37,4 +38,11 @@ private:
 	Aircraft* mPlayerAircraft;
 	SpriteNode*	mBackground;
 	Aircraft* mEnemy;
+
+	/*--- Command Stuff ---*/
+public:
+	CommandQueue& GetCommandQueue() { return mCommandQueue; }
+
+private:
+	CommandQueue mCommandQueue;
 };

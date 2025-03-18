@@ -11,11 +11,18 @@ World::World(Game* game)
 {
 }
 
-void World::Update(const GameTimer& gt)
+void World::Update(const GameTimer& dt)
 {
-	mSceneGraph->Update(gt);
+	// Process and dispacth all commands
 
-	ProcessInput(gt);
+	while (!mCommandQueue.isEmpty())
+	{
+		mSceneGraph->OnCommand(mCommandQueue.pop(), dt);
+	}
+
+	mSceneGraph->Update(dt);
+
+	ProcessInput();
 }
 
 void World::Draw()
@@ -58,39 +65,39 @@ void World::BuildScene()
 	mSceneGraph->Build();
 }
 
-void World::ProcessInput(const GameTimer& gt)
+void World::ProcessInput()
 {
-	const float dt = gt.DeltaTime();
-	const float moveSpeed = 5.0f * dt;
-	const float rotationSpeed = 5.0f * XMConvertToRadians(45.0f) * dt; // Rotates at 45 degrees per second
+	//const float dt = gt.DeltaTime();
+	//const float moveSpeed = 5.0f * dt;
+	//const float rotationSpeed = 5.0f * XMConvertToRadians(45.0f) * dt; // Rotates at 45 degrees per second
 
-	// Movement (Arrow Keys)
-	if (GetAsyncKeyState(VK_UP) & 0x8000)
-	{
-		mPlayerAircraft->Move(0.0f, 0.0f, moveSpeed);
-	}
-	if (GetAsyncKeyState(VK_DOWN) & 0x8000)
-	{
-		mPlayerAircraft->Move(0.0f, 0.0f, -moveSpeed);
-	}
-	if (GetAsyncKeyState(VK_LEFT) & 0x8000)
-	{
-		mPlayerAircraft->Move(-moveSpeed, 0.0f, 0.0f);
-	}
-	if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
-	{
-		mPlayerAircraft->Move(moveSpeed, 0.0f, 0.0f);
-	}
+	//// Movement (Arrow Keys)
+	//if (GetAsyncKeyState(VK_UP) & 0x8000)
+	//{
+	//	mPlayerAircraft->Move(0.0f, 0.0f, moveSpeed);
+	//}
+	//if (GetAsyncKeyState(VK_DOWN) & 0x8000)
+	//{
+	//	mPlayerAircraft->Move(0.0f, 0.0f, -moveSpeed);
+	//}
+	//if (GetAsyncKeyState(VK_LEFT) & 0x8000)
+	//{
+	//	mPlayerAircraft->Move(-moveSpeed, 0.0f, 0.0f);
+	//}
+	//if (GetAsyncKeyState(VK_RIGHT) & 0x8000)
+	//{
+	//	mPlayerAircraft->Move(moveSpeed, 0.0f, 0.0f);
+	//}
 
-	// Rotation (Q & R)
-	if (GetAsyncKeyState('Q') & 0x8000) // Rotate counterclockwise (negative X-axis)
-	{
-		mPlayerAircraft->Rotate(rotationSpeed, 0.0f, 0.0f);
-	}
-	if (GetAsyncKeyState('E') & 0x8000) // Rotate clockwise (positive X-axis)
-	{
-		mPlayerAircraft->Rotate(-rotationSpeed, 0.0f, 0.0f);
-	}
+	//// Rotation (Q & R)
+	//if (GetAsyncKeyState('Q') & 0x8000) // Rotate counterclockwise (negative X-axis)
+	//{
+	//	mPlayerAircraft->Rotate(rotationSpeed, 0.0f, 0.0f);
+	//}
+	//if (GetAsyncKeyState('E') & 0x8000) // Rotate clockwise (positive X-axis)
+	//{
+	//	mPlayerAircraft->Rotate(-rotationSpeed, 0.0f, 0.0f);
+	//}
 }
 
 

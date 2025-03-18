@@ -27,4 +27,7 @@ private:
 
 	/*--- Command Stuff ---*/
 public:
+	virtual unsigned int GetCategory() const override;
+
+	void Accelerate(XMFLOAT3& velocity);
 };

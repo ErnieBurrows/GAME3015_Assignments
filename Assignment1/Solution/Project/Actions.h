@@ -5,24 +5,6 @@
 #include "Category.h"
 
 
-//// Associate actions with commands.
-	//mActionBinding[MoveLeft].action = [](SceneNode& node, const GameTimer& dt)
-	//	{
-	//		node.Move(-playerMoveSpeed * dt.DeltaTime(), 0.0f, 0.0f);
-	//	};
-	//mActionBinding[MoveRight].action = [](SceneNode& node, const GameTimer& dt)
-	//	{
-	//		node.Move(playerMoveSpeed * dt.DeltaTime(), 0.0f, 0.0f);
-	//	};
-	//mActionBinding[MoveUp].action = [](SceneNode& node, const GameTimer& dt)
-	//	{
-	//		node.Move(0.0f, playerMoveSpeed * dt.DeltaTime(), 0.0f);
-	//	};
-	//mActionBinding[MoveDown].action = [](SceneNode& node, const GameTimer& dt)
-	//	{
-	//		node.Move(0.0f, -playerMoveSpeed * dt.DeltaTime(), 0.0f);
-	//	};
-
 namespace Actions
 {
 	/* ----- PLAYER ACTIONS ----- */
@@ -77,4 +59,6 @@ namespace Actions
 			};
 		return command;
 	}
+
+
 }

@@ -140,6 +140,8 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Player2.cpp" />
+    <ClCompile Include="PlayerBase.cpp" />
     <ClCompile Include="SceneNode.cpp" />
     <ClCompile Include="SpriteNode.cpp" />
     <ClCompile Include="tiny_obj_loader.cc" />
@@ -165,6 +167,8 @@
     <ClInclude Include="FrameResource.h" />
     <ClInclude Include="Game.hpp" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Player2.h" />
+    <ClInclude Include="PlayerBase.h" />
     <ClInclude Include="SceneNode.hpp" />
     <ClInclude Include="SpriteNode.h" />
     <ClInclude Include="tiny_obj_loader.h" />

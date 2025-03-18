@@ -48,7 +48,7 @@ void Aircraft::BuildCurrent()
 unsigned int Aircraft::GetCategory() const
 {
 	// For now this assumes "Eagle is the player aircraft"
-	return (mType == Eagle) ? Category::PlayerAircraft : Category::EnemyAircraft;
+	return (mType == Eagle) ? Category::PlayerAircraft : Category::Player2Aircraft;
 }
 
 void Aircraft::Accelerate(XMFLOAT3& velocity)

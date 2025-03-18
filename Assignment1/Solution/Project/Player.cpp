@@ -2,86 +2,23 @@
 #include "Windows.h"
 #include "Actions.h"
 
-const float playerMoveSpeed = 30.0f;
-
 Player::Player()
 {
-	// Set up default key bindings
-	mKeyBinding[VK_LEFT] = MoveLeft;
-	mKeyBinding[VK_RIGHT] = MoveRight;
-	mKeyBinding[VK_UP] = MoveUp;
-	mKeyBinding[VK_DOWN] = MoveDown;
+	moveSpeed = 10.0f;
 
-	mActionBinding[MoveLeft] = Actions::CreateMoveLeftCommand(playerMoveSpeed, Category::PlayerAircraft);
-	mActionBinding[MoveRight] = Actions::CreateMoveRightCommand(playerMoveSpeed, Category::PlayerAircraft);
-	mActionBinding[MoveUp] = Actions::CreateMoveUpCommand(playerMoveSpeed, Category::PlayerAircraft);
-	mActionBinding[MoveDown] = Actions::CreateMoveDownCommand(playerMoveSpeed, Category::PlayerAircraft);
+	mKeyBinding['A'] = MoveLeft;
+	mKeyBinding['D'] = MoveRight;
+	mKeyBinding['W'] = MoveUp;
+	mKeyBinding['S'] = MoveDown;
+
+	mActionBinding[MoveLeft] = Actions::CreateMoveLeftCommand(moveSpeed, Category::PlayerAircraft);
+	mActionBinding[MoveRight] = Actions::CreateMoveRightCommand(moveSpeed, Category::PlayerAircraft);
+	mActionBinding[MoveUp] = Actions::CreateMoveUpCommand(moveSpeed, Category::PlayerAircraft);
+	mActionBinding[MoveDown] = Actions::CreateMoveDownCommand(moveSpeed, Category::PlayerAircraft);
 
 	// Make sure the commands ONLY affect the player aircraft
 	for (auto& pair : mActionBinding)
 	{
 		pair.second.category = Category::PlayerAircraft;
 	}
-}
-
-/// <summary>
-/// Used to handle events that are not real time i.e key presses instead of per frame key checking
-/// </summary>
-/// <param name="commands"></param>
-void Player::HandleEvent(CommandQueue& commands)
-{
-}
-
-void Player::HandleRealtimeInput(CommandQueue& commands)
-{
-	// Iterate through all key bindings and push the associated command to the command queue
-	for (const auto& pair : mKeyBinding)
-	{
-		if (GetAsyncKeyState(pair.first) & 0x8000)
-		{
-			OutputDebugStringA("Key pressed!\n");
-
-			if (isRealtimeAction(pair.second))
-			{
-				commands.push(mActionBinding[pair.second]);
-			}
-		}
-	}
-}
-
-void Player::AssignKey(Action action, int key)
-{
-	// Remove any existing mapping for this action to avoid duplicates.
-	for (auto i = mKeyBinding.begin(); i != mKeyBinding.end();)
-	{
-		if (i->second == action)
-		{
-			mKeyBinding.erase(i);
-		}
-		else
-		{
-			++i;;
-		}
-	}
-
-	mKeyBinding[key] = action;
-}
-
-int Player::GetAssignedKey(Action action) const
-{
-	for (auto pair : mKeyBinding)
-	{
-		if (pair.second == action)
-		{
-			return pair.first;
-		}
-	}
-
-	return -1;
-}
-
-bool Player::isRealtimeAction(Action action)
-{
-	// Todo: Define which actions are real time
-	return true;
 }

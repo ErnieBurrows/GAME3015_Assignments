@@ -4,6 +4,7 @@
 #include "SpriteNode.h"
 #include "CommandQueue.h"
 #include "Player.h"
+#include "Player2.h"
 
 class World 
 {
@@ -37,6 +38,8 @@ private:
 	XMFLOAT2 mSpawnPosition;
 	float mScrollSpeed;
 	Aircraft* mPlayerAircraft;
+	Aircraft* mPlayer2Aircraft;
+
 	SpriteNode*	mBackground;
 	Aircraft* mEnemy;
 
@@ -48,4 +51,5 @@ private:
 	CommandQueue mCommandQueue;
 
 	Player mPlayer;
+	Player2 mPlayer2;
 };

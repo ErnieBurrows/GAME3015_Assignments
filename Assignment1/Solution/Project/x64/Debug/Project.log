@@ -1,2 +1,5 @@
-﻿  Player.cpp
+﻿  Aircraft.cpp
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\Aircraft.cpp(36,52): warning C4267: '=': conversion from 'size_t' to 'UINT', possible loss of data
+  Player2.cpp
+  Generating Code...
   Project.vcxproj -> D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\x64\Debug\Project.exe

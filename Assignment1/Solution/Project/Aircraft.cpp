@@ -25,6 +25,7 @@ void Aircraft::DrawCurrent() const
 		renderer->World = GetWorldTransform();
 		renderer->NumFramesDirty++;
 	}
+
 	UINT objCBByteSize = d3dUtil::CalcConstantBufferByteSize(sizeof(ObjectConstants));
 	UINT matCBByteSize = d3dUtil::CalcConstantBufferByteSize(sizeof(MaterialConstants));
 
@@ -69,6 +70,7 @@ void Aircraft::BuildCurrent()
 	renderer->BaseVertexLocation = renderer->Geo->DrawArgs["obj"].BaseVertexLocation;
 
 	mAircraftRitem = renderer;
+
 	game->GetRenderItems().push_back(std::move(render));
 }
 

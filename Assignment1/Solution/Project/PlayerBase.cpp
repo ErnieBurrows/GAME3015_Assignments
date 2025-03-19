@@ -24,8 +24,6 @@ void PlayerBase::HandleRealtimeInput(CommandQueue& commands)
 	{
 		if (GetAsyncKeyState(pair.first) & 0x8000)
 		{
-			OutputDebugStringA("Key pressed!\n");
-
 			if (isRealtimeAction(pair.second))
 			{
 				commands.push(mActionBinding[pair.second]);

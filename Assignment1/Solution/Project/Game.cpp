@@ -56,6 +56,10 @@ bool Game::Initialize()
 	FlushCommandQueue();
 
 	/* --- STATE INITALIZATION --- */
+	State::Context context;
+	context.game = this;
+	mStateStack = StateStack(context);
+
 	mStateStack.RegisterState<TitleState>(Title);
 	mStateStack.RegisterState<MainMenuState>(MainMenu);
 	mStateStack.RegisterState<GameState>(Play);
@@ -186,6 +190,8 @@ void Game::OnMouseDown(WPARAM btnState, int x, int y)
 	mLastMousePos.x = x;
 	mLastMousePos.y = y;
 
+	mStateStack.HandleEvent(btnState, x, y);
+
 	SetCapture(mhMainWnd);
 }
 
@@ -212,6 +218,8 @@ void Game::OnMouseMove(WPARAM btnState, int x, int y)
 void Game::OnKeyboardInput(const GameTimer& gt)
 {
 	const float dt = gt.DeltaTime();
+
+	//mStateStack.HandleEvent(VK_RETURN, 0, 0);
 
 	mCamera.GetLook();
 	float tmin = 0;

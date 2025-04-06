@@ -24,7 +24,7 @@ public:
 	virtual bool Update(float dt)
 	{
 		std::cout << "PauseState: Updating...\n";
-		return true;
+		return false;
 	}
 
 	virtual bool HandleEvent(WPARAM btnState, int x, int y)

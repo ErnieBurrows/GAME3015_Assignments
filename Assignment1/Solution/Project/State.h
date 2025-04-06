@@ -4,6 +4,8 @@
 
 class StateStack;
 
+class Game;
+
 class State
 {
 public:
@@ -12,7 +14,7 @@ public:
 	// Context struct to pass information and pointers to each state
 	struct Context
 	{
-
+		Game* game;
 	};
 
 	State(StateStack& stack, Context context) : mStack(&stack), mContext(context) {}

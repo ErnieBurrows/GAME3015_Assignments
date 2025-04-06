@@ -9,6 +9,16 @@ public:
 	GameState(StateStack& stack, Context context) : State(stack, context)
 	{
 		std::cout << "GameState: Initialized.\n";
+
+		Game* gameInstance = GetContext().game;
+		if (gameInstance)
+		{
+			std::cout << "GameState: Game instance is valid.\n";
+		}
+		else
+		{
+			std::cout << "GameState: Game instance is null.\n";
+		}
 	}
 
 	virtual ~GameState()

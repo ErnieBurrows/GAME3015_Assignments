@@ -1,6 +1,5 @@
 d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\project\x64\debug\vc143.pdb
 d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\project\x64\debug\vc143.idb
-d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\project\x64\debug\tiny_obj_loader.obj
 d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\project\x64\debug\statestack.obj
 d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\project\x64\debug\state.obj
 d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\project\x64\debug\spritenode.obj
@@ -8,6 +7,7 @@ d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\
 d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\project\x64\debug\playerbase.obj
 d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\project\x64\debug\player2.obj
 d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\project\x64\debug\player.obj
+d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\project\x64\debug\mainmenustate.obj
 d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\project\x64\debug\main.obj
 d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\project\x64\debug\game.obj
 d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\project\x64\debug\frameresource.obj
@@ -21,9 +21,10 @@ d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\
 d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\project\x64\debug\d3dapp.obj
 d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\project\x64\debug\camera.obj
 d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\project\x64\debug\world.obj
-d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\x64\debug\project.exe
-d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\x64\debug\project.pdb
+d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\project\x64\debug\tiny_obj_loader.obj
 d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\project\x64\debug\project.ilk
+d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\x64\debug\project.pdb
+d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\x64\debug\project.exe
 d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\project\x64\debug\project.tlog\cl.command.1.tlog
 d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\project\x64\debug\project.tlog\cl.items.tlog
 d:\school\game_engine_dev_ii_game3015\game3015_assignments\assignment1\solution\project\x64\debug\project.tlog\cl.read.1.tlog

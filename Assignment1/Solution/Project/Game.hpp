@@ -1,5 +1,6 @@
 #include "World.hpp"
 #include "Player.h"
+#include "StateStack.h"
 
 class Game : public D3DApp
 {
@@ -106,5 +107,18 @@ public:
 	std::unique_ptr<Material> CreateMaterial(const std::string& name, int matCBIndex, int diffuseSrvHeapIndex);
 
 	ID3D12GraphicsCommandList* getCmdList() { return mCommandList.Get(); }
+
+
+/* --- State System ---*/
+private:
+	StateStack mStateStack;
+	enum StateID
+	{
+		Title = 0,
+		MainMenu = 1,
+		Play = 2,
+		Pause = 3
+	};
+
 
 };

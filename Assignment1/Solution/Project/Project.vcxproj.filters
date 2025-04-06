@@ -96,6 +96,9 @@
     <ClCompile Include="StateStack.cpp">
       <Filter>GameEngine\StateSystem</Filter>
     </ClCompile>
+    <ClCompile Include="MainMenuState.h">
+      <Filter>GameEngine\StateSystem\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Common\Camera.h">
@@ -175,6 +178,15 @@
     </ClInclude>
     <ClInclude Include="StateStack.h">
       <Filter>GameEngine\StateSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleState.h">
+      <Filter>GameEngine\StateSystem\States</Filter>
+    </ClInclude>
+    <ClInclude Include="GameState.h">
+      <Filter>GameEngine\StateSystem\States</Filter>
+    </ClInclude>
+    <ClInclude Include="PauseState.h">
+      <Filter>GameEngine\StateSystem\States</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

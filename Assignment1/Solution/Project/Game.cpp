@@ -1,11 +1,17 @@
 #include "Game.hpp"
 #include "tiny_obj_loader.h"
 
+#include "TitleState.h"
+#include "MainMenuState.h"
+#include "GameState.h"
+#include "PauseState.h"
+
 const int gNumFrameResources = 3;
 
 Game::Game(HINSTANCE hInstance)
 	: D3DApp(hInstance)
 	, mWorld(this)
+	, mStateStack({ })
 {
 }
 
@@ -49,6 +55,14 @@ bool Game::Initialize()
 	// Wait until initialization is complete.
 	FlushCommandQueue();
 
+	/* --- STATE INITALIZATION --- */
+	mStateStack.RegisterState<TitleState>(Title);
+	mStateStack.RegisterState<MainMenuState>(MainMenu);
+	mStateStack.RegisterState<GameState>(Play);
+	mStateStack.RegisterState<PauseState>(Pause);
+
+	mStateStack.PushState(Title);
+
 	return true;
 }
 
@@ -88,6 +102,9 @@ void Game::Update(const GameTimer& gt)
 	UpdateObjectCBs(gt);
 	UpdateMaterialCBs(gt);
 	UpdateMainPassCB(gt);
+
+	// Update the state stack
+	mStateStack.Update(gt.DeltaTime());
 }
 
 void Game::Draw(const GameTimer& gt)
@@ -132,6 +149,8 @@ void Game::Draw(const GameTimer& gt)
 
 	auto passCB = mCurrFrameResource->PassCB->Resource();
 	mCommandList->SetGraphicsRootConstantBufferView(2, passCB->GetGPUVirtualAddress());
+
+	mStateStack.Draw();
 
 	mWorld.Draw();
 

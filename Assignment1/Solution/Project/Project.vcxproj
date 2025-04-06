@@ -139,6 +139,7 @@
     <ClCompile Include="FrameResource.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainMenuState.h" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Player2.cpp" />
     <ClCompile Include="PlayerBase.cpp" />
@@ -167,6 +168,8 @@
     <ClInclude Include="Entity.hpp" />
     <ClInclude Include="FrameResource.h" />
     <ClInclude Include="Game.hpp" />
+    <ClInclude Include="GameState.h" />
+    <ClInclude Include="PauseState.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Player2.h" />
     <ClInclude Include="PlayerBase.h" />
@@ -175,6 +178,7 @@
     <ClInclude Include="State.h" />
     <ClInclude Include="StateStack.h" />
     <ClInclude Include="tiny_obj_loader.h" />
+    <ClInclude Include="TitleState.h" />
     <ClInclude Include="World.hpp" />
   </ItemGroup>
   <ItemGroup>

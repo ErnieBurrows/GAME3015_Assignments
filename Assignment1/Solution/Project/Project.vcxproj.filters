@@ -25,6 +25,12 @@
     <Filter Include="ExternalCode">
       <UniqueIdentifier>{c361e8a8-5f65-4f39-8deb-c7e319bf932c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GameEngine\StateSystem">
+      <UniqueIdentifier>{2f9efc95-9a3a-4bda-add2-56b8241a970a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameEngine\StateSystem\States">
+      <UniqueIdentifier>{452967f9-94b6-4824-8822-0ba6900bb0a2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Common\Camera.cpp">
@@ -83,6 +89,12 @@
     </ClCompile>
     <ClCompile Include="Player.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="State.cpp">
+      <Filter>GameEngine\StateSystem</Filter>
+    </ClCompile>
+    <ClCompile Include="StateStack.cpp">
+      <Filter>GameEngine\StateSystem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -157,6 +169,12 @@
     </ClInclude>
     <ClInclude Include="Player.h">
       <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>GameEngine\StateSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="StateStack.h">
+      <Filter>GameEngine\StateSystem</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

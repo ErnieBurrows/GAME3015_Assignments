@@ -144,6 +144,8 @@
     <ClCompile Include="PlayerBase.cpp" />
     <ClCompile Include="SceneNode.cpp" />
     <ClCompile Include="SpriteNode.cpp" />
+    <ClCompile Include="State.cpp" />
+    <ClCompile Include="StateStack.cpp" />
     <ClCompile Include="tiny_obj_loader.cc" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
@@ -170,6 +172,8 @@
     <ClInclude Include="PlayerBase.h" />
     <ClInclude Include="SceneNode.hpp" />
     <ClInclude Include="SpriteNode.h" />
+    <ClInclude Include="State.h" />
+    <ClInclude Include="StateStack.h" />
     <ClInclude Include="tiny_obj_loader.h" />
     <ClInclude Include="World.hpp" />
   </ItemGroup>

@@ -82,11 +82,6 @@ public:
 
 	void Move(float x, float y, float z);
 	void Rotate(float x, float y, float z);
-
-	const std::vector<Ptr>& GetChildren() const { return mChildren; }
-
-	RenderItem* GetRenderer() const { return renderer; }
-
 private:
 	virtual void UpdateCurrent(const GameTimer& gt);
 	void UpdateChildren(const GameTimer& gt);
@@ -95,7 +90,6 @@ private:
 	void DrawChildren() const;
 	virtual void BuildCurrent();
 	void BuildChildren();
-
 
 protected:
 	Game* game;

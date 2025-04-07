@@ -34,6 +34,7 @@ private:
 
 	//step9
 	void BuildDescriptorHeaps();
+
 	void BuildShadersAndInputLayout();
 	void BuildShapeGeometry();
 	void BuildPSOs();
@@ -51,9 +52,6 @@ public:
 
 	UINT mCbvSrvDescriptorSize = 0;
 	ComPtr<ID3D12DescriptorHeap> mSrvDescriptorHeap = nullptr;
-
-	ID3D12Device* GetD3DDevice() const { return md3dDevice.Get(); }
-
 private:
 
 	

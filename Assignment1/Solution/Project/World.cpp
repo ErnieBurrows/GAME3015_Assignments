@@ -69,31 +69,3 @@ void World::ProcessInput()
 	mPlayer2.HandleRealtimeInput(GetCommandQueue());
 }
 
-size_t World::GetNumRenderItems() const
-{
-	size_t count = 0;
-	if (mPlayerAircraft)   ++count;
-	if (mPlayer2Aircraft)  ++count;
-	if (mBackground)       ++count;
-	return count;
-}
-
-void World::CollectRenderItems(std::vector<RenderItem*>& renderItems) const
-{
-	std::function<void(const SceneNode*)> collect = [&](const SceneNode* node)
-		{
-			if (node->GetRenderer())
-			{
-				renderItems.push_back(node->GetRenderer());
-			}
-			
-			for (const auto& child : node->GetChildren()) 
-			{
-				collect(child.get());
-			}
-		};
-
-	collect(mSceneGraph);
-}
-
-

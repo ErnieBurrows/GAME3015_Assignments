@@ -18,8 +18,6 @@ public:
 
 	void ProcessInput();
 
-	size_t GetNumRenderItems() const;
-
 
 private:
 	enum Layer
@@ -48,8 +46,6 @@ private:
 	/*--- Command Stuff ---*/
 public:
 	CommandQueue& GetCommandQueue() { return mCommandQueue; }
-
-	void CollectRenderItems(std::vector<RenderItem*>& renderItems) const;
 
 private:
 	CommandQueue mCommandQueue;

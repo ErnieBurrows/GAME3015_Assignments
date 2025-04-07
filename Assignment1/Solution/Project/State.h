@@ -6,10 +6,31 @@
 #include <memory>
 #include<Windows.h>
 
+namespace States
+{
+	/**
+	 * @brief Enumeration of game state types
+	 */
+	enum ID
+	{
+		None,           ///< Null/invalid state
+		Title,          ///< Title screen state
+		Menu,           ///< Main menu state
+		Game,           ///< Core gameplay state
+		Instructions,   ///< Tutorial/instructions state
+		Pause           ///< Paused game state
+	};
+}
+
 class StateStack;
 class Game;
 class Player;
 class SceneNode;
+
+namespace sf
+{
+	class RenderWindow;
+}
 
 class State
 {
@@ -31,7 +52,8 @@ public:
 
 	virtual void Draw() = 0;
 	virtual bool Update(const GameTimer& gt) = 0;
-	virtual bool HandleEvent(WPARAM btnState, int x, int y) = 0;
+	virtual bool HandleEvent(WPARAM btnState) = 0;
+	virtual bool HandleRealTimeInput() = 0;
 
 	virtual bool IsTransparent() const { return false; }
 

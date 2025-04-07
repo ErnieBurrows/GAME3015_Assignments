@@ -2,7 +2,7 @@
 #include "State.h"
 
 #include <vector>
-#include <functional>]
+#include <functional>
 #include <map>
 #include <stdexcept>
 

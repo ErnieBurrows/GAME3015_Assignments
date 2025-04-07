@@ -10,8 +10,8 @@ const int gNumFrameResources = 3;
 
 Game::Game(HINSTANCE hInstance)
 	: D3DApp(hInstance)
-	, mWorld(this)
 	, mStateStack({ })
+	//, mWorld(this)
 {
 }
 
@@ -65,7 +65,7 @@ bool Game::Initialize()
 	mStateStack.RegisterState<GameState>(Play);
 	mStateStack.RegisterState<PauseState>(Pause);
 
-	mStateStack.PushState(Title);
+	mStateStack.PushState(Play);
 
 	return true;
 }
@@ -85,7 +85,7 @@ void Game::Update(const GameTimer& gt)
 {
 	OnKeyboardInput(gt);
 
-	mWorld.Update(gt);
+	//mWorld.Update(gt);
 	//UpdateCamera(gt);
 
 	// Cycle through the circular frame resource array.
@@ -156,7 +156,7 @@ void Game::Draw(const GameTimer& gt)
 
 	mStateStack.Draw();
 
-	mWorld.Draw();
+	//mWorld.Draw();
 
 	DrawRenderItems(mCommandList.Get(), mOpaqueRitems);
 
@@ -572,7 +572,7 @@ void Game::BuildMaterials()
 
 void Game::BuildRenderItems()
 {
-	mWorld.BuildScene();
+	//mWorld.BuildScene();
 
 	//// All the render items are opaque.
 	for (auto& e : mAllRitems)

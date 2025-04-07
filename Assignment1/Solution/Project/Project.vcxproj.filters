@@ -99,6 +99,9 @@
     <ClCompile Include="MainMenuState.h">
       <Filter>GameEngine\StateSystem\States</Filter>
     </ClCompile>
+    <ClCompile Include="GameState.cpp">
+      <Filter>GameEngine\StateSystem\States</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Common\Camera.h">

@@ -6,8 +6,6 @@
 #include "GameState.h"
 #include "PauseState.h"
 
-const int gNumFrameResources = 3;
-
 Game::Game(HINSTANCE hInstance)
 	: D3DApp(hInstance)
 	, mStateStack({ })
@@ -43,8 +41,7 @@ bool Game::Initialize()
 	BuildShadersAndInputLayout();
 	BuildShapeGeometry();
 	BuildMaterials();
-	BuildRenderItems();
-	BuildFrameResources();
+	
 	BuildPSOs();
 
 	// Execute the initialization commands.
@@ -65,7 +62,7 @@ bool Game::Initialize()
 	mStateStack.RegisterState<GameState>(Play);
 	mStateStack.RegisterState<PauseState>(Pause);
 
-	mStateStack.PushState(Play);
+	mStateStack.PushState(Title);
 
 	return true;
 }
@@ -89,23 +86,23 @@ void Game::Update(const GameTimer& gt)
 	//UpdateCamera(gt);
 
 	// Cycle through the circular frame resource array.
-	mCurrFrameResourceIndex = (mCurrFrameResourceIndex + 1) % gNumFrameResources;
-	mCurrFrameResource = mFrameResources[mCurrFrameResourceIndex].get();
+	/*mCurrFrameResourceIndex = (mCurrFrameResourceIndex + 1) % gNumFrameResources;
+	mCurrFrameResource = mFrameResources[mCurrFrameResourceIndex].get();*/
 
 	// Has the GPU finished processing the commands of the current frame resource?
 	// If not, wait until the GPU has completed commands up to this fence point.
-	if (mCurrFrameResource->Fence != 0 && mFence->GetCompletedValue() < mCurrFrameResource->Fence)
+	/*if (mCurrFrameResource->Fence != 0 && mFence->GetCompletedValue() < mCurrFrameResource->Fence)
 	{
 		HANDLE eventHandle = CreateEventEx(nullptr, nullptr, false, EVENT_ALL_ACCESS);
 		ThrowIfFailed(mFence->SetEventOnCompletion(mCurrFrameResource->Fence, eventHandle));
 		WaitForSingleObject(eventHandle, INFINITE);
 		CloseHandle(eventHandle);
-	}
+	}*/
 
-	AnimateMaterials(gt);
-	UpdateObjectCBs(gt);
-	UpdateMaterialCBs(gt);
-	UpdateMainPassCB(gt);
+	//AnimateMaterials(gt);
+	//UpdateObjectCBs(gt);
+	//UpdateMaterialCBs(gt);
+	//UpdateMainPassCB(gt);
 
 	// Update the state stack
 	mStateStack.Update(gt.DeltaTime());
@@ -113,76 +110,124 @@ void Game::Update(const GameTimer& gt)
 
 void Game::Draw(const GameTimer& gt)
 {
-	auto cmdListAlloc = mCurrFrameResource->CmdListAlloc;
+	// Ensure that all commands from the previous frame have finished.
+	FlushCommandQueue();
 
-	// Reuse the memory associated with command recording.
-	// We can only reset when the associated command lists have finished execution on the GPU.
-	ThrowIfFailed(cmdListAlloc->Reset());
-
-	// A command list can be reset after it has been added to the command queue via ExecuteCommandList.
-	// Reusing the command list reuses memory.
-	ThrowIfFailed(mCommandList->Reset(cmdListAlloc.Get(), mOpaquePSO.Get()));
-
-	//mScreenViewport.TopLeftX = 0.0f;
-	//mScreenViewport.TopLeftY = 0.0f;
-	//mScreenViewport.Height = 200;
-	//mScreenViewport.Height = 200;
+	// Now it's safe to reset the allocator and command list.
+	ThrowIfFailed(mDirectCmdListAlloc->Reset());
+	ThrowIfFailed(mCommandList->Reset(mDirectCmdListAlloc.Get(), mOpaquePSO.Get()));
 
 	mCommandList->RSSetViewports(1, &mScreenViewport);
 	mCommandList->RSSetScissorRects(1, &mScissorRect);
 
-	// Indicate a state transition on the resource usage.
-	auto transition1 = CD3DX12_RESOURCE_BARRIER::Transition(CurrentBackBuffer(),
-		D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET);
-	mCommandList->ResourceBarrier(1, &transition1);
+	auto barrierPresentToRT = CD3DX12_RESOURCE_BARRIER::Transition(
+		CurrentBackBuffer(),
+		D3D12_RESOURCE_STATE_PRESENT,
+		D3D12_RESOURCE_STATE_RENDER_TARGET);
+	mCommandList->ResourceBarrier(1, &barrierPresentToRT);
 
-	// Clear the back buffer and depth buffer.
 	mCommandList->ClearRenderTargetView(CurrentBackBufferView(), Colors::LightSteelBlue, 0, nullptr);
-	mCommandList->ClearDepthStencilView(DepthStencilView(), D3D12_CLEAR_FLAG_DEPTH | D3D12_CLEAR_FLAG_STENCIL, 1.0f, 0, 0, nullptr);
+	mCommandList->ClearDepthStencilView(
+		DepthStencilView(),
+		D3D12_CLEAR_FLAG_DEPTH | D3D12_CLEAR_FLAG_STENCIL,
+		1.0f, 0, 0, nullptr);
 
-
-	auto dsv = DepthStencilView();
-	// Specify the buffers we are going to render to.
-	auto buffer = CurrentBackBufferView();
-	mCommandList->OMSetRenderTargets(1, &buffer, true, &dsv);
+	auto rtvHandle = CurrentBackBufferView();
+	auto dsvHandle = DepthStencilView();
+	mCommandList->OMSetRenderTargets(1, &rtvHandle, true, &dsvHandle);
 
 	ID3D12DescriptorHeap* descriptorHeaps[] = { mSrvDescriptorHeap.Get() };
 	mCommandList->SetDescriptorHeaps(_countof(descriptorHeaps), descriptorHeaps);
-
 	mCommandList->SetGraphicsRootSignature(mRootSignature.Get());
 
-	auto passCB = mCurrFrameResource->PassCB->Resource();
-	mCommandList->SetGraphicsRootConstantBufferView(2, passCB->GetGPUVirtualAddress());
-
+	// Delegate drawing to the active state.
 	mStateStack.Draw();
 
-	//mWorld.Draw();
+	auto barrierRTtoPresent = CD3DX12_RESOURCE_BARRIER::Transition(
+		CurrentBackBuffer(),
+		D3D12_RESOURCE_STATE_RENDER_TARGET,
+		D3D12_RESOURCE_STATE_PRESENT);
+	mCommandList->ResourceBarrier(1, &barrierRTtoPresent);
 
-	DrawRenderItems(mCommandList.Get(), mOpaqueRitems);
-
-	// Indicate a state transition on the resource usage.
-	auto transition2 = CD3DX12_RESOURCE_BARRIER::Transition(CurrentBackBuffer(),
-		D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT);
-	mCommandList->ResourceBarrier(1, &transition2);
-
-	// Done recording commands.
 	ThrowIfFailed(mCommandList->Close());
-
-	// Add the command list to the queue for execution.
 	ID3D12CommandList* cmdsLists[] = { mCommandList.Get() };
 	mCommandQueue->ExecuteCommandLists(_countof(cmdsLists), cmdsLists);
 
-	// Swap the back and front buffers
 	ThrowIfFailed(mSwapChain->Present(0, 0));
 	mCurrBackBuffer = (mCurrBackBuffer + 1) % SwapChainBufferCount;
 
-	// Advance the fence value to mark commands up to this fence point.
-	mCurrFrameResource->Fence = ++mCurrentFence;
+	// mCommandQueue->Signal(mFence.Get(), ++mCurrentFence);
 
-	// Add an instruction to the command queue to set a new fence point. 
-	// Because we are on the GPU timeline, the new fence point won't be 
-	// set until the GPU finishes processing all the commands prior to this Signal().
-	mCommandQueue->Signal(mFence.Get(), mCurrentFence);
+	////auto cmdListAlloc = mCurrFrameResource->CmdListAlloc;
+
+	//// Reuse the memory associated with command recording.
+	//// We can only reset when the associated command lists have finished execution on the GPU.
+	////ThrowIfFailed(cmdListAlloc->Reset());
+
+	//// A command list can be reset after it has been added to the command queue via ExecuteCommandList.
+	//// Reusing the command list reuses memory.
+	////ThrowIfFailed(mCommandList->Reset(cmdListAlloc.Get(), mOpaquePSO.Get()));
+
+	////mScreenViewport.TopLeftX = 0.0f;
+	////mScreenViewport.TopLeftY = 0.0f;
+	////mScreenViewport.Height = 200;
+	////mScreenViewport.Height = 200;
+
+	//mCommandList->RSSetViewports(1, &mScreenViewport);
+	//mCommandList->RSSetScissorRects(1, &mScissorRect);
+
+	//// Indicate a state transition on the resource usage.
+	//auto transition1 = CD3DX12_RESOURCE_BARRIER::Transition(CurrentBackBuffer(),
+	//	D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET);
+	//mCommandList->ResourceBarrier(1, &transition1);
+
+	//// Clear the back buffer and depth buffer.
+	//mCommandList->ClearRenderTargetView(CurrentBackBufferView(), Colors::LightSteelBlue, 0, nullptr);
+	//mCommandList->ClearDepthStencilView(DepthStencilView(), D3D12_CLEAR_FLAG_DEPTH | D3D12_CLEAR_FLAG_STENCIL, 1.0f, 0, 0, nullptr);
+
+
+	//auto dsv = DepthStencilView();
+	//// Specify the buffers we are going to render to.
+	//auto buffer = CurrentBackBufferView();
+	//mCommandList->OMSetRenderTargets(1, &buffer, true, &dsv);
+
+	//ID3D12DescriptorHeap* descriptorHeaps[] = { mSrvDescriptorHeap.Get() };
+	//mCommandList->SetDescriptorHeaps(_countof(descriptorHeaps), descriptorHeaps);
+
+	//mCommandList->SetGraphicsRootSignature(mRootSignature.Get());
+
+	////auto passCB = mCurrFrameResource->PassCB->Resource();
+	////mCommandList->SetGraphicsRootConstantBufferView(2, passCB->GetGPUVirtualAddress());
+
+	//mStateStack.Draw();
+
+	////mWorld.Draw();
+
+	////DrawRenderItems(mCommandList.Get(), mOpaqueRitems);
+
+	//// Indicate a state transition on the resource usage.
+	//auto transition2 = CD3DX12_RESOURCE_BARRIER::Transition(CurrentBackBuffer(),
+	//	D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT);
+	//mCommandList->ResourceBarrier(1, &transition2);
+
+	//// Done recording commands.
+	//ThrowIfFailed(mCommandList->Close());
+
+	//// Add the command list to the queue for execution.
+	//ID3D12CommandList* cmdsLists[] = { mCommandList.Get() };
+	//mCommandQueue->ExecuteCommandLists(_countof(cmdsLists), cmdsLists);
+
+	//// Swap the back and front buffers
+	//ThrowIfFailed(mSwapChain->Present(0, 0));
+	//mCurrBackBuffer = (mCurrBackBuffer + 1) % SwapChainBufferCount;
+
+	//// Advance the fence value to mark commands up to this fence point.
+	////mCurrFrameResource->Fence = ++mCurrentFence;
+
+	//// Add an instruction to the command queue to set a new fence point. 
+	//// Because we are on the GPU timeline, the new fence point won't be 
+	//// set until the GPU finishes processing all the commands prior to this Signal().
+	//mCommandQueue->Signal(mFence.Get(), mCurrentFence);
 }
 
 void Game::OnMouseDown(WPARAM btnState, int x, int y)

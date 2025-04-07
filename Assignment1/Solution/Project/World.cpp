@@ -36,7 +36,7 @@ void World::BuildScene()
 	std::unique_ptr<Aircraft> player(new Aircraft(Aircraft::Eagle, mGame));
 	mPlayerAircraft = player.get();
 	mPlayerAircraft->SetPosition(-0.75, 1.5, 0.0);
-	mPlayerAircraft->SetScale(1.0, 1.0, 1.0);
+	mPlayerAircraft->SetScale(0.0002, 0.0002, 0.0002);
 	mPlayerAircraft->SetWorldRotation(XMConvertToRadians(270), XMConvertToRadians(270), 0.0f);
 	mPlayerAircraft->SetVelocity(0.0, 0.0, 0.0);
 	mSceneGraph->AttachChild(std::move(player));

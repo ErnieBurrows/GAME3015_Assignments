@@ -55,11 +55,7 @@ void SceneNode::Draw() const
 
 void SceneNode::DrawCurrent() const
 {
-	if (renderer)
-	{
-		renderer->World = GetWorldTransform();
-		renderer->NumFramesDirty++;
-	}
+	//Empty for now
 }
 
 void SceneNode::DrawChildren() const

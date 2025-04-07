@@ -56,7 +56,6 @@ void Aircraft::DrawCurrent() const
 
 void Aircraft::BuildCurrent()
 {
-
 	auto render = std::make_unique<RenderItem>();
 	renderer = render.get();
 

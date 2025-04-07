@@ -25,15 +25,8 @@ bool Game::Initialize()
 		return false;
 
 
-	//mCamera.SetPosition(0, 5, 0);
-	//mCamera.Pitch(3.14 / 2);
-
-	mCamera.SetPosition(0.0f, 2.0f, -5.0f);
-	mCamera.LookAt(
-		XMFLOAT3(0.0f, 2.0f, -5.0f),  
-		XMFLOAT3(0.0f, 0.0f, 0.0f),   
-		XMFLOAT3(0.0f, 1.0f, 0.0f));  
-
+	mCamera.SetPosition(0, 5, 0);
+	mCamera.Pitch(3.14 / 2);
 
 	// Reset the command list to prep for initialization commands.
 	ThrowIfFailed(mCommandList->Reset(mDirectCmdListAlloc.Get(), nullptr));
@@ -112,7 +105,7 @@ void Game::Update(const GameTimer& gt)
 	//UpdateMainPassCB(gt);
 
 	// Update the state stack
-	mStateStack.Update(mTimer.DeltaTime());
+	mStateStack.Update(gt.DeltaTime());
 }
 
 void Game::Draw(const GameTimer& gt)
@@ -162,6 +155,79 @@ void Game::Draw(const GameTimer& gt)
 
 	ThrowIfFailed(mSwapChain->Present(0, 0));
 	mCurrBackBuffer = (mCurrBackBuffer + 1) % SwapChainBufferCount;
+
+	// mCommandQueue->Signal(mFence.Get(), ++mCurrentFence);
+
+	////auto cmdListAlloc = mCurrFrameResource->CmdListAlloc;
+
+	//// Reuse the memory associated with command recording.
+	//// We can only reset when the associated command lists have finished execution on the GPU.
+	////ThrowIfFailed(cmdListAlloc->Reset());
+
+	//// A command list can be reset after it has been added to the command queue via ExecuteCommandList.
+	//// Reusing the command list reuses memory.
+	////ThrowIfFailed(mCommandList->Reset(cmdListAlloc.Get(), mOpaquePSO.Get()));
+
+	////mScreenViewport.TopLeftX = 0.0f;
+	////mScreenViewport.TopLeftY = 0.0f;
+	////mScreenViewport.Height = 200;
+	////mScreenViewport.Height = 200;
+
+	//mCommandList->RSSetViewports(1, &mScreenViewport);
+	//mCommandList->RSSetScissorRects(1, &mScissorRect);
+
+	//// Indicate a state transition on the resource usage.
+	//auto transition1 = CD3DX12_RESOURCE_BARRIER::Transition(CurrentBackBuffer(),
+	//	D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET);
+	//mCommandList->ResourceBarrier(1, &transition1);
+
+	//// Clear the back buffer and depth buffer.
+	//mCommandList->ClearRenderTargetView(CurrentBackBufferView(), Colors::LightSteelBlue, 0, nullptr);
+	//mCommandList->ClearDepthStencilView(DepthStencilView(), D3D12_CLEAR_FLAG_DEPTH | D3D12_CLEAR_FLAG_STENCIL, 1.0f, 0, 0, nullptr);
+
+
+	//auto dsv = DepthStencilView();
+	//// Specify the buffers we are going to render to.
+	//auto buffer = CurrentBackBufferView();
+	//mCommandList->OMSetRenderTargets(1, &buffer, true, &dsv);
+
+	//ID3D12DescriptorHeap* descriptorHeaps[] = { mSrvDescriptorHeap.Get() };
+	//mCommandList->SetDescriptorHeaps(_countof(descriptorHeaps), descriptorHeaps);
+
+	//mCommandList->SetGraphicsRootSignature(mRootSignature.Get());
+
+	////auto passCB = mCurrFrameResource->PassCB->Resource();
+	////mCommandList->SetGraphicsRootConstantBufferView(2, passCB->GetGPUVirtualAddress());
+
+	//mStateStack.Draw();
+
+	////mWorld.Draw();
+
+	////DrawRenderItems(mCommandList.Get(), mOpaqueRitems);
+
+	//// Indicate a state transition on the resource usage.
+	//auto transition2 = CD3DX12_RESOURCE_BARRIER::Transition(CurrentBackBuffer(),
+	//	D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT);
+	//mCommandList->ResourceBarrier(1, &transition2);
+
+	//// Done recording commands.
+	//ThrowIfFailed(mCommandList->Close());
+
+	//// Add the command list to the queue for execution.
+	//ID3D12CommandList* cmdsLists[] = { mCommandList.Get() };
+	//mCommandQueue->ExecuteCommandLists(_countof(cmdsLists), cmdsLists);
+
+	//// Swap the back and front buffers
+	//ThrowIfFailed(mSwapChain->Present(0, 0));
+	//mCurrBackBuffer = (mCurrBackBuffer + 1) % SwapChainBufferCount;
+
+	//// Advance the fence value to mark commands up to this fence point.
+	////mCurrFrameResource->Fence = ++mCurrentFence;
+
+	//// Add an instruction to the command queue to set a new fence point. 
+	//// Because we are on the GPU timeline, the new fence point won't be 
+	//// set until the GPU finishes processing all the commands prior to this Signal().
+	//mCommandQueue->Signal(mFence.Get(), mCurrentFence);
 }
 
 void Game::OnMouseDown(WPARAM btnState, int x, int y)

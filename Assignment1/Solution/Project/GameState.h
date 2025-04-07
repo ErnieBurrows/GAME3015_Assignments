@@ -3,7 +3,6 @@
 #include "State.h"
 #include "World.hpp"
 #include "FrameResource.h"
-#include "../../Common/GameTimer.h"
 #include <memory>
 #include <vector>
 
@@ -21,14 +20,9 @@ public:
 private:
 	void BuildFrameResources();
 
-	void UpdateMainPassCB(const GameTimer& gt);
-
 	std::unique_ptr<World> mWorld;
 	std::vector<std::unique_ptr<FrameResource>> mFrameResources;
 	int mCurrFrameResourceIndex;
 	FrameResource* mCurrFrameResource;
 
-	PassConstants mMainPassCB;
-
-	GameTimer mGameTimer;
 };

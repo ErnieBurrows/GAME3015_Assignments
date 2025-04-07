@@ -19,19 +19,13 @@ private:
 	virtual void OnMouseDown(WPARAM btnState, int x, int y)override;
 	virtual void OnMouseUp(WPARAM btnState, int x, int y)override;
 	virtual void OnMouseMove(WPARAM btnState, int x, int y)override;
-public:
+
 	void OnKeyboardInput(const GameTimer& gt);
-
-	Microsoft::WRL::ComPtr<ID3D12Fence> GetFence() const { return mFence; }
-
-private:
 	void UpdateCamera(const GameTimer& gt);
 	void AnimateMaterials(const GameTimer& gt);
 	void UpdateObjectCBs(const GameTimer& gt);
 	void UpdateMaterialCBs(const GameTimer& gt);
 	void UpdateMainPassCB(const GameTimer& gt);
-
-	Microsoft::WRL::ComPtr<ID3D12Fence> mFence;
 
 	//step5
 	void LoadTextures();
@@ -60,10 +54,6 @@ public:
 
 	ID3D12Device* GetD3DDevice() const { return md3dDevice.Get(); }
 
-	Camera& GetCamera() { return mCamera; }
-
-	int GetClientWidth() const { return mClientWidth; }
-	int GetClientHeight() const { return mClientHeight; }
 private:
 
 	

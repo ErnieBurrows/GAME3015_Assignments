@@ -3,6 +3,7 @@
 
 #include <vector>
 #include <functional>
+#include <utility>
 #include <map>
 #include <stdexcept>
 
@@ -16,113 +17,52 @@ public:
 		Clear
 	};
 
-	explicit StateStack(State::Context context) : mContext(context) {}
+	explicit StateStack(State::Context context);
 
 	template<typename T>
-	void RegisterState(int stateID)
-	{
-		mFactories[stateID] = [this]() 
-		{
-			return State::Ptr(new T(*this, mContext));
-		};
-	}
+	void RegisterState(int stateID);
 
-	void Update(float dt)
-	{
-		// Upate from the top state downward until one returns false
-		for (auto i = mStack.rbegin(); i != mStack.rend(); ++i)
-		{
-			if (!(*i)->Update(dt))
-				break;
-		}
-		ApplyPendingChanges();
-	}
 
-	void Draw()
-	{
-		for (State::Ptr& state : mStack)
-		{
-			state->Draw();
-		}
-	}
+	void Update(const GameTimer& timer);
+	void Draw();
+	void HandleEvent(WPARAM btnState);
+	void HandleRealTimeInput();
 
-	void HandleEvent(WPARAM btnState, int x, int y)
-	{
-		for (auto i = mStack.rbegin(); i != mStack.rend(); ++i)
-		{
-			if (!(*i)->HandleEvent(btnState, x, y))
-				break;
-		}
-		ApplyPendingChanges();
-	}
+	void PushState(States::ID stateID);
+	void PopState();
+	void ClearStates();
+	
+	bool IsEmpty() const;
 
-	void PushState(int stateID)
-	{
-		mPendingList.push_back({Push, stateID});
-	}
-
-	void PopState()
-	{
-		mPendingList.push_back({Pop, 0});
-	}
-
-	void ClearStates()
-	{
-		mPendingList.push_back({ Clear, 0 });
-	}
-
-	bool IsEmpty() const
-	{
-		return mStack.empty();
-	}
+	State* GetCurrentState();
+	State* GetPreviousState();
 
 private:
 	struct PendingChange
 	{
+		explicit PendingChange(Action action, States::ID stateID = States::None);
+
 		Action action;
-		int stateID;
+		States::ID stateID;
 	};
 
-	State::Ptr CreateState(int stateID)
-	{
-		auto found = mFactories.find(stateID);
-
-		if (found == mFactories.end())
-		{
-			throw std::runtime_error("State not registered");
-		}
-
-		return found->second();
-	}
-
-	void ApplyPendingChanges()
-	{
-		for (PendingChange change : mPendingList)
-		{
-			switch (change.action)
-			{
-			case Push:
-				mStack.push_back(CreateState(change.stateID));
-				break;
-
-			case Pop:
-				if (!mStack.empty())
-					mStack.pop_back();
-				break;
-
-			case Clear:
-				mStack.clear();
-				break;
-			}
-
-		}
-		// Clear the pending changes after applying them
-		mPendingList.clear();
-	}
-
+	State::Ptr CreateState(States::ID stateID);
+	void ApplyPendingChanges();
+	
+private:
 	std::vector<State::Ptr> mStack;
 	std::vector<PendingChange> mPendingList;
 	State::Context mContext;
-	std::map<int, std::function<State::Ptr()>> mFactories;
+
+	std::map<States::ID, std::function<State::Ptr()>> mFactories;
 };
+
+template<typename T>
+inline void StateStack::RegisterState(int stateID)
+{
+	mFactories[stateID] = [this]()
+		{
+			return State::Ptr(new T(*this, mContext));
+		};
+}
 

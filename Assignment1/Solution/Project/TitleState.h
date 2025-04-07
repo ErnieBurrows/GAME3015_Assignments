@@ -31,7 +31,7 @@ public:
 		return true;
 	}
 
-	virtual bool HandleEvent(WPARAM btnState, int x, int y)
+	virtual bool HandleEvent(WPARAM btnState)
 	{
 		// If a key is pressed, transition to the main menu
 		if (btnState != 0)

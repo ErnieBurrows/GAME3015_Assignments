@@ -27,8 +27,7 @@ public:
 		return false;
 	}
 
-	virtual bool HandleEvent(WPARAM btnState, int x, int y)
-	{
+	virtual bool HandleEvent(WPARAM btnState)
 		std::cout << "PauseState: Handling event...\n";
 		if (btnState != 0)
 		{

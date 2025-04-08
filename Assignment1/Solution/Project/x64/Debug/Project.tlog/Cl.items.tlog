@@ -11,7 +11,9 @@ D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\
 D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\Game.cpp;D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\x64\Debug\Game.obj
 D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\GameState.cpp;D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\x64\Debug\GameState.obj
 D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\main.cpp;D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\x64\Debug\main.obj
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\MainMenuState.cpp;D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\x64\Debug\MainMenuState.obj
 D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\MainMenuState.h;D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\x64\Debug\MainMenuState.obj
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\PauseState.cpp;D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\x64\Debug\PauseState.obj
 D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\Player.cpp;D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\x64\Debug\Player.obj
 D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\Player2.cpp;D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\x64\Debug\Player2.obj
 D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\PlayerBase.cpp;D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\x64\Debug\PlayerBase.obj
@@ -20,4 +22,5 @@ D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\
 D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\State.cpp;D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\x64\Debug\State.obj
 D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\StateStack.cpp;D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\x64\Debug\StateStack.obj
 D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\tiny_obj_loader.cc;D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\x64\Debug\tiny_obj_loader.obj
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\TitleState.cpp;D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\x64\Debug\TitleState.obj
 D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\World.cpp;D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\x64\Debug\World.obj

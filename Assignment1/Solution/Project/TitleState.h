@@ -5,46 +5,12 @@
 class TitleState : public State
 {
 public: 
-	TitleState(StateStack& stack, Context context) : State(stack, context), mElapsedTime(0.0f)
-	{
-		std::cout << "TitleState: Initialized. (Press any key to continue...)\n";
-	}
+	TitleState(StateStack& stack, Context context);
 
-	virtual void Draw()
-	{
-		std::cout << "TitleState: Drawing...\n";
-	}
-
-	virtual bool Update(const GameTimer& gt)
-	{
-		//mElapsedTime += dt;
-
-		if (mElapsedTime > 2.0f)
-		{
-			std::cout << "TitleState: 2 seconds elapsed. Transitioning to Main Menu.\n";
-
-			RequestStackPop();
-
-			// Assuming 1 is the ID for Main Menu state
-			RequestStackPush(1); 
-		}
-		return true;
-	}
-
-	virtual bool HandleEvent(WPARAM btnState, int x, int y)
-	{
-		// If a key is pressed, transition to the main menu
-		if (btnState != 0)
-		{
-			std::cout << "TitleState: Key pressed. Transitioning to Main Menu.\n";
-			RequestStackPop();
-
-			// Assuming 1 is the ID for Main Menu state
-			RequestStackPush(1);
-		}
-		return true;
-	}
-
+	virtual void Draw();
+	virtual bool Update(const GameTimer& gt);
+	virtual bool HandleEvent(WPARAM btnState, int x, int y);
+	
 private:
 	float mElapsedTime;
 };

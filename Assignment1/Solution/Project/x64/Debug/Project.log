@@ -11,7 +11,9 @@
   Game.cpp
   GameState.cpp
   main.cpp
+  MainMenuState.cpp
   MainMenuState.h
+  PauseState.cpp
   Player.cpp
   Player2.cpp
   PlayerBase.cpp
@@ -20,13 +22,15 @@
   State.cpp
   StateStack.cpp
   tiny_obj_loader.cc
+  TitleState.cpp
   World.cpp
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\Aircraft.cpp(64,52): warning C4267: '=': conversion from 'size_t' to 'UINT', possible loss of data
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\SpriteNode.cpp(20,52): warning C4267: '=': conversion from 'size_t' to 'UINT', possible loss of data
 D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\World.cpp(39,42): warning C4305: 'argument': truncation from 'double' to 'float'
 D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\World.cpp(39,35): warning C4305: 'argument': truncation from 'double' to 'float'
 D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\World.cpp(39,28): warning C4305: 'argument': truncation from 'double' to 'float'
 D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\World.cpp(48,43): warning C4305: 'argument': truncation from 'double' to 'float'
 D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\World.cpp(48,36): warning C4305: 'argument': truncation from 'double' to 'float'
 D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\World.cpp(48,29): warning C4305: 'argument': truncation from 'double' to 'float'
-D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\SpriteNode.cpp(20,52): warning C4267: '=': conversion from 'size_t' to 'UINT', possible loss of data
-D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\Aircraft.cpp(64,52): warning C4267: '=': conversion from 'size_t' to 'UINT', possible loss of data
+x64\Debug\MainMenuState.obj : warning LNK4042: object specified more than once; extras ignored
   Project.vcxproj -> D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\x64\Debug\Project.exe

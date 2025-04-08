@@ -293,9 +293,8 @@ void Game::LoadTextures()
 	CreateTexture("PlaneTex", L"../../Textures/Airplane_Metal.dds");
 	CreateTexture("DesertTex", L"../../Textures/Desert.dds");
 	CreateTexture("StartPromptTextTex", L"../../Textures/StartPrompt.dds");
+	CreateTexture("MainMenuPromptTextTex", L"../../Textures/MainMenuPrompt.dds");
 
-	//mainmenu text
-	CreateTexture("MenuTextTex", L"../../Textures/mmScreen2.dds");
 	//pauseScreen text
 	CreateTexture("PauseTextTex", L"../../Textures/pauseScreen.dds");
 	//gamescreen text
@@ -358,8 +357,8 @@ void Game::BuildDescriptorHeaps()
 	auto PlaneTex = mTextures["PlaneTex"]->Resource;
 	auto DesertTex = mTextures["DesertTex"]->Resource;
 	auto StartPromptTex = mTextures["StartPromptTextTex"]->Resource;
+	auto MainMenuPromptTex = mTextures["MainMenuPromptTextTex"]->Resource;
 
-	auto MMTextTex = mTextures["MenuTextTex"]->Resource;
 	auto PauseTextTex = mTextures["PauseTextTex"]->Resource;
 	auto GameTextTex = mTextures["GameTextTex"]->Resource;
 	
@@ -392,8 +391,8 @@ void Game::BuildDescriptorHeaps()
 
 	//MM TExt Descriptor
 	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
-	srvDesc.Format = MMTextTex->GetDesc().Format;
-	md3dDevice->CreateShaderResourceView(MMTextTex.Get(), &srvDesc, hDescriptor);
+	srvDesc.Format = MainMenuPromptTex->GetDesc().Format;
+	md3dDevice->CreateShaderResourceView(MainMenuPromptTex.Get(), &srvDesc, hDescriptor);
 
 	//Pause Descriptor
 	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
@@ -582,8 +581,8 @@ void Game::BuildMaterials()
 	CreateMaterials("PlayerPlane", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
 	CreateMaterials("Desert", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
 	CreateMaterials("StartPrompt", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
+	CreateMaterials("MainMenuPrompt", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
 
-	CreateMaterials("MMText", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
 	CreateMaterials("PauseText", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
 	CreateMaterials("GameText", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
 

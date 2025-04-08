@@ -18,11 +18,11 @@ TitleState::TitleState(StateStack* stack, Context* context)
     backgroundSprite->setPosition(0, 0, 0);
     mSceneGraph->attachChild(std::move(backgroundSprite));
 
-    std::unique_ptr<SpriteNode> TSSprite = std::make_unique<SpriteNode>(this);
-    TSSprite->SetDrawName("StartPrompt", "boxGeo", "box");
-    TSSprite->setScale(5.0, 1.0, 2.0);
-    TSSprite->setPosition(0, 1, -0.25);
-    mSceneGraph->attachChild(std::move(TSSprite));
+    std::unique_ptr<SpriteNode> StartPromptSprite = std::make_unique<SpriteNode>(this);
+    StartPromptSprite->SetDrawName("StartPrompt", "boxGeo", "box");
+    StartPromptSprite->setScale(5.0, 1.0, 2.0);
+    StartPromptSprite->setPosition(0, 1, -0.25);
+    mSceneGraph->attachChild(std::move(StartPromptSprite));
 
     mSceneGraph->build();
     mContext->game->BuildFrameResources(mAllRitems.size());

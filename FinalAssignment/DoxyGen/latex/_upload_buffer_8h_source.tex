@@ -1,0 +1,72 @@
+\doxysection{Upload\+Buffer.\+h}
+\hypertarget{_upload_buffer_8h_source}{}\label{_upload_buffer_8h_source}\index{Common/UploadBuffer.h@{Common/UploadBuffer.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ "{}d3dUtil.h"{}}}
+\DoxyCodeLine{00004\ }
+\DoxyCodeLine{00005\ \textcolor{keyword}{template}<\textcolor{keyword}{typename}\ T>}
+\DoxyCodeLine{00006\ \textcolor{keyword}{class\ }UploadBuffer}
+\DoxyCodeLine{00007\ \{}
+\DoxyCodeLine{00008\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00009\ \ \ \ \ UploadBuffer(ID3D12Device*\ device,\ UINT\ elementCount,\ \textcolor{keywordtype}{bool}\ isConstantBuffer)\ :\ }
+\DoxyCodeLine{00010\ \ \ \ \ \ \ \ \ mIsConstantBuffer(isConstantBuffer)}
+\DoxyCodeLine{00011\ \ \ \ \ \{}
+\DoxyCodeLine{00012\ \ \ \ \ \ \ \ \ mElementByteSize\ =\ \textcolor{keyword}{sizeof}(T);}
+\DoxyCodeLine{00013\ }
+\DoxyCodeLine{00014\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Constant\ buffer\ elements\ need\ to\ be\ multiples\ of\ 256\ bytes.}}
+\DoxyCodeLine{00015\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ This\ is\ because\ the\ hardware\ can\ only\ view\ constant\ data\ }}
+\DoxyCodeLine{00016\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ at\ m*256\ byte\ offsets\ and\ of\ n*256\ byte\ lengths.\ }}
+\DoxyCodeLine{00017\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ typedef\ struct\ D3D12\_CONSTANT\_BUFFER\_VIEW\_DESC\ \{}}
+\DoxyCodeLine{00018\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ UINT64\ OffsetInBytes;\ //\ multiple\ of\ 256}}
+\DoxyCodeLine{00019\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ UINT\ \ \ SizeInBytes;\ \ \ //\ multiple\ of\ 256}}
+\DoxyCodeLine{00020\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ \}\ D3D12\_CONSTANT\_BUFFER\_VIEW\_DESC;}}
+\DoxyCodeLine{00021\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(isConstantBuffer)}
+\DoxyCodeLine{00022\ \ \ \ \ \ \ \ \ \ \ \ \ mElementByteSize\ =\ \mbox{\hyperlink{classd3d_util_a0883e0848cae813b2bc71570f3303e92}{d3dUtil::CalcConstantBufferByteSize}}(\textcolor{keyword}{sizeof}(T));}
+\DoxyCodeLine{00023\ }
+\DoxyCodeLine{00024\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ upload\ =\ CD3DX12\_HEAP\_PROPERTIES(D3D12\_HEAP\_TYPE\_UPLOAD);}
+\DoxyCodeLine{00025\ \ \ \ \ \ \ \ \ \textcolor{keyword}{auto}\ buffer\ =\ CD3DX12\_RESOURCE\_DESC::Buffer(mElementByteSize\ *\ elementCount);}
+\DoxyCodeLine{00026\ \ \ \ \ \ \ \ \ ThrowIfFailed(device-\/>CreateCommittedResource(}
+\DoxyCodeLine{00027\ \ \ \ \ \ \ \ \ \ \ \ \ \&upload,}
+\DoxyCodeLine{00028\ \ \ \ \ \ \ \ \ \ \ \ \ D3D12\_HEAP\_FLAG\_NONE,}
+\DoxyCodeLine{00029\ \ \ \ \ \ \ \ \ \ \ \ \ \&buffer,}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ \ \ \ \ D3D12\_RESOURCE\_STATE\_GENERIC\_READ,}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{nullptr},}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ IID\_PPV\_ARGS(\&mUploadBuffer)));}
+\DoxyCodeLine{00033\ }
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ ThrowIfFailed(mUploadBuffer-\/>Map(0,\ \textcolor{keyword}{nullptr},\ \textcolor{keyword}{reinterpret\_cast<}\textcolor{keywordtype}{void}**\textcolor{keyword}{>}(\&mMappedData)));}
+\DoxyCodeLine{00035\ }
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ We\ do\ not\ need\ to\ unmap\ until\ we\ are\ done\ with\ the\ resource.\ \ However,\ we\ must\ not\ write\ to}}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ the\ resource\ while\ it\ is\ in\ use\ by\ the\ GPU\ (so\ we\ must\ use\ synchronization\ techniques).}}
+\DoxyCodeLine{00038\ \ \ \ \ \}}
+\DoxyCodeLine{00039\ }
+\DoxyCodeLine{00040\ \ \ \ \ UploadBuffer(\textcolor{keyword}{const}\ UploadBuffer\&\ rhs)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00041\ \ \ \ \ UploadBuffer\&\ operator=(\textcolor{keyword}{const}\ UploadBuffer\&\ rhs)\ =\ \textcolor{keyword}{delete};}
+\DoxyCodeLine{00042\ \ \ \ \ \string~UploadBuffer()}
+\DoxyCodeLine{00043\ \ \ \ \ \{}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(mUploadBuffer\ !=\ \textcolor{keyword}{nullptr})}
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ mUploadBuffer-\/>Unmap(0,\ \textcolor{keyword}{nullptr});}
+\DoxyCodeLine{00046\ }
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ mMappedData\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00048\ \ \ \ \ \}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ ID3D12Resource*\ Resource()\textcolor{keyword}{const}}
+\DoxyCodeLine{00051\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ mUploadBuffer.Get();}
+\DoxyCodeLine{00053\ \ \ \ \ \}}
+\DoxyCodeLine{00054\ }
+\DoxyCodeLine{00055\ \ \ \ \ \textcolor{keywordtype}{void}\ CopyData(\textcolor{keywordtype}{int}\ elementIndex,\ \textcolor{keyword}{const}\ T\&\ data)}
+\DoxyCodeLine{00056\ \ \ \ \ \{}
+\DoxyCodeLine{00057\ \ \ \ \ \ \ \ \ memcpy(\&mMappedData[elementIndex*mElementByteSize],\ \&data,\ \textcolor{keyword}{sizeof}(T));}
+\DoxyCodeLine{00058\ \ \ \ \ \}}
+\DoxyCodeLine{00059\ }
+\DoxyCodeLine{00060\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00061\ \ \ \ \ Microsoft::WRL::ComPtr<ID3D12Resource>\ mUploadBuffer;}
+\DoxyCodeLine{00062\ \ \ \ \ BYTE*\ mMappedData\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00063\ }
+\DoxyCodeLine{00064\ \ \ \ \ UINT\ mElementByteSize\ =\ 0;}
+\DoxyCodeLine{00065\ \ \ \ \ \textcolor{keywordtype}{bool}\ mIsConstantBuffer\ =\ \textcolor{keyword}{false};}
+\DoxyCodeLine{00066\ \};}
+
+\end{DoxyCode}

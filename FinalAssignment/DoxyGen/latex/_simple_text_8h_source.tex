@@ -1,0 +1,120 @@
+\doxysection{Simple\+Text.\+h}
+\hypertarget{_simple_text_8h_source}{}\label{_simple_text_8h_source}\index{Solution/InitializeDirect3D/SimpleText.h@{Solution/InitializeDirect3D/SimpleText.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ *}}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ *\ File:\ SimpleText.h}}
+\DoxyCodeLine{00005\ \textcolor{comment}{//\ *}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//\ *\ Description:}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ *}}
+\DoxyCodeLine{00008\ \textcolor{comment}{//\ *}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ *\ \ This\ file\ is\ part\ of\ the\ Microsoft\ Windows\ SDK\ Code\ Samples.}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ *}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ *\ \ Copyright\ (C)\ Microsoft\ Corporation.\ \ All\ rights\ reserved.}}
+\DoxyCodeLine{00012\ \textcolor{comment}{//\ *}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//\ *\ This\ source\ code\ is\ intended\ only\ as\ a\ supplement\ to\ Microsoft}}
+\DoxyCodeLine{00014\ \textcolor{comment}{//\ *\ Development\ Tools\ and/or\ on-\/line\ documentation.\ \ See\ these\ other}}
+\DoxyCodeLine{00015\ \textcolor{comment}{//\ *\ materials\ for\ detailed\ information\ regarding\ Microsoft\ code\ samples.}}
+\DoxyCodeLine{00016\ \textcolor{comment}{//\ *}}
+\DoxyCodeLine{00017\ \textcolor{comment}{//\ *\ THIS\ CODE\ AND\ INFORMATION\ ARE\ PROVIDED\ AS\ IS\ WITHOUT\ WARRANTY\ OF\ ANY}}
+\DoxyCodeLine{00018\ \textcolor{comment}{//\ *\ KIND,\ EITHER\ EXPRESSED\ OR\ IMPLIED,\ INCLUDING\ BUT\ NOT\ LIMITED\ TO\ THE}}
+\DoxyCodeLine{00019\ \textcolor{comment}{//\ *\ IMPLIED\ WARRANTIES\ OF\ MERCHANTABILITY\ AND/OR\ FITNESS\ FOR\ A}}
+\DoxyCodeLine{00020\ \textcolor{comment}{//\ *\ PARTICULAR\ PURPOSE.}}
+\DoxyCodeLine{00021\ \textcolor{comment}{//\ *}}
+\DoxyCodeLine{00022\ \textcolor{comment}{//\ ************************************************************************/}}
+\DoxyCodeLine{00023\ \textcolor{comment}{//}}
+\DoxyCodeLine{00024\ \textcolor{comment}{//\#pragma\ once}}
+\DoxyCodeLine{00025\ \textcolor{comment}{//\#include\ <d2d1.h>}}
+\DoxyCodeLine{00026\ \textcolor{comment}{//\#include\ <dwrite.h>}}
+\DoxyCodeLine{00027\ \textcolor{comment}{//}}
+\DoxyCodeLine{00028\ \textcolor{comment}{//\#ifndef\ HINST\_THISCOMPONENT}}
+\DoxyCodeLine{00029\ \textcolor{comment}{//EXTERN\_C\ IMAGE\_DOS\_HEADER\ \_\_ImageBase;}}
+\DoxyCodeLine{00030\ \textcolor{comment}{//\#define\ HINST\_THISCOMPONENT\ ((HINSTANCE)\&\_\_ImageBase)}}
+\DoxyCodeLine{00031\ \textcolor{comment}{//\#endif}}
+\DoxyCodeLine{00032\ \textcolor{comment}{//}}
+\DoxyCodeLine{00033\ \textcolor{comment}{//}}
+\DoxyCodeLine{00034\ \textcolor{comment}{//\ /******************************************************************}}
+\DoxyCodeLine{00035\ \textcolor{comment}{//\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{00036\ \textcolor{comment}{//\ *\ \ SimpleText\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{00037\ \textcolor{comment}{//\ *\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ *}}
+\DoxyCodeLine{00038\ \textcolor{comment}{//\ ******************************************************************/}}
+\DoxyCodeLine{00039\ \textcolor{comment}{//}}
+\DoxyCodeLine{00040\ \textcolor{comment}{//class\ SimpleText}}
+\DoxyCodeLine{00041\ \textcolor{comment}{//\{}}
+\DoxyCodeLine{00042\ \textcolor{comment}{//public:}}
+\DoxyCodeLine{00043\ \textcolor{comment}{//\ \ \ \ SimpleText();}}
+\DoxyCodeLine{00044\ \textcolor{comment}{//\ \ \ \ \string~SimpleText();}}
+\DoxyCodeLine{00045\ \textcolor{comment}{//}}
+\DoxyCodeLine{00046\ \textcolor{comment}{//\ \ \ \ HRESULT\ Initialize(HWND\ hwndParent);}}
+\DoxyCodeLine{00047\ \textcolor{comment}{//}}
+\DoxyCodeLine{00048\ \textcolor{comment}{//\ \ \ \ HWND\ GetHwnd()\ \{\ return\ hwnd\_;\ \}}}
+\DoxyCodeLine{00049\ \textcolor{comment}{//}}
+\DoxyCodeLine{00050\ \textcolor{comment}{//private:}}
+\DoxyCodeLine{00051\ \textcolor{comment}{//\ \ \ \ HRESULT\ CreateDeviceIndependentResources(}}
+\DoxyCodeLine{00052\ \textcolor{comment}{//\ \ \ \ );}}
+\DoxyCodeLine{00053\ \textcolor{comment}{//}}
+\DoxyCodeLine{00054\ \textcolor{comment}{//\ \ \ \ void\ DiscardDeviceIndependentResources(}}
+\DoxyCodeLine{00055\ \textcolor{comment}{//\ \ \ \ );}}
+\DoxyCodeLine{00056\ \textcolor{comment}{//}}
+\DoxyCodeLine{00057\ \textcolor{comment}{//\ \ \ \ HRESULT\ CreateDeviceResources(}}
+\DoxyCodeLine{00058\ \textcolor{comment}{//\ \ \ \ );}}
+\DoxyCodeLine{00059\ \textcolor{comment}{//}}
+\DoxyCodeLine{00060\ \textcolor{comment}{//\ \ \ \ void\ DiscardDeviceResources(}}
+\DoxyCodeLine{00061\ \textcolor{comment}{//\ \ \ \ );}}
+\DoxyCodeLine{00062\ \textcolor{comment}{//}}
+\DoxyCodeLine{00063\ \textcolor{comment}{//\ \ \ \ HRESULT\ DrawD2DContent(}}
+\DoxyCodeLine{00064\ \textcolor{comment}{//\ \ \ \ );}}
+\DoxyCodeLine{00065\ \textcolor{comment}{//}}
+\DoxyCodeLine{00066\ \textcolor{comment}{//\ \ \ \ HRESULT\ DrawText(}}
+\DoxyCodeLine{00067\ \textcolor{comment}{//\ \ \ \ );}}
+\DoxyCodeLine{00068\ \textcolor{comment}{//}}
+\DoxyCodeLine{00069\ \textcolor{comment}{//\ \ \ \ void\ OnResize(}}
+\DoxyCodeLine{00070\ \textcolor{comment}{//\ \ \ \ \ \ \ \ UINT\ width,}}
+\DoxyCodeLine{00071\ \textcolor{comment}{//\ \ \ \ \ \ \ \ UINT\ height}}
+\DoxyCodeLine{00072\ \textcolor{comment}{//\ \ \ \ );}}
+\DoxyCodeLine{00073\ \textcolor{comment}{//}}
+\DoxyCodeLine{00074\ \textcolor{comment}{//\ \ \ \ static\ LRESULT\ CALLBACK\ WndProc(}}
+\DoxyCodeLine{00075\ \textcolor{comment}{//\ \ \ \ \ \ \ \ HWND\ hWnd,}}
+\DoxyCodeLine{00076\ \textcolor{comment}{//\ \ \ \ \ \ \ \ UINT\ message,}}
+\DoxyCodeLine{00077\ \textcolor{comment}{//\ \ \ \ \ \ \ \ WPARAM\ wParam,}}
+\DoxyCodeLine{00078\ \textcolor{comment}{//\ \ \ \ \ \ \ \ LPARAM\ lParam}}
+\DoxyCodeLine{00079\ \textcolor{comment}{//\ \ \ \ );}}
+\DoxyCodeLine{00080\ \textcolor{comment}{//}}
+\DoxyCodeLine{00081\ \textcolor{comment}{//private:}}
+\DoxyCodeLine{00082\ \textcolor{comment}{//\ \ \ \ HWND\ hwnd\_;}}
+\DoxyCodeLine{00083\ \textcolor{comment}{//}}
+\DoxyCodeLine{00084\ \textcolor{comment}{//\ \ \ \ //\ how\ much\ to\ scale\ a\ design\ that\ assumes\ 96-\/DPI\ pixels}}
+\DoxyCodeLine{00085\ \textcolor{comment}{//\ \ \ \ float\ dpiScaleX\_;}}
+\DoxyCodeLine{00086\ \textcolor{comment}{//\ \ \ \ float\ dpiScaleY\_;}}
+\DoxyCodeLine{00087\ \textcolor{comment}{//}}
+\DoxyCodeLine{00088\ \textcolor{comment}{//\ \ \ \ //\ Direct2D}}
+\DoxyCodeLine{00089\ \textcolor{comment}{//}}
+\DoxyCodeLine{00090\ \textcolor{comment}{//\ \ \ \ ID2D1Factory*\ pD2DFactory\_;}}
+\DoxyCodeLine{00091\ \textcolor{comment}{//\ \ \ \ ID2D1HwndRenderTarget*\ pRT\_;}}
+\DoxyCodeLine{00092\ \textcolor{comment}{//\ \ \ \ ID2D1SolidColorBrush*\ pBlackBrush\_;}}
+\DoxyCodeLine{00093\ \textcolor{comment}{//}}
+\DoxyCodeLine{00094\ \textcolor{comment}{//}}
+\DoxyCodeLine{00095\ \textcolor{comment}{//\ \ \ \ //\ DirectWrite}}
+\DoxyCodeLine{00096\ \textcolor{comment}{//}}
+\DoxyCodeLine{00097\ \textcolor{comment}{//\ \ \ \ IDWriteFactory*\ pDWriteFactory\_;}}
+\DoxyCodeLine{00098\ \textcolor{comment}{//\ \ \ \ IDWriteTextFormat*\ pTextFormat\_;}}
+\DoxyCodeLine{00099\ \textcolor{comment}{//}}
+\DoxyCodeLine{00100\ \textcolor{comment}{//}}
+\DoxyCodeLine{00101\ \textcolor{comment}{//}}
+\DoxyCodeLine{00102\ \textcolor{comment}{//\ \ \ \ const\ wchar\_t*\ wszText\_;}}
+\DoxyCodeLine{00103\ \textcolor{comment}{//\ \ \ \ UINT32\ cTextLength\_;}}
+\DoxyCodeLine{00104\ \textcolor{comment}{//}}
+\DoxyCodeLine{00105\ \textcolor{comment}{//}}
+\DoxyCodeLine{00106\ \textcolor{comment}{//\};}}
+\DoxyCodeLine{00107\ \textcolor{comment}{//}}
+\DoxyCodeLine{00109\ \textcolor{comment}{//template\ <class\ T>\ inline\ void\ SafeRelease(T**\ ppT)}}
+\DoxyCodeLine{00110\ \textcolor{comment}{//\{}}
+\DoxyCodeLine{00111\ \textcolor{comment}{//\ \ \ \ if\ (*ppT)}}
+\DoxyCodeLine{00112\ \textcolor{comment}{//\ \ \ \ \{}}
+\DoxyCodeLine{00113\ \textcolor{comment}{//\ \ \ \ \ \ \ \ (*ppT)-\/>Release();}}
+\DoxyCodeLine{00114\ \textcolor{comment}{//\ \ \ \ \ \ \ \ *ppT\ =\ NULL;}}
+\DoxyCodeLine{00115\ \textcolor{comment}{//\ \ \ \ \}}}
+\DoxyCodeLine{00116\ \textcolor{comment}{//\}}}
+
+\end{DoxyCode}

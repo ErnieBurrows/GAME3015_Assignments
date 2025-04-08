@@ -1,0 +1,120 @@
+\doxysection{Game\+State Class Reference}
+\hypertarget{class_game_state}{}\label{class_game_state}\index{GameState@{GameState}}
+Inheritance diagram for Game\+State\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_game_state}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_game_state_a05f2b11b65c32912f95c06d68b8bd4c4}\label{class_game_state_a05f2b11b65c32912f95c06d68b8bd4c4} 
+{\bfseries Game\+State} (\mbox{\hyperlink{class_state_stack}{State\+Stack}} \texorpdfstring{$\ast$}{*}stack, \mbox{\hyperlink{struct_state_1_1_context}{Context}} \texorpdfstring{$\ast$}{*}context)
+\item 
+virtual void \mbox{\hyperlink{class_game_state_a0c1d83fbe03ca72edf6bb0fc3393f16b}{Draw}} () override
+\item 
+virtual bool \mbox{\hyperlink{class_game_state_ac02eeba1f6f23760e8743aaabe0c4b66}{Update}} (const \mbox{\hyperlink{class_game_timer}{Game\+Timer}} \&gt) override
+\item 
+virtual bool \mbox{\hyperlink{class_game_state_a7064a942c979e53745548e01c7041bc0}{Handle\+Event}} (WPARAM btn\+State) override
+\item 
+virtual bool \mbox{\hyperlink{class_game_state_acc2bebd7a5e37a7f16e3748a9de0333b}{Handle\+Real\+Time\+Input}} () override
+\item 
+\Hypertarget{class_game_state_aaf255a97137afb613c3509da8f01aa06}\label{class_game_state_aaf255a97137afb613c3509da8f01aa06} 
+void {\bfseries Process\+Input} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_state}{State}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries State} (\mbox{\hyperlink{class_state_stack}{State\+Stack}} \texorpdfstring{$\ast$}{*}stack, \mbox{\hyperlink{struct_state_1_1_context}{Context}} \texorpdfstring{$\ast$}{*}context)
+\item 
+virtual bool {\bfseries Is\+Transparent} () const
+\item 
+std\+::vector$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{struct_render_item}{Render\+Item}} $>$ $>$ \& {\bfseries get\+Render\+Items} ()
+\item 
+\mbox{\hyperlink{struct_state_1_1_context}{Context}} \texorpdfstring{$\ast$}{*} {\bfseries Get\+Context} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_game_state_abae3784758f93e8affba727139d51455}\label{class_game_state_abae3784758f93e8affba727139d51455} 
+\mbox{\hyperlink{class_world}{World}} {\bfseries m\+World}
+\item 
+\Hypertarget{class_game_state_a02e4e919bb98bd3f89b18c66d82a6c59}\label{class_game_state_a02e4e919bb98bd3f89b18c66d82a6c59} 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_scene_node}{Scene\+Node}} $>$ {\bfseries m\+Pause\+State\+Scene\+Graph}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Types inherited from \mbox{\hyperlink{class_state}{State}}}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_state}{State}} $>$ {\bfseries State\+Ptr}
+\begin{DoxyCompactList}\small\item\em Unique pointer type for automatic state management. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_state}{State}}}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries Request\+Stack\+Push} (States\+::\+ID state\+ID)
+\item 
+void {\bfseries Request\+Stack\+Pop} ()
+\item 
+void {\bfseries Request\+State\+Clear} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_state}{State}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_state_stack}{State\+Stack}} \texorpdfstring{$\ast$}{*} {\bfseries m\+Stack}
+\item 
+\mbox{\hyperlink{struct_state_1_1_context}{Context}} \texorpdfstring{$\ast$}{*} {\bfseries m\+Context}
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_scene_node}{Scene\+Node}} $>$ {\bfseries m\+Scene\+Graph}
+\item 
+std\+::vector$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{struct_render_item}{Render\+Item}} $>$ $>$ {\bfseries m\+All\+Ritems}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_game_state_a0c1d83fbe03ca72edf6bb0fc3393f16b}\index{GameState@{GameState}!Draw@{Draw}}
+\index{Draw@{Draw}!GameState@{GameState}}
+\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}}
+{\footnotesize\ttfamily \label{class_game_state_a0c1d83fbe03ca72edf6bb0fc3393f16b} 
+void Game\+State\+::\+Draw (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_state}{State}}.
+
+\Hypertarget{class_game_state_a7064a942c979e53745548e01c7041bc0}\index{GameState@{GameState}!HandleEvent@{HandleEvent}}
+\index{HandleEvent@{HandleEvent}!GameState@{GameState}}
+\doxysubsubsection{\texorpdfstring{HandleEvent()}{HandleEvent()}}
+{\footnotesize\ttfamily \label{class_game_state_a7064a942c979e53745548e01c7041bc0} 
+bool Game\+State\+::\+Handle\+Event (\begin{DoxyParamCaption}\item[{WPARAM}]{btn\+State}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_state}{State}}.
+
+\Hypertarget{class_game_state_acc2bebd7a5e37a7f16e3748a9de0333b}\index{GameState@{GameState}!HandleRealTimeInput@{HandleRealTimeInput}}
+\index{HandleRealTimeInput@{HandleRealTimeInput}!GameState@{GameState}}
+\doxysubsubsection{\texorpdfstring{HandleRealTimeInput()}{HandleRealTimeInput()}}
+{\footnotesize\ttfamily \label{class_game_state_acc2bebd7a5e37a7f16e3748a9de0333b} 
+bool Game\+State\+::\+Handle\+Real\+Time\+Input (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_state}{State}}.
+
+\Hypertarget{class_game_state_ac02eeba1f6f23760e8743aaabe0c4b66}\index{GameState@{GameState}!Update@{Update}}
+\index{Update@{Update}!GameState@{GameState}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily \label{class_game_state_ac02eeba1f6f23760e8743aaabe0c4b66} 
+bool Game\+State\+::\+Update (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_game_timer}{Game\+Timer}} \&}]{gt}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_state}{State}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Solution/\+Initialize\+Direct3\+D/Game\+State.\+hpp\item 
+Solution/\+Initialize\+Direct3\+D/Game\+State.\+cpp\end{DoxyCompactItemize}

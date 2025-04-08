@@ -1,0 +1,105 @@
+\doxysection{Geometry\+Generator.\+h}
+\hypertarget{_geometry_generator_8h_source}{}\label{_geometry_generator_8h_source}\index{Common/GeometryGenerator.h@{Common/GeometryGenerator.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{comment}{//***************************************************************************************}}
+\DoxyCodeLine{00002\ \textcolor{comment}{//\ GeometryGenerator.h\ by\ Frank\ Luna\ (C)\ 2011\ All\ Rights\ Reserved.}}
+\DoxyCodeLine{00003\ \textcolor{comment}{//\ \ \ }}
+\DoxyCodeLine{00004\ \textcolor{comment}{//\ Defines\ a\ static\ class\ for\ procedurally\ generating\ the\ geometry\ of\ }}
+\DoxyCodeLine{00005\ \textcolor{comment}{//\ common\ mathematical\ objects.}}
+\DoxyCodeLine{00006\ \textcolor{comment}{//}}
+\DoxyCodeLine{00007\ \textcolor{comment}{//\ All\ triangles\ are\ generated\ "{}outward"{}\ facing.\ \ If\ you\ want\ "{}inward"{}\ }}
+\DoxyCodeLine{00008\ \textcolor{comment}{//\ facing\ triangles\ (for\ example,\ if\ you\ want\ to\ place\ the\ camera\ inside}}
+\DoxyCodeLine{00009\ \textcolor{comment}{//\ a\ sphere\ to\ simulate\ a\ sky),\ you\ will\ need\ to:}}
+\DoxyCodeLine{00010\ \textcolor{comment}{//\ \ \ 1.\ Change\ the\ Direct3D\ cull\ mode\ or\ manually\ reverse\ the\ winding\ order.}}
+\DoxyCodeLine{00011\ \textcolor{comment}{//\ \ \ 2.\ Invert\ the\ normal.}}
+\DoxyCodeLine{00012\ \textcolor{comment}{//\ \ \ 3.\ Update\ the\ texture\ coordinates\ and\ tangent\ vectors.}}
+\DoxyCodeLine{00013\ \textcolor{comment}{//***************************************************************************************}}
+\DoxyCodeLine{00014\ }
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00016\ }
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <DirectXMath.h>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00020\ }
+\DoxyCodeLine{00021\ \textcolor{keyword}{class\ }\mbox{\hyperlink{class_geometry_generator}{GeometryGenerator}}}
+\DoxyCodeLine{00022\ \{}
+\DoxyCodeLine{00023\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00024\ }
+\DoxyCodeLine{00025\ \ \ \ \ \textcolor{keyword}{using\ }uint16\ =\ std::uint16\_t;}
+\DoxyCodeLine{00026\ \ \ \ \ \textcolor{keyword}{using\ }uint32\ =\ std::uint32\_t;}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00028\ \ \ \ \ \textcolor{keyword}{struct\ }Vertex}
+\DoxyCodeLine{00029\ \ \ \ \ \{}
+\DoxyCodeLine{00030\ \ \ \ \ \ \ \ \ Vertex()\{\}}
+\DoxyCodeLine{00031\ \ \ \ \ \ \ \ \ Vertex(}
+\DoxyCodeLine{00032\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ DirectX::XMFLOAT3\&\ p,\ }
+\DoxyCodeLine{00033\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ DirectX::XMFLOAT3\&\ n,\ }
+\DoxyCodeLine{00034\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ DirectX::XMFLOAT3\&\ t,\ }
+\DoxyCodeLine{00035\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ DirectX::XMFLOAT2\&\ uv)\ :}
+\DoxyCodeLine{00036\ \ \ \ \ \ \ \ \ \ \ \ \ Position(p),\ }
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ \ \ \ \ Normal(n),\ }
+\DoxyCodeLine{00038\ \ \ \ \ \ \ \ \ \ \ \ \ TangentU(t),\ }
+\DoxyCodeLine{00039\ \ \ \ \ \ \ \ \ \ \ \ \ TexC(uv)\{\}}
+\DoxyCodeLine{00040\ \ \ \ \ \ \ \ \ Vertex(}
+\DoxyCodeLine{00041\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ px,\ \textcolor{keywordtype}{float}\ py,\ \textcolor{keywordtype}{float}\ pz,\ }
+\DoxyCodeLine{00042\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ nx,\ \textcolor{keywordtype}{float}\ ny,\ \textcolor{keywordtype}{float}\ nz,}
+\DoxyCodeLine{00043\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ tx,\ \textcolor{keywordtype}{float}\ ty,\ \textcolor{keywordtype}{float}\ tz,}
+\DoxyCodeLine{00044\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordtype}{float}\ u,\ \textcolor{keywordtype}{float}\ v)\ :\ }
+\DoxyCodeLine{00045\ \ \ \ \ \ \ \ \ \ \ \ \ Position(px,py,pz),\ }
+\DoxyCodeLine{00046\ \ \ \ \ \ \ \ \ \ \ \ \ Normal(nx,ny,nz),}
+\DoxyCodeLine{00047\ \ \ \ \ \ \ \ \ \ \ \ \ TangentU(tx,\ ty,\ tz),\ }
+\DoxyCodeLine{00048\ \ \ \ \ \ \ \ \ \ \ \ \ TexC(u,v)\{\}}
+\DoxyCodeLine{00049\ }
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ DirectX::XMFLOAT3\ Position;}
+\DoxyCodeLine{00051\ \ \ \ \ \ \ \ \ DirectX::XMFLOAT3\ Normal;}
+\DoxyCodeLine{00052\ \ \ \ \ \ \ \ \ DirectX::XMFLOAT3\ TangentU;}
+\DoxyCodeLine{00053\ \ \ \ \ \ \ \ \ DirectX::XMFLOAT2\ TexC;}
+\DoxyCodeLine{00054\ \ \ \ \ \};}
+\DoxyCodeLine{00055\ }
+\DoxyCodeLine{00056\ \ \ \ \ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_geometry_generator_1_1_mesh_data}{MeshData}}}
+\DoxyCodeLine{00057\ \ \ \ \ \{}
+\DoxyCodeLine{00058\ \ \ \ \ \ \ \ \ std::vector<Vertex>\ Vertices;}
+\DoxyCodeLine{00059\ \ \ \ \ \ \ \ \ std::vector<uint32>\ Indices32;}
+\DoxyCodeLine{00060\ }
+\DoxyCodeLine{00061\ \ \ \ \ \ \ \ \ std::vector<uint16>\&\ GetIndices16()}
+\DoxyCodeLine{00062\ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{if}(mIndices16.empty())}
+\DoxyCodeLine{00064\ \ \ \ \ \ \ \ \ \ \ \ \ \{}
+\DoxyCodeLine{00065\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mIndices16.resize(Indices32.size());}
+\DoxyCodeLine{00066\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{for}(\textcolor{keywordtype}{size\_t}\ i\ =\ 0;\ i\ <\ Indices32.size();\ ++i)}
+\DoxyCodeLine{00067\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ mIndices16[i]\ =\ \textcolor{keyword}{static\_cast<}uint16\textcolor{keyword}{>}(Indices32[i]);}
+\DoxyCodeLine{00068\ \ \ \ \ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00069\ }
+\DoxyCodeLine{00070\ \ \ \ \ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ mIndices16;}
+\DoxyCodeLine{00071\ \ \ \ \ \ \ \ \ \}}
+\DoxyCodeLine{00072\ }
+\DoxyCodeLine{00073\ \ \ \ \ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00074\ \ \ \ \ \ \ \ \ std::vector<uint16>\ mIndices16;}
+\DoxyCodeLine{00075\ \ \ \ \ \};}
+\DoxyCodeLine{00076\ }
+\DoxyCodeLine{00081\ \ \ \ \ \mbox{\hyperlink{struct_geometry_generator_1_1_mesh_data}{MeshData}}\ \mbox{\hyperlink{class_geometry_generator_a9ebf88d1bee287c6e211bff43fbdd3a0}{CreateBox}}(\textcolor{keywordtype}{float}\ width,\ \textcolor{keywordtype}{float}\ height,\ \textcolor{keywordtype}{float}\ depth,\ uint32\ numSubdivisions);}
+\DoxyCodeLine{00082\ }
+\DoxyCodeLine{00087\ \ \ \ \ \mbox{\hyperlink{struct_geometry_generator_1_1_mesh_data}{MeshData}}\ \mbox{\hyperlink{class_geometry_generator_a61677b3472294c52b544670722d22f0b}{CreateSphere}}(\textcolor{keywordtype}{float}\ radius,\ uint32\ sliceCount,\ uint32\ stackCount);}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00093\ \ \ \ \ \mbox{\hyperlink{struct_geometry_generator_1_1_mesh_data}{MeshData}}\ \mbox{\hyperlink{class_geometry_generator_ac29d9710556efda67adf2969b3d59efe}{CreateGeosphere}}(\textcolor{keywordtype}{float}\ radius,\ uint32\ numSubdivisions);}
+\DoxyCodeLine{00094\ }
+\DoxyCodeLine{00098\ \ \ \ \ \textcolor{comment}{//\ cylinders.\ \ The\ slices\ and\ stacks\ parameters\ control\ the\ degree\ of\ tessellation.}}
+\DoxyCodeLine{00100\ \ \ \ \ \mbox{\hyperlink{struct_geometry_generator_1_1_mesh_data}{MeshData}}\ \mbox{\hyperlink{class_geometry_generator_a6d2867280024eaf02c0643c765dfdd2b}{CreateCylinder}}(\textcolor{keywordtype}{float}\ bottomRadius,\ \textcolor{keywordtype}{float}\ topRadius,\ \textcolor{keywordtype}{float}\ height,\ uint32\ sliceCount,\ uint32\ stackCount);}
+\DoxyCodeLine{00101\ }
+\DoxyCodeLine{00106\ \ \ \ \ \mbox{\hyperlink{struct_geometry_generator_1_1_mesh_data}{MeshData}}\ \mbox{\hyperlink{class_geometry_generator_a594d746f5a6a3a645ea2c85a9feabafe}{CreateGrid}}(\textcolor{keywordtype}{float}\ width,\ \textcolor{keywordtype}{float}\ depth,\ uint32\ m,\ uint32\ n);}
+\DoxyCodeLine{00107\ }
+\DoxyCodeLine{00111\ \ \ \ \ \mbox{\hyperlink{struct_geometry_generator_1_1_mesh_data}{MeshData}}\ CreateQuad(\textcolor{keywordtype}{float}\ x,\ \textcolor{keywordtype}{float}\ y,\ \textcolor{keywordtype}{float}\ w,\ \textcolor{keywordtype}{float}\ h,\ \textcolor{keywordtype}{float}\ depth);}
+\DoxyCodeLine{00112\ }
+\DoxyCodeLine{00113\ \ \ \ \ \mbox{\hyperlink{struct_geometry_generator_1_1_mesh_data}{MeshData}}\ CreateTriangularPrism(\textcolor{keywordtype}{float}\ bottomRad,\ \textcolor{keywordtype}{float}\ height,\ uint32\ stackCount);}
+\DoxyCodeLine{00114\ }
+\DoxyCodeLine{00115\ \ \ \ \ \textcolor{keywordtype}{void}\ Subdivide(\mbox{\hyperlink{struct_geometry_generator_1_1_mesh_data}{MeshData}}\&\ meshData);}
+\DoxyCodeLine{00116\ \textcolor{keyword}{private}:}
+\DoxyCodeLine{00117\ \ \ \ \ }
+\DoxyCodeLine{00118\ \ \ \ \ \mbox{\hyperlink{struct_geometry_generator_1_1_vertex}{Vertex}}\ MidPoint(\textcolor{keyword}{const}\ \mbox{\hyperlink{struct_geometry_generator_1_1_vertex}{Vertex}}\&\ v0,\ \textcolor{keyword}{const}\ \mbox{\hyperlink{struct_geometry_generator_1_1_vertex}{Vertex}}\&\ v1);}
+\DoxyCodeLine{00119\ \ \ \ \ \textcolor{keywordtype}{void}\ BuildCylinderTopCap(\textcolor{keywordtype}{float}\ bottomRadius,\ \textcolor{keywordtype}{float}\ topRadius,\ \textcolor{keywordtype}{float}\ height,\ uint32\ sliceCount,\ uint32\ stackCount,\ \mbox{\hyperlink{struct_geometry_generator_1_1_mesh_data}{MeshData}}\&\ meshData);}
+\DoxyCodeLine{00120\ \ \ \ \ \textcolor{keywordtype}{void}\ BuildCylinderBottomCap(\textcolor{keywordtype}{float}\ bottomRadius,\ \textcolor{keywordtype}{float}\ topRadius,\ \textcolor{keywordtype}{float}\ height,\ uint32\ sliceCount,\ uint32\ stackCount,\ \mbox{\hyperlink{struct_geometry_generator_1_1_mesh_data}{MeshData}}\&\ meshData);}
+\DoxyCodeLine{00121\ \};}
+\DoxyCodeLine{00122\ }
+
+\end{DoxyCode}

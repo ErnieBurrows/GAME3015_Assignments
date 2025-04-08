@@ -1,0 +1,96 @@
+\doxysection{Dx\+Exception Class Reference}
+\hypertarget{class_dx_exception}{}\label{class_dx_exception}\index{DxException@{DxException}}
+
+
+Exception class for Direct3D errors.  
+
+
+
+
+{\ttfamily \#include $<$d3d\+Util.\+h$>$}
+
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_dx_exception_a73cee550c555eeb217d2abbcc564f2d9}{Dx\+Exception}} (HRESULT hr, const std\+::wstring \&function\+Name, const std\+::wstring \&filename, int line\+Number)
+\begin{DoxyCompactList}\small\item\em Constructor for the exception. \end{DoxyCompactList}\item 
+std\+::wstring \mbox{\hyperlink{class_dx_exception_a031a5ff549f043decbe96093e73dac27}{To\+String}} () const
+\begin{DoxyCompactList}\small\item\em Converts the exception to a string. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_dx_exception_ad772fc53a8ebf75f54718213aa45d635}\label{class_dx_exception_ad772fc53a8ebf75f54718213aa45d635} 
+HRESULT {\bfseries Error\+Code} = S\+\_\+\+OK
+\begin{DoxyCompactList}\small\item\em HRESULT error code. \end{DoxyCompactList}\item 
+\Hypertarget{class_dx_exception_a8fa7d58ba60cc972f4eb4993dfd5bc56}\label{class_dx_exception_a8fa7d58ba60cc972f4eb4993dfd5bc56} 
+std\+::wstring {\bfseries Function\+Name}
+\begin{DoxyCompactList}\small\item\em Name of the function that failed. \end{DoxyCompactList}\item 
+\Hypertarget{class_dx_exception_a5b68341d8c7730eb9ae00b7ebcccdd69}\label{class_dx_exception_a5b68341d8c7730eb9ae00b7ebcccdd69} 
+std\+::wstring {\bfseries Filename}
+\begin{DoxyCompactList}\small\item\em Filename where the error occurred. \end{DoxyCompactList}\item 
+\Hypertarget{class_dx_exception_aee30e6d56dfd40d6a73852503ebd8b7f}\label{class_dx_exception_aee30e6d56dfd40d6a73852503ebd8b7f} 
+int {\bfseries Line\+Number} = -\/1
+\begin{DoxyCompactList}\small\item\em Line number where the error occurred. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Exception class for Direct3D errors. 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_dx_exception_a73cee550c555eeb217d2abbcc564f2d9}\index{DxException@{DxException}!DxException@{DxException}}
+\index{DxException@{DxException}!DxException@{DxException}}
+\doxysubsubsection{\texorpdfstring{DxException()}{DxException()}}
+{\footnotesize\ttfamily \label{class_dx_exception_a73cee550c555eeb217d2abbcc564f2d9} 
+Dx\+Exception\+::\+Dx\+Exception (\begin{DoxyParamCaption}\item[{HRESULT}]{hr}{, }\item[{const std\+::wstring \&}]{function\+Name}{, }\item[{const std\+::wstring \&}]{filename}{, }\item[{int}]{line\+Number}{}\end{DoxyParamCaption})}
+
+
+
+Constructor for the exception. 
+
+Constructs a DirectX exception with detailed error information.
+
+
+\begin{DoxyParams}{Parameters}
+{\em hr} & HRESULT error code \\
+\hline
+{\em function\+Name} & Name of the function that failed \\
+\hline
+{\em filename} & Filename where the error occurred \\
+\hline
+{\em line\+Number} & Line number where the error occurred\\
+\hline
+{\em hr} & HRESULT error code \\
+\hline
+{\em function\+Name} & Name of the function where error occurred \\
+\hline
+{\em filename} & Source file where error occurred \\
+\hline
+{\em line\+Number} & Line number in source file \\
+\hline
+\end{DoxyParams}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_dx_exception_a031a5ff549f043decbe96093e73dac27}\index{DxException@{DxException}!ToString@{ToString}}
+\index{ToString@{ToString}!DxException@{DxException}}
+\doxysubsubsection{\texorpdfstring{ToString()}{ToString()}}
+{\footnotesize\ttfamily \label{class_dx_exception_a031a5ff549f043decbe96093e73dac27} 
+std\+::wstring Dx\+Exception\+::\+To\+String (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Converts the exception to a string. 
+
+Converts exception information to formatted error string.
+
+\begin{DoxyReturn}{Returns}
+Wide string representation of the exception
+
+Formatted string containing error details\+: Function name, filename, line number, and error message 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Common/d3d\+Util.\+h\item 
+Common/d3d\+Util.\+cpp\end{DoxyCompactItemize}

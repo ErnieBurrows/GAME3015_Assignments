@@ -1,0 +1,117 @@
+\doxysection{Pause\+State Class Reference}
+\hypertarget{class_pause_state}{}\label{class_pause_state}\index{PauseState@{PauseState}}
+Inheritance diagram for Pause\+State\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_pause_state}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_pause_state_a051078d6900ac47ee4face8cc5cb7700}\label{class_pause_state_a051078d6900ac47ee4face8cc5cb7700} 
+{\bfseries Pause\+State} (\mbox{\hyperlink{class_state_stack}{State\+Stack}} \texorpdfstring{$\ast$}{*}stack, \mbox{\hyperlink{struct_state_1_1_context}{Context}} \texorpdfstring{$\ast$}{*}context)
+\item 
+virtual void \mbox{\hyperlink{class_pause_state_ad743f77b33b7f1e7e0600c27c1c080ca}{Draw}} () override
+\item 
+virtual bool \mbox{\hyperlink{class_pause_state_acaf2c9cd4b834245bd74c3904aedddb8}{Update}} (const \mbox{\hyperlink{class_game_timer}{Game\+Timer}} \&gt) override
+\item 
+virtual bool \mbox{\hyperlink{class_pause_state_ae945f099ecb185e08e63a4361fb5347e}{Handle\+Event}} (WPARAM btn\+State) override
+\item 
+virtual bool \mbox{\hyperlink{class_pause_state_a3c3bd3ab6c840c80511d20533785853b}{Handle\+Real\+Time\+Input}} () override
+\item 
+\Hypertarget{class_pause_state_ae2ac63e9931e0a3382f7b1f77c13e1f7}\label{class_pause_state_ae2ac63e9931e0a3382f7b1f77c13e1f7} 
+void {\bfseries Check\+Pause} (const \mbox{\hyperlink{class_game_timer}{Game\+Timer}} \&gt)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_state}{State}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries State} (\mbox{\hyperlink{class_state_stack}{State\+Stack}} \texorpdfstring{$\ast$}{*}stack, \mbox{\hyperlink{struct_state_1_1_context}{Context}} \texorpdfstring{$\ast$}{*}context)
+\item 
+virtual bool {\bfseries Is\+Transparent} () const
+\item 
+std\+::vector$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{struct_render_item}{Render\+Item}} $>$ $>$ \& {\bfseries get\+Render\+Items} ()
+\item 
+\mbox{\hyperlink{struct_state_1_1_context}{Context}} \texorpdfstring{$\ast$}{*} {\bfseries Get\+Context} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_pause_state_a65ee6e30413a898eec0ca9188b6b2e00}\label{class_pause_state_a65ee6e30413a898eec0ca9188b6b2e00} 
+bool {\bfseries show\+Pause}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Types inherited from \mbox{\hyperlink{class_state}{State}}}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_state}{State}} $>$ {\bfseries State\+Ptr}
+\begin{DoxyCompactList}\small\item\em Unique pointer type for automatic state management. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_state}{State}}}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries Request\+Stack\+Push} (States\+::\+ID state\+ID)
+\item 
+void {\bfseries Request\+Stack\+Pop} ()
+\item 
+void {\bfseries Request\+State\+Clear} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_state}{State}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_state_stack}{State\+Stack}} \texorpdfstring{$\ast$}{*} {\bfseries m\+Stack}
+\item 
+\mbox{\hyperlink{struct_state_1_1_context}{Context}} \texorpdfstring{$\ast$}{*} {\bfseries m\+Context}
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_scene_node}{Scene\+Node}} $>$ {\bfseries m\+Scene\+Graph}
+\item 
+std\+::vector$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{struct_render_item}{Render\+Item}} $>$ $>$ {\bfseries m\+All\+Ritems}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_pause_state_ad743f77b33b7f1e7e0600c27c1c080ca}\index{PauseState@{PauseState}!Draw@{Draw}}
+\index{Draw@{Draw}!PauseState@{PauseState}}
+\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}}
+{\footnotesize\ttfamily \label{class_pause_state_ad743f77b33b7f1e7e0600c27c1c080ca} 
+void Pause\+State\+::\+Draw (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_state}{State}}.
+
+\Hypertarget{class_pause_state_ae945f099ecb185e08e63a4361fb5347e}\index{PauseState@{PauseState}!HandleEvent@{HandleEvent}}
+\index{HandleEvent@{HandleEvent}!PauseState@{PauseState}}
+\doxysubsubsection{\texorpdfstring{HandleEvent()}{HandleEvent()}}
+{\footnotesize\ttfamily \label{class_pause_state_ae945f099ecb185e08e63a4361fb5347e} 
+bool Pause\+State\+::\+Handle\+Event (\begin{DoxyParamCaption}\item[{WPARAM}]{btn\+State}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_state}{State}}.
+
+\Hypertarget{class_pause_state_a3c3bd3ab6c840c80511d20533785853b}\index{PauseState@{PauseState}!HandleRealTimeInput@{HandleRealTimeInput}}
+\index{HandleRealTimeInput@{HandleRealTimeInput}!PauseState@{PauseState}}
+\doxysubsubsection{\texorpdfstring{HandleRealTimeInput()}{HandleRealTimeInput()}}
+{\footnotesize\ttfamily \label{class_pause_state_a3c3bd3ab6c840c80511d20533785853b} 
+bool Pause\+State\+::\+Handle\+Real\+Time\+Input (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_state}{State}}.
+
+\Hypertarget{class_pause_state_acaf2c9cd4b834245bd74c3904aedddb8}\index{PauseState@{PauseState}!Update@{Update}}
+\index{Update@{Update}!PauseState@{PauseState}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily \label{class_pause_state_acaf2c9cd4b834245bd74c3904aedddb8} 
+bool Pause\+State\+::\+Update (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_game_timer}{Game\+Timer}} \&}]{gt}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_state}{State}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Solution/\+Initialize\+Direct3\+D/Pause\+State.\+hpp\item 
+Solution/\+Initialize\+Direct3\+D/Pause\+State.\+cpp\end{DoxyCompactItemize}

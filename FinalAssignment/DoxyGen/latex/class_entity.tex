@@ -1,0 +1,108 @@
+\doxysection{Entity Class Reference}
+\hypertarget{class_entity}{}\label{class_entity}\index{Entity@{Entity}}
+Inheritance diagram for Entity\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=3.000000cm]{class_entity}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_entity_ac219200508c18e5db68225c7efb7da5d}\label{class_entity_ac219200508c18e5db68225c7efb7da5d} 
+{\bfseries Entity} (\mbox{\hyperlink{class_state}{State}} \texorpdfstring{$\ast$}{*}state)
+\item 
+\Hypertarget{class_entity_a472e1690df5fb48c6c7f052e4cb39c78}\label{class_entity_a472e1690df5fb48c6c7f052e4cb39c78} 
+void {\bfseries set\+Velocity} (XMFLOAT3 velocity)
+\item 
+\Hypertarget{class_entity_abb3c22fe7e78968131560642e360e12b}\label{class_entity_abb3c22fe7e78968131560642e360e12b} 
+void {\bfseries set\+Velocity} (float vx, float vy, float vz)
+\item 
+\Hypertarget{class_entity_af4fcc5c9f7e9d705502269444ef3eca3}\label{class_entity_af4fcc5c9f7e9d705502269444ef3eca3} 
+XMFLOAT3 {\bfseries get\+Velocity} () const
+\item 
+\Hypertarget{class_entity_a6604e7ba4eee5511a6aa21345cbdaf28}\label{class_entity_a6604e7ba4eee5511a6aa21345cbdaf28} 
+void {\bfseries accelerate} (XMFLOAT3 velocity)
+\item 
+\Hypertarget{class_entity_aa2c71a179fcbb868c8ae01e98aaf79a9}\label{class_entity_aa2c71a179fcbb868c8ae01e98aaf79a9} 
+void {\bfseries accelerate} (float vx, float vy, float vz)
+\item 
+virtual void \mbox{\hyperlink{class_entity_ac2ba9cb8ca54fff11ad7397334edcd94}{update\+Current}} (const \mbox{\hyperlink{class_game_timer}{Game\+Timer}} \&gt)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_scene_node}{Scene\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries Scene\+Node} (\mbox{\hyperlink{class_state}{State}} \texorpdfstring{$\ast$}{*}state)
+\item 
+void {\bfseries attach\+Child} (Ptr child)
+\item 
+Ptr {\bfseries detach\+Child} (const \mbox{\hyperlink{class_scene_node}{Scene\+Node}} \&node)
+\item 
+const std\+::vector$<$ Ptr $>$ \& {\bfseries get\+Children} () const
+\item 
+void {\bfseries update} (const \mbox{\hyperlink{class_game_timer}{Game\+Timer}} \&gt)
+\item 
+void {\bfseries draw} () const
+\item 
+void {\bfseries build} ()
+\item 
+XMFLOAT3 {\bfseries get\+World\+Position} () const
+\item 
+void {\bfseries set\+Position} (float x, float y, float z)
+\item 
+XMFLOAT3 {\bfseries get\+World\+Rotation} () const
+\item 
+void {\bfseries set\+World\+Rotation} (float x, float y, float z)
+\item 
+XMFLOAT3 {\bfseries get\+World\+Scale} () const
+\item 
+void {\bfseries set\+Scale} (float x, float y, float z)
+\item 
+XMFLOAT4\+X4 {\bfseries get\+World\+Transform} () const
+\item 
+XMFLOAT4\+X4 {\bfseries get\+Transform} () const
+\item 
+void {\bfseries move} (float x, float y, float z)
+\item 
+void {\bfseries on\+Command} (const \mbox{\hyperlink{struct_command}{Command}} \&command, const \mbox{\hyperlink{class_game_timer}{Game\+Timer}} \&gt)
+\item 
+virtual unsigned int {\bfseries get\+Category} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_entity_a15aa77787228598dfa35f5f822695c43}\label{class_entity_a15aa77787228598dfa35f5f822695c43} 
+XMFLOAT3 {\bfseries m\+Velocity}
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Types inherited from \mbox{\hyperlink{class_scene_node}{Scene\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_scene_node}{Scene\+Node}} $>$ {\bfseries Ptr}
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_scene_node}{Scene\+Node}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_state}{State}} \texorpdfstring{$\ast$}{*} {\bfseries m\+State}
+\item 
+\mbox{\hyperlink{struct_render_item}{Render\+Item}} \texorpdfstring{$\ast$}{*} {\bfseries renderer}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_entity_ac2ba9cb8ca54fff11ad7397334edcd94}\index{Entity@{Entity}!updateCurrent@{updateCurrent}}
+\index{updateCurrent@{updateCurrent}!Entity@{Entity}}
+\doxysubsubsection{\texorpdfstring{updateCurrent()}{updateCurrent()}}
+{\footnotesize\ttfamily \label{class_entity_ac2ba9cb8ca54fff11ad7397334edcd94} 
+void Entity\+::update\+Current (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_game_timer}{Game\+Timer}} \&}]{gt}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Reimplemented from \mbox{\hyperlink{class_scene_node}{Scene\+Node}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Solution/\+Initialize\+Direct3\+D/Entity.\+hpp\item 
+Solution/\+Initialize\+Direct3\+D/Entity.\+cpp\end{DoxyCompactItemize}

@@ -1,0 +1,273 @@
+\doxysection{d3d\+Util.\+h}
+\hypertarget{d3d_util_8h_source}{}\label{d3d_util_8h_source}\index{Common/d3dUtil.h@{Common/d3dUtil.h}}
+
+\begin{DoxyCode}{0}
+\DoxyCodeLine{00001\ \textcolor{preprocessor}{\#pragma\ once}}
+\DoxyCodeLine{00002\ }
+\DoxyCodeLine{00003\ \textcolor{preprocessor}{\#include\ <windows.h>}}
+\DoxyCodeLine{00004\ \textcolor{preprocessor}{\#include\ <wrl.h>}}
+\DoxyCodeLine{00005\ \textcolor{preprocessor}{\#include\ <dxgi1\_4.h>}}
+\DoxyCodeLine{00006\ \textcolor{preprocessor}{\#include\ <d3d12.h>}}
+\DoxyCodeLine{00007\ \textcolor{preprocessor}{\#include\ <D3Dcompiler.h>}}
+\DoxyCodeLine{00008\ \textcolor{preprocessor}{\#include\ <DirectXMath.h>}}
+\DoxyCodeLine{00009\ \textcolor{preprocessor}{\#include\ <DirectXPackedVector.h>}}
+\DoxyCodeLine{00010\ \textcolor{preprocessor}{\#include\ <DirectXColors.h>}}
+\DoxyCodeLine{00011\ \textcolor{preprocessor}{\#include\ <DirectXCollision.h>}}
+\DoxyCodeLine{00012\ \textcolor{preprocessor}{\#include\ <string>}}
+\DoxyCodeLine{00013\ \textcolor{preprocessor}{\#include\ <memory>}}
+\DoxyCodeLine{00014\ \textcolor{preprocessor}{\#include\ <algorithm>}}
+\DoxyCodeLine{00015\ \textcolor{preprocessor}{\#include\ <vector>}}
+\DoxyCodeLine{00016\ \textcolor{preprocessor}{\#include\ <array>}}
+\DoxyCodeLine{00017\ \textcolor{preprocessor}{\#include\ <unordered\_map>}}
+\DoxyCodeLine{00018\ \textcolor{preprocessor}{\#include\ <cstdint>}}
+\DoxyCodeLine{00019\ \textcolor{preprocessor}{\#include\ <fstream>}}
+\DoxyCodeLine{00020\ \textcolor{preprocessor}{\#include\ <sstream>}}
+\DoxyCodeLine{00021\ \textcolor{preprocessor}{\#include\ <cassert>}}
+\DoxyCodeLine{00022\ \textcolor{preprocessor}{\#include\ "{}d3dx12.h"{}}}
+\DoxyCodeLine{00023\ \textcolor{preprocessor}{\#include\ "{}DDSTextureLoader.h"{}}}
+\DoxyCodeLine{00024\ \textcolor{preprocessor}{\#include\ "{}MathHelper.h"{}}}
+\DoxyCodeLine{00025\ }
+\DoxyCodeLine{00026\ \textcolor{keyword}{extern}\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{int}\ gNumFrameResources;}
+\DoxyCodeLine{00027\ }
+\DoxyCodeLine{00033\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ d3dSetDebugName(IDXGIObject*\ obj,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ name)}
+\DoxyCodeLine{00034\ \{}
+\DoxyCodeLine{00035\ \ \ \ \ \textcolor{keywordflow}{if}\ (obj)}
+\DoxyCodeLine{00036\ \ \ \ \ \{}
+\DoxyCodeLine{00037\ \ \ \ \ \ \ \ \ obj-\/>SetPrivateData(WKPDID\_D3DDebugObjectName,\ lstrlenA(name),\ name);}
+\DoxyCodeLine{00038\ \ \ \ \ \}}
+\DoxyCodeLine{00039\ \}}
+\DoxyCodeLine{00040\ }
+\DoxyCodeLine{00046\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ d3dSetDebugName(ID3D12Device*\ obj,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ name)}
+\DoxyCodeLine{00047\ \{}
+\DoxyCodeLine{00048\ \ \ \ \ \textcolor{keywordflow}{if}\ (obj)}
+\DoxyCodeLine{00049\ \ \ \ \ \{}
+\DoxyCodeLine{00050\ \ \ \ \ \ \ \ \ obj-\/>SetPrivateData(WKPDID\_D3DDebugObjectName,\ lstrlenA(name),\ name);}
+\DoxyCodeLine{00051\ \ \ \ \ \}}
+\DoxyCodeLine{00052\ \}}
+\DoxyCodeLine{00053\ }
+\DoxyCodeLine{00059\ \textcolor{keyword}{inline}\ \textcolor{keywordtype}{void}\ d3dSetDebugName(ID3D12DeviceChild*\ obj,\ \textcolor{keyword}{const}\ \textcolor{keywordtype}{char}*\ name)}
+\DoxyCodeLine{00060\ \{}
+\DoxyCodeLine{00061\ \ \ \ \ \textcolor{keywordflow}{if}\ (obj)}
+\DoxyCodeLine{00062\ \ \ \ \ \{}
+\DoxyCodeLine{00063\ \ \ \ \ \ \ \ \ obj-\/>SetPrivateData(WKPDID\_D3DDebugObjectName,\ lstrlenA(name),\ name);}
+\DoxyCodeLine{00064\ \ \ \ \ \}}
+\DoxyCodeLine{00065\ \}}
+\DoxyCodeLine{00066\ }
+\DoxyCodeLine{00072\ \textcolor{keyword}{inline}\ std::wstring\ AnsiToWString(\textcolor{keyword}{const}\ std::string\&\ str)}
+\DoxyCodeLine{00073\ \{}
+\DoxyCodeLine{00074\ \ \ \ \ WCHAR\ buffer[512];}
+\DoxyCodeLine{00075\ \ \ \ \ MultiByteToWideChar(CP\_ACP,\ 0,\ str.c\_str(),\ -\/1,\ buffer,\ 512);}
+\DoxyCodeLine{00076\ \ \ \ \ \textcolor{keywordflow}{return}\ std::wstring(buffer);}
+\DoxyCodeLine{00077\ \}}
+\DoxyCodeLine{00078\ }
+\DoxyCodeLine{00079\ \textcolor{keyword}{class\ }\mbox{\hyperlink{classd3d_util}{d3dUtil}}}
+\DoxyCodeLine{00080\ \{}
+\DoxyCodeLine{00081\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00087\ \ \ \ \ \textcolor{keyword}{static}\ \textcolor{keywordtype}{bool}\ \mbox{\hyperlink{classd3d_util_a2e43ccad934a5f8de92c10de835e7d14}{IsKeyDown}}(\textcolor{keywordtype}{int}\ vkeyCode);}
+\DoxyCodeLine{00088\ }
+\DoxyCodeLine{00089\ \ \ \ \ \textcolor{keyword}{static}\ std::string\ ToString(HRESULT\ hr);}
+\DoxyCodeLine{00090\ }
+\DoxyCodeLine{00096\ \ \ \ \ \textcolor{keyword}{static}\ UINT\ \mbox{\hyperlink{classd3d_util_a0883e0848cae813b2bc71570f3303e92}{CalcConstantBufferByteSize}}(UINT\ byteSize)}
+\DoxyCodeLine{00097\ \ \ \ \ \{}
+\DoxyCodeLine{00098\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Constant\ buffers\ must\ be\ a\ multiple\ of\ the\ minimum\ hardware}}
+\DoxyCodeLine{00099\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ allocation\ size\ (usually\ 256\ bytes).\ \ So\ round\ up\ to\ nearest}}
+\DoxyCodeLine{00100\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ multiple\ of\ 256.\ \ We\ do\ this\ by\ adding\ 255\ and\ then\ masking\ off}}
+\DoxyCodeLine{00101\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ the\ lower\ 2\ bytes\ which\ store\ all\ bits\ <\ 256.}}
+\DoxyCodeLine{00102\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ Example:\ Suppose\ byteSize\ =\ 300.}}
+\DoxyCodeLine{00103\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ (300\ +\ 255)\ \&\ \string~255}}
+\DoxyCodeLine{00104\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 555\ \&\ \string~255}}
+\DoxyCodeLine{00105\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 0x022B\ \&\ \string~0x00ff}}
+\DoxyCodeLine{00106\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 0x022B\ \&\ 0xff00}}
+\DoxyCodeLine{00107\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 0x0200}}
+\DoxyCodeLine{00108\ \ \ \ \ \ \ \ \ \textcolor{comment}{//\ 512}}
+\DoxyCodeLine{00109\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ (byteSize\ +\ 255)\ \&\ \string~255;}
+\DoxyCodeLine{00110\ \ \ \ \ \}}
+\DoxyCodeLine{00111\ }
+\DoxyCodeLine{00117\ \ \ \ \ \textcolor{keyword}{static}\ Microsoft::WRL::ComPtr<ID3DBlob>\ \mbox{\hyperlink{classd3d_util_a374c360bb2668c34223e74fbf0f1402b}{LoadBinary}}(\textcolor{keyword}{const}\ std::wstring\&\ filename);}
+\DoxyCodeLine{00118\ }
+\DoxyCodeLine{00128\ \ \ \ \ \textcolor{keyword}{static}\ Microsoft::WRL::ComPtr<ID3D12Resource>\ \mbox{\hyperlink{classd3d_util_ae4a68e5b73f032619ee5c2db64f57899}{CreateDefaultBuffer}}(}
+\DoxyCodeLine{00129\ \ \ \ \ \ \ \ \ ID3D12Device*\ device,}
+\DoxyCodeLine{00130\ \ \ \ \ \ \ \ \ ID3D12GraphicsCommandList*\ cmdList,}
+\DoxyCodeLine{00131\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ \textcolor{keywordtype}{void}*\ initData,}
+\DoxyCodeLine{00132\ \ \ \ \ \ \ \ \ UINT64\ byteSize,}
+\DoxyCodeLine{00133\ \ \ \ \ \ \ \ \ Microsoft::WRL::ComPtr<ID3D12Resource>\&\ uploadBuffer);}
+\DoxyCodeLine{00134\ }
+\DoxyCodeLine{00143\ \ \ \ \ \textcolor{keyword}{static}\ Microsoft::WRL::ComPtr<ID3DBlob>\ \mbox{\hyperlink{classd3d_util_acac6acd838913d63466e4f0159bfe8b0}{CompileShader}}(}
+\DoxyCodeLine{00144\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::wstring\&\ filename,}
+\DoxyCodeLine{00145\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ D3D\_SHADER\_MACRO*\ defines,}
+\DoxyCodeLine{00146\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ entrypoint,}
+\DoxyCodeLine{00147\ \ \ \ \ \ \ \ \ \textcolor{keyword}{const}\ std::string\&\ target);}
+\DoxyCodeLine{00148\ \};}
+\DoxyCodeLine{00149\ }
+\DoxyCodeLine{00153\ \textcolor{keyword}{class\ }DxException}
+\DoxyCodeLine{00154\ \{}
+\DoxyCodeLine{00155\ \textcolor{keyword}{public}:}
+\DoxyCodeLine{00156\ \ \ \ \ DxException()\ =\ \textcolor{keywordflow}{default};}
+\DoxyCodeLine{00164\ \ \ \ \ DxException(HRESULT\ hr,\ \textcolor{keyword}{const}\ std::wstring\&\ functionName,\ \textcolor{keyword}{const}\ std::wstring\&\ filename,\ \textcolor{keywordtype}{int}\ lineNumber);}
+\DoxyCodeLine{00165\ }
+\DoxyCodeLine{00170\ \ \ \ \ std::wstring\ \mbox{\hyperlink{class_dx_exception_a031a5ff549f043decbe96093e73dac27}{ToString}}()\textcolor{keyword}{const};}
+\DoxyCodeLine{00171\ }
+\DoxyCodeLine{00172\ \ \ \ \ HRESULT\ \mbox{\hyperlink{class_dx_exception_ad772fc53a8ebf75f54718213aa45d635}{ErrorCode}}\ =\ S\_OK;\ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00173\ \ \ \ \ std::wstring\ \mbox{\hyperlink{class_dx_exception_a8fa7d58ba60cc972f4eb4993dfd5bc56}{FunctionName}};\ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00174\ \ \ \ \ std::wstring\ \mbox{\hyperlink{class_dx_exception_a5b68341d8c7730eb9ae00b7ebcccdd69}{Filename}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00175\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{class_dx_exception_aee30e6d56dfd40d6a73852503ebd8b7f}{LineNumber}}\ =\ -\/1;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00176\ \};}
+\DoxyCodeLine{00177\ }
+\DoxyCodeLine{00181\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_submesh_geometry}{SubmeshGeometry}}}
+\DoxyCodeLine{00182\ \{}
+\DoxyCodeLine{00183\ \ \ \ \ UINT\ \mbox{\hyperlink{struct_submesh_geometry_ab28b180ab73cabb07553c76f3f32c180}{IndexCount}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00184\ \ \ \ \ UINT\ \mbox{\hyperlink{struct_submesh_geometry_a56f8aee51b11ee61a229679000a1aeb6}{StartIndexLocation}}\ =\ 0;\ \ \ }
+\DoxyCodeLine{00185\ \ \ \ \ INT\ \mbox{\hyperlink{struct_submesh_geometry_a95e805e2c8022aea5826d7343ee7dc20}{BaseVertexLocation}}\ =\ 0;\ \ \ \ }
+\DoxyCodeLine{00186\ }
+\DoxyCodeLine{00187\ \ \ \ \ \textcolor{comment}{//\ Bounding\ box\ of\ the\ geometry\ defined\ by\ this\ submesh.\ }}
+\DoxyCodeLine{00188\ \ \ \ \ \textcolor{comment}{//\ This\ is\ used\ in\ later\ chapters\ of\ the\ book.}}
+\DoxyCodeLine{00189\ \ \ \ \ DirectX::BoundingBox\ \mbox{\hyperlink{struct_submesh_geometry_ac79bad539c71ede2aa15b2527cacaa97}{Bounds}};\ \ }
+\DoxyCodeLine{00190\ \};}
+\DoxyCodeLine{00191\ }
+\DoxyCodeLine{00195\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_mesh_geometry}{MeshGeometry}}}
+\DoxyCodeLine{00196\ \{}
+\DoxyCodeLine{00197\ \ \ \ \ \textcolor{comment}{//\ Give\ it\ a\ name\ so\ we\ can\ look\ it\ up\ by\ name.}}
+\DoxyCodeLine{00198\ \ \ \ \ std::string\ \mbox{\hyperlink{struct_mesh_geometry_a9cfdc0d2b907a9059b32fccae59d9813}{Name}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00199\ }
+\DoxyCodeLine{00200\ \ \ \ \ \textcolor{comment}{//\ System\ memory\ copies.\ \ Use\ Blobs\ because\ the\ vertex/index\ format\ can\ be\ generic.}}
+\DoxyCodeLine{00201\ \ \ \ \ \textcolor{comment}{//\ It\ is\ up\ to\ the\ client\ to\ cast\ appropriately.\ }}
+\DoxyCodeLine{00202\ }
+\DoxyCodeLine{00203\ \ \ \ \ Microsoft::WRL::ComPtr<ID3DBlob>\ \mbox{\hyperlink{struct_mesh_geometry_a79e5e540605f4205197154469bf4194e}{VertexBufferCPU}}\ =\ \textcolor{keyword}{nullptr};\ \ }
+\DoxyCodeLine{00204\ \ \ \ \ Microsoft::WRL::ComPtr<ID3DBlob>\ \mbox{\hyperlink{struct_mesh_geometry_aa9a4e934b370f9c716217b01c15bad32}{IndexBufferCPU}}\ =\ \textcolor{keyword}{nullptr};\ \ \ }
+\DoxyCodeLine{00205\ \ \ \ \ Microsoft::WRL::ComPtr<ID3DBlob>\ \mbox{\hyperlink{struct_mesh_geometry_a281ef611d2f40f2baa0993134c6a14d7}{ColorBufferCPU}}\ =\ \textcolor{keyword}{nullptr};\ \ \ }
+\DoxyCodeLine{00206\ }
+\DoxyCodeLine{00207\ }
+\DoxyCodeLine{00208\ \ \ \ \ Microsoft::WRL::ComPtr<ID3D12Resource>\ \mbox{\hyperlink{struct_mesh_geometry_afc3be274ba79e6984225407560350438}{VertexBufferGPU}}\ =\ \textcolor{keyword}{nullptr};\ \ }
+\DoxyCodeLine{00209\ \ \ \ \ Microsoft::WRL::ComPtr<ID3D12Resource>\ \mbox{\hyperlink{struct_mesh_geometry_a98d981b7fd0627dbe53c31ce83d23d8f}{IndexBufferGPU}}\ =\ \textcolor{keyword}{nullptr};\ \ \ }
+\DoxyCodeLine{00210\ \ \ \ \ Microsoft::WRL::ComPtr<ID3D12Resource>\ \mbox{\hyperlink{struct_mesh_geometry_a0e4b64b879b617fb5eabc824bb5dedb6}{ColorBufferGPU}}\ =\ \textcolor{keyword}{nullptr};\ \ \ }
+\DoxyCodeLine{00211\ }
+\DoxyCodeLine{00212\ }
+\DoxyCodeLine{00213\ \ \ \ \ Microsoft::WRL::ComPtr<ID3D12Resource>\ \mbox{\hyperlink{struct_mesh_geometry_a99726cbb8b6acc9599ccaae768032104}{VertexBufferUploader}}\ =\ \textcolor{keyword}{nullptr};\ \ }
+\DoxyCodeLine{00214\ \ \ \ \ Microsoft::WRL::ComPtr<ID3D12Resource>\ \mbox{\hyperlink{struct_mesh_geometry_a49a2735dd265091e5451c26c7e4fceb9}{IndexBufferUploader}}\ =\ \textcolor{keyword}{nullptr};\ \ \ }
+\DoxyCodeLine{00215\ \ \ \ \ Microsoft::WRL::ComPtr<ID3D12Resource>\ \mbox{\hyperlink{struct_mesh_geometry_ae9e4ca59e40ccbae59680a6726457a94}{ColorBufferUploader}}\ =\ \textcolor{keyword}{nullptr};\ \ \ }
+\DoxyCodeLine{00216\ \ \ \ \ UINT\ \mbox{\hyperlink{struct_mesh_geometry_a809bd47a42dcf1f8512c55c663354fe9}{VertexByteStride}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00217\ \ \ \ \ UINT\ \mbox{\hyperlink{struct_mesh_geometry_a95d475544535050a64a841489a0e3269}{VertexBufferByteSize}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00218\ \ \ \ \ DXGI\_FORMAT\ \mbox{\hyperlink{struct_mesh_geometry_a4ab6fed21b08b6008850e43f8e912506}{IndexFormat}}\ =\ DXGI\_FORMAT\_R16\_UINT;\ \ }
+\DoxyCodeLine{00219\ \ \ \ \ UINT\ \mbox{\hyperlink{struct_mesh_geometry_ada154aecae7686cb96099c259fa49946}{IndexBufferByteSize}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00220\ \ \ \ \ UINT\ \mbox{\hyperlink{struct_mesh_geometry_a0b2e69dc595217c3f600147e500a4a31}{ColorByteStride}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00221\ \ \ \ \ UINT\ \mbox{\hyperlink{struct_mesh_geometry_a1298a377fa7b61bfdbf198cc80e14e3c}{ColorBufferByteSize}}\ =\ 0;\ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00222\ }
+\DoxyCodeLine{00223\ \ \ \ \ \textcolor{comment}{//\ A\ MeshGeometry\ may\ store\ multiple\ geometries\ in\ one\ vertex/index\ buffer.}}
+\DoxyCodeLine{00224\ \ \ \ \ \textcolor{comment}{//\ Use\ this\ container\ to\ define\ the\ Submesh\ geometries\ so\ we\ can\ draw}}
+\DoxyCodeLine{00225\ \ \ \ \ \textcolor{comment}{//\ the\ Submeshes\ individually.}}
+\DoxyCodeLine{00226\ }
+\DoxyCodeLine{00227\ \ \ \ \ std::unordered\_map<std::string,\ SubmeshGeometry>\ \mbox{\hyperlink{struct_mesh_geometry_a0b2c5e9269169fb7c5d838240957fd10}{DrawArgs}};\ \ }
+\DoxyCodeLine{00228\ }
+\DoxyCodeLine{00233\ \ \ \ \ D3D12\_VERTEX\_BUFFER\_VIEW\ \mbox{\hyperlink{struct_mesh_geometry_acec2bf9adf97ea1263702d66a69c8513}{VertexBufferView}}()\textcolor{keyword}{const}}
+\DoxyCodeLine{00234\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00235\ \ \ \ \ \ \ \ \ D3D12\_VERTEX\_BUFFER\_VIEW\ vbv;}
+\DoxyCodeLine{00236\ \ \ \ \ \ \ \ \ vbv.BufferLocation\ =\ \mbox{\hyperlink{struct_mesh_geometry_afc3be274ba79e6984225407560350438}{VertexBufferGPU}}-\/>GetGPUVirtualAddress();}
+\DoxyCodeLine{00237\ \ \ \ \ \ \ \ \ vbv.StrideInBytes\ =\ \mbox{\hyperlink{struct_mesh_geometry_a809bd47a42dcf1f8512c55c663354fe9}{VertexByteStride}};}
+\DoxyCodeLine{00238\ \ \ \ \ \ \ \ \ vbv.SizeInBytes\ =\ \mbox{\hyperlink{struct_mesh_geometry_a95d475544535050a64a841489a0e3269}{VertexBufferByteSize}};}
+\DoxyCodeLine{00239\ }
+\DoxyCodeLine{00240\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ vbv;}
+\DoxyCodeLine{00241\ \ \ \ \ \}}
+\DoxyCodeLine{00242\ }
+\DoxyCodeLine{00247\ \ \ \ \ D3D12\_INDEX\_BUFFER\_VIEW\ \mbox{\hyperlink{struct_mesh_geometry_a93ffd50cd07c380b0cade539ba82e8a5}{IndexBufferView}}()\textcolor{keyword}{const}}
+\DoxyCodeLine{00248\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00249\ \ \ \ \ \ \ \ \ D3D12\_INDEX\_BUFFER\_VIEW\ ibv;}
+\DoxyCodeLine{00250\ \ \ \ \ \ \ \ \ ibv.BufferLocation\ =\ \mbox{\hyperlink{struct_mesh_geometry_a98d981b7fd0627dbe53c31ce83d23d8f}{IndexBufferGPU}}-\/>GetGPUVirtualAddress();}
+\DoxyCodeLine{00251\ \ \ \ \ \ \ \ \ ibv.Format\ =\ \mbox{\hyperlink{struct_mesh_geometry_a4ab6fed21b08b6008850e43f8e912506}{IndexFormat}};}
+\DoxyCodeLine{00252\ \ \ \ \ \ \ \ \ ibv.SizeInBytes\ =\ \mbox{\hyperlink{struct_mesh_geometry_ada154aecae7686cb96099c259fa49946}{IndexBufferByteSize}};}
+\DoxyCodeLine{00253\ }
+\DoxyCodeLine{00254\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ ibv;}
+\DoxyCodeLine{00255\ \ \ \ \ \}}
+\DoxyCodeLine{00256\ }
+\DoxyCodeLine{00261\ \ \ \ \ D3D12\_VERTEX\_BUFFER\_VIEW\ \mbox{\hyperlink{struct_mesh_geometry_a249c29b781bbed54661c76f9c4342dcc}{ColorBufferView}}()\textcolor{keyword}{const}}
+\DoxyCodeLine{00262\ \textcolor{keyword}{\ \ \ \ }\{}
+\DoxyCodeLine{00263\ \ \ \ \ \ \ \ \ D3D12\_VERTEX\_BUFFER\_VIEW\ cbv;}
+\DoxyCodeLine{00264\ \ \ \ \ \ \ \ \ cbv.BufferLocation\ =\ \mbox{\hyperlink{struct_mesh_geometry_a0e4b64b879b617fb5eabc824bb5dedb6}{ColorBufferGPU}}-\/>GetGPUVirtualAddress();}
+\DoxyCodeLine{00265\ \ \ \ \ \ \ \ \ cbv.StrideInBytes\ =\ \mbox{\hyperlink{struct_mesh_geometry_a0b2e69dc595217c3f600147e500a4a31}{ColorByteStride}};}
+\DoxyCodeLine{00266\ \ \ \ \ \ \ \ \ cbv.SizeInBytes\ =\ \mbox{\hyperlink{struct_mesh_geometry_a1298a377fa7b61bfdbf198cc80e14e3c}{ColorBufferByteSize}};}
+\DoxyCodeLine{00267\ }
+\DoxyCodeLine{00268\ \ \ \ \ \ \ \ \ \textcolor{keywordflow}{return}\ cbv;}
+\DoxyCodeLine{00269\ \ \ \ \ \}}
+\DoxyCodeLine{00270\ }
+\DoxyCodeLine{00274\ \ \ \ \ \ \textcolor{comment}{//\ We\ can\ free\ this\ memory\ after\ we\ finish\ upload\ to\ the\ GPU.}}
+\DoxyCodeLine{00275\ \ \ \ \ \textcolor{keywordtype}{void}\ \mbox{\hyperlink{struct_mesh_geometry_aba9e36f1f4439a88bed25a48cc337ece}{DisposeUploaders}}()}
+\DoxyCodeLine{00276\ \ \ \ \ \{}
+\DoxyCodeLine{00277\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_mesh_geometry_a99726cbb8b6acc9599ccaae768032104}{VertexBufferUploader}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00278\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_mesh_geometry_a49a2735dd265091e5451c26c7e4fceb9}{IndexBufferUploader}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00279\ \ \ \ \ \ \ \ \ \mbox{\hyperlink{struct_mesh_geometry_ae9e4ca59e40ccbae59680a6726457a94}{ColorBufferUploader}}\ =\ \textcolor{keyword}{nullptr};}
+\DoxyCodeLine{00280\ \ \ \ \ \}}
+\DoxyCodeLine{00281\ \};}
+\DoxyCodeLine{00282\ }
+\DoxyCodeLine{00286\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_light}{Light}}}
+\DoxyCodeLine{00287\ \{}
+\DoxyCodeLine{00288\ \ \ \ \ DirectX::XMFLOAT3\ \mbox{\hyperlink{struct_light_a015096e9847bd33050b73a13c200a4c1}{Strength}}\ =\ \{\ 0.5f,\ 0.5f,\ 0.5f\ \};\ \ \ \ \ }
+\DoxyCodeLine{00289\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{struct_light_a21cc24ec9f914edbbc090bb3460fc645}{FalloffStart}}\ =\ 1.0f;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00290\ \ \ \ \ DirectX::XMFLOAT3\ \mbox{\hyperlink{struct_light_afd9b6884af30b8fdc7fee9a982572a0f}{Direction}}\ =\ \{\ 0.0f,\ -\/1.0f,\ 0.0f\ \};\ \ \ \ }
+\DoxyCodeLine{00291\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{struct_light_a38fa90b8cea6b266b13c3dc865828a14}{FalloffEnd}}\ =\ 10.0f;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00292\ \ \ \ \ DirectX::XMFLOAT3\ \mbox{\hyperlink{struct_light_a759c2228a71bfc669460ae4210a48e52}{Position}}\ =\ \{\ 0.0f,\ 0.0f,\ 0.0f\ \};\ \ \ \ \ \ \ }
+\DoxyCodeLine{00293\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{struct_light_a7202d90f1b073d3ac170c18451f0bc92}{SpotPower}}\ =\ 64.0f;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00294\ \};}
+\DoxyCodeLine{00295\ }
+\DoxyCodeLine{00296\ \textcolor{preprocessor}{\#define\ MaxLights\ 16\ \ \ \ }}
+\DoxyCodeLine{00297\ }
+\DoxyCodeLine{00301\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_material_constants}{MaterialConstants}}}
+\DoxyCodeLine{00302\ \{}
+\DoxyCodeLine{00303\ \ \ \ \ DirectX::XMFLOAT4\ \mbox{\hyperlink{struct_material_constants_a83cf6d979493301808d0e4b350c3e0a4}{DiffuseAlbedo}}\ =\ \{\ 1.0f,\ 1.0f,\ 1.0f,\ 1.0f\ \};\ \ }
+\DoxyCodeLine{00304\ \ \ \ \ DirectX::XMFLOAT3\ \mbox{\hyperlink{struct_material_constants_a7b2282a2a351b4327324fc7456a1cd85}{FresnelR0}}\ =\ \{\ 0.01f,\ 0.01f,\ 0.01f\ \};\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00305\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{struct_material_constants_ab931870a28dc4f2afdf7d6f565d06659}{Roughness}}\ =\ 0.25f;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00306\ }
+\DoxyCodeLine{00307\ \ \ \ \ \textcolor{comment}{//\ Used\ in\ texture\ mapping.}}
+\DoxyCodeLine{00308\ \ \ \ \ DirectX::XMFLOAT4X4\ \mbox{\hyperlink{struct_material_constants_a5d631fb90e1b2557008841d059c322c8}{MatTransform}}\ =\ MathHelper::Identity4x4();\ \ \ \ }
+\DoxyCodeLine{00309\ \};}
+\DoxyCodeLine{00310\ }
+\DoxyCodeLine{00314\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_material}{Material}}}
+\DoxyCodeLine{00315\ \{}
+\DoxyCodeLine{00316\ \ \ \ \ \textcolor{comment}{//\ Unique\ material\ name\ for\ lookup.}}
+\DoxyCodeLine{00317\ \ \ \ \ std::string\ \mbox{\hyperlink{struct_material_a793dc9034c137caf3d8b3b4b0f9d451b}{Name}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00318\ }
+\DoxyCodeLine{00319\ \ \ \ \ \textcolor{comment}{//\ Index\ into\ constant\ buffer\ corresponding\ to\ this\ material.}}
+\DoxyCodeLine{00320\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{struct_material_a7bafa2db0678ffe18c5e51f3d0e45df9}{MatCBIndex}}\ =\ -\/1;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00321\ }
+\DoxyCodeLine{00322\ \ \ \ \ \textcolor{comment}{//\ Index\ into\ SRV\ heap\ for\ diffuse\ texture.}}
+\DoxyCodeLine{00323\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{struct_material_ae0af64dd847942c26368b71faefe747e}{DiffuseSrvHeapIndex}}\ =\ -\/1;\ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00324\ }
+\DoxyCodeLine{00325\ \ \ \ \ \textcolor{comment}{//\ Index\ into\ SRV\ heap\ for\ normal\ texture.}}
+\DoxyCodeLine{00326\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{struct_material_af6139531ff098c78d4d03d2fa232f27e}{NormalSrvHeapIndex}}\ =\ -\/1;\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00327\ }
+\DoxyCodeLine{00328\ \ \ \ \ \textcolor{comment}{//\ Dirty\ flag\ indicating\ the\ material\ has\ changed\ and\ we\ need\ to\ update\ the\ constant\ buffer.}}
+\DoxyCodeLine{00329\ \ \ \ \ \textcolor{comment}{//\ Because\ we\ have\ a\ material\ constant\ buffer\ for\ each\ FrameResource,\ we\ have\ to\ apply\ the}}
+\DoxyCodeLine{00330\ \ \ \ \ \textcolor{comment}{//\ update\ to\ each\ FrameResource.\ \ Thus,\ when\ we\ modify\ a\ material\ we\ should\ set\ }}
+\DoxyCodeLine{00331\ \ \ \ \ \textcolor{comment}{//\ NumFramesDirty\ =\ gNumFrameResources\ so\ that\ each\ frame\ resource\ gets\ the\ update.}}
+\DoxyCodeLine{00332\ \ \ \ \ \textcolor{keywordtype}{int}\ \mbox{\hyperlink{struct_material_aacbebebfe577cd18d8652a01e8fae8c0}{NumFramesDirty}}\ =\ gNumFrameResources;\ \ \ }
+\DoxyCodeLine{00333\ }
+\DoxyCodeLine{00334\ \ \ \ \ \textcolor{comment}{//\ Material\ constant\ buffer\ data\ used\ for\ shading.}}
+\DoxyCodeLine{00335\ \ \ \ \ DirectX::XMFLOAT4\ \mbox{\hyperlink{struct_material_a35fea10a83b154ec1e16d083e2d4e41f}{DiffuseAlbedo}}\ =\ \{\ 1.0f,\ 1.0f,\ 1.0f,\ 1.0f\ \};\ \ }
+\DoxyCodeLine{00336\ \ \ \ \ DirectX::XMFLOAT3\ \mbox{\hyperlink{struct_material_afa0eeacfe7ed75af247eb08edb14d7b8}{FresnelR0}}\ =\ \{\ 0.01f,\ 0.01f,\ 0.01f\ \};\ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00337\ \ \ \ \ \textcolor{keywordtype}{float}\ \mbox{\hyperlink{struct_material_a909d7c43062f35668676364d3873449d}{Roughness}}\ =\ .25f;\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00338\ \ \ \ \ DirectX::XMFLOAT4X4\ \mbox{\hyperlink{struct_material_a3fd206fc6ecb51634475f22ff17528d0}{MatTransform}}\ =\ MathHelper::Identity4x4();\ \ \ \ }
+\DoxyCodeLine{00339\ \};}
+\DoxyCodeLine{00340\ }
+\DoxyCodeLine{00344\ \textcolor{keyword}{struct\ }\mbox{\hyperlink{struct_texture}{Texture}}}
+\DoxyCodeLine{00345\ \{}
+\DoxyCodeLine{00346\ \ \ \ \ \textcolor{comment}{//\ Unique\ material\ name\ for\ lookup.}}
+\DoxyCodeLine{00347\ \ \ \ \ std::string\ \mbox{\hyperlink{struct_texture_aff942a6e6a80c06965b239a73ad04a2d}{Name}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00348\ }
+\DoxyCodeLine{00349\ \ \ \ \ std::wstring\ \mbox{\hyperlink{struct_texture_a4c7d999ed2653374b600a75eb8a307f7}{Filename}};\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ }
+\DoxyCodeLine{00350\ }
+\DoxyCodeLine{00351\ \ \ \ \ Microsoft::WRL::ComPtr<ID3D12Resource>\ \mbox{\hyperlink{struct_texture_ae273d56b160aa483303d13b903e00122}{Resource}}\ =\ \textcolor{keyword}{nullptr};\ \ }
+\DoxyCodeLine{00352\ \ \ \ \ Microsoft::WRL::ComPtr<ID3D12Resource>\ \mbox{\hyperlink{struct_texture_a9e4e92ab08debca51ed2635cd3f9c5a7}{UploadHeap}}\ =\ \textcolor{keyword}{nullptr};\ \ }
+\DoxyCodeLine{00353\ \};}
+\DoxyCodeLine{00354\ }
+\DoxyCodeLine{00358\ \textcolor{preprocessor}{\#ifndef\ ThrowIfFailed}}
+\DoxyCodeLine{00359\ \textcolor{preprocessor}{\#define\ ThrowIfFailed(x)\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00360\ \textcolor{preprocessor}{\{\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00361\ \textcolor{preprocessor}{\ \ \ \ HRESULT\ hr\_\_\ =\ (x);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00362\ \textcolor{preprocessor}{\ \ \ \ std::wstring\ wfn\ =\ AnsiToWString(\_\_FILE\_\_);\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \(\backslash\)}}
+\DoxyCodeLine{00363\ \textcolor{preprocessor}{\ \ \ \ if(FAILED(hr\_\_))\ \{\ throw\ DxException(hr\_\_,\ L\#x,\ wfn,\ \_\_LINE\_\_);\ \}\ \(\backslash\)}}
+\DoxyCodeLine{00364\ \textcolor{preprocessor}{\}}}
+\DoxyCodeLine{00365\ \textcolor{preprocessor}{\#endif}}
+\DoxyCodeLine{00366\ }
+\DoxyCodeLine{00370\ \textcolor{preprocessor}{\#ifndef\ ReleaseCom}}
+\DoxyCodeLine{00371\ \textcolor{preprocessor}{\#define\ ReleaseCom(x)\ \{\ if(x)\{\ x-\/>Release();\ x\ =\ 0;\ \}\ \}}}
+\DoxyCodeLine{00372\ \textcolor{preprocessor}{\#endif}}
+
+\end{DoxyCode}

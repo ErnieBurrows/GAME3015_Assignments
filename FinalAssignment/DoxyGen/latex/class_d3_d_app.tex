@@ -1,0 +1,767 @@
+\doxysection{D3\+DApp Class Reference}
+\hypertarget{class_d3_d_app}{}\label{class_d3_d_app}\index{D3DApp@{D3DApp}}
+
+
+Direct3D 12 application base class.  
+
+
+
+
+{\ttfamily \#include $<$d3d\+App.\+h$>$}
+
+Inheritance diagram for D3\+DApp\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_d3_d_app}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+HINSTANCE \mbox{\hyperlink{class_d3_d_app_ab5fc7468412d19bae8f4e82fb634769a}{App\+Inst}} () const
+\begin{DoxyCompactList}\small\item\em Gets the application instance handle. \end{DoxyCompactList}\item 
+HWND \mbox{\hyperlink{class_d3_d_app_ae70e0422d916077999b25cc1b984027d}{Main\+Wnd}} () const
+\begin{DoxyCompactList}\small\item\em Gets the main window handle. \end{DoxyCompactList}\item 
+float \mbox{\hyperlink{class_d3_d_app_ab8cf74904b14c4a2072fc020c9bc4d22}{Aspect\+Ratio}} () const
+\begin{DoxyCompactList}\small\item\em Gets the aspect ratio of the client area. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_d3_d_app_a84b1bd8014d56b1e8c3ec9c7b486646e}{Get4x\+Msaa\+State}} () const
+\begin{DoxyCompactList}\small\item\em Gets current 4x MSAA state. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_d3_d_app_a74ce23c1a7b775c3af6c67522abaa2bd}{Set4x\+Msaa\+State}} (bool value)
+\begin{DoxyCompactList}\small\item\em Enables/disables 4x MSAA. \end{DoxyCompactList}\item 
+int \mbox{\hyperlink{class_d3_d_app_a0a2ed8f09bb1ae3a97f3b9a5067c905f}{Run}} ()
+\begin{DoxyCompactList}\small\item\em Runs the main application loop. \end{DoxyCompactList}\item 
+virtual bool \mbox{\hyperlink{class_d3_d_app_a961fa79170dcbde858923a5250c322be}{Initialize}} ()
+\begin{DoxyCompactList}\small\item\em Initializes application resources. \end{DoxyCompactList}\item 
+virtual LRESULT \mbox{\hyperlink{class_d3_d_app_a50a6ba535971837f61c79d7f9390dc30}{Msg\+Proc}} (HWND hwnd, UINT msg, WPARAM w\+Param, LPARAM l\+Param)
+\begin{DoxyCompactList}\small\item\em Handles Windows messages. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static \mbox{\hyperlink{class_d3_d_app}{D3\+DApp}} \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_d3_d_app_a66173f354ad8b3edc6c714883c7203df}{Get\+App}} ()
+\begin{DoxyCompactList}\small\item\em Gets the singleton application instance. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_d3_d_app_a973ca94b98dea10bf478f336f28e335f}{D3\+DApp}} (HINSTANCE h\+Instance)
+\begin{DoxyCompactList}\small\item\em Constructs a \doxylink{class_d3_d_app}{D3\+DApp} instance. \end{DoxyCompactList}\item 
+\Hypertarget{class_d3_d_app_ab42d41b67772a44b30bfd473a91c934f}\label{class_d3_d_app_ab42d41b67772a44b30bfd473a91c934f} 
+{\bfseries D3\+DApp} (const \mbox{\hyperlink{class_d3_d_app}{D3\+DApp}} \&rhs)=delete
+\item 
+\Hypertarget{class_d3_d_app_a973e1436e4ba07338548073a49f8a253}\label{class_d3_d_app_a973e1436e4ba07338548073a49f8a253} 
+\mbox{\hyperlink{class_d3_d_app}{D3\+DApp}} \& {\bfseries operator=} (const \mbox{\hyperlink{class_d3_d_app}{D3\+DApp}} \&rhs)=delete
+\item 
+virtual \mbox{\hyperlink{class_d3_d_app_ab58c61812da3a6c656279c79c39f0600}{\texorpdfstring{$\sim$}{\string~}\+D3\+DApp}} ()
+\begin{DoxyCompactList}\small\item\em Destructor -\/ releases Direct3D resources. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_d3_d_app_a4ca280598775faf38a663fb902f5b227}{Create\+Rtv\+And\+Dsv\+Descriptor\+Heaps}} ()
+\begin{DoxyCompactList}\small\item\em Creates RTV and DSV descriptor heaps. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_d3_d_app_a4c1b99cd01576c413d3a50d1435f1b8a}{On\+Resize}} ()
+\begin{DoxyCompactList}\small\item\em Handles window resize events. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_d3_d_app_ae31029e118e14ee3ae4649f1c6f8d2dd}{Update}} (const \mbox{\hyperlink{class_game_timer}{Game\+Timer}} \&gt)=0
+\begin{DoxyCompactList}\small\item\em Pure virtual update method for frame logic. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_d3_d_app_afc159e00500db82ec59edf2bc95e5e6a}{Draw}} (const \mbox{\hyperlink{class_game_timer}{Game\+Timer}} \&gt)=0
+\begin{DoxyCompactList}\small\item\em Pure virtual render method. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_d3_d_app_afa0d546d52408a9b55866e6ba065ddae}{On\+Mouse\+Down}} (WPARAM btn\+State, int x, int y)
+\begin{DoxyCompactList}\small\item\em Handles mouse button down events. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_d3_d_app_a98be07429ac3ffb5f76cbe831f9d94de}{On\+Mouse\+Up}} (WPARAM btn\+State, int x, int y)
+\begin{DoxyCompactList}\small\item\em Handles mouse button up events. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_d3_d_app_aa5270048920cd8a62dc07c7ed5e97622}{On\+Mouse\+Move}} (WPARAM btn\+State, int x, int y)
+\begin{DoxyCompactList}\small\item\em Handles mouse movement events. \end{DoxyCompactList}\item 
+virtual void \mbox{\hyperlink{class_d3_d_app_ab6d221a3caba317f85d9fb3e19daa6c3}{On\+Key\+Down}} (WPARAM btn\+State)
+\begin{DoxyCompactList}\small\item\em Handles key down events. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_d3_d_app_a775e141865e0de4dc3f3a39281cbcf02}{Init\+Main\+Window}} ()
+\begin{DoxyCompactList}\small\item\em Initializes main application window. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{class_d3_d_app_a13ad61cbed0b9641974cc6183ba6a22b}{Init\+Direct3D}} ()
+\begin{DoxyCompactList}\small\item\em Initializes Direct3D resources. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_d3_d_app_a978d7c0fda3b30b09c91dc52ec99d942}{Create\+Command\+Objects}} ()
+\begin{DoxyCompactList}\small\item\em Creates command queue and command list objects. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_d3_d_app_a93e68c33a000808033ce442cd5568dec}{Create\+Swap\+Chain}} ()
+\begin{DoxyCompactList}\small\item\em Creates swap chain for window. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_d3_d_app_afd141907db51f0c177ab89955e9d5de9}{Flush\+Command\+Queue}} ()
+\begin{DoxyCompactList}\small\item\em Flushes the command queue. \end{DoxyCompactList}\item 
+ID3\+D12\+Resource \texorpdfstring{$\ast$}{*} \mbox{\hyperlink{class_d3_d_app_a851376059fec11e3a6d7535785c5d8cd}{Current\+Back\+Buffer}} () const
+\begin{DoxyCompactList}\small\item\em Gets current back buffer resource. \end{DoxyCompactList}\item 
+D3\+D12\+\_\+\+CPU\+\_\+\+DESCRIPTOR\+\_\+\+HANDLE \mbox{\hyperlink{class_d3_d_app_ac796a8fcd1a1af0e4665e221af6981d4}{Current\+Back\+Buffer\+View}} () const
+\begin{DoxyCompactList}\small\item\em Gets current back buffer RTV descriptor. \end{DoxyCompactList}\item 
+D3\+D12\+\_\+\+CPU\+\_\+\+DESCRIPTOR\+\_\+\+HANDLE \mbox{\hyperlink{class_d3_d_app_a2d2bfecf16e881f1d65f464767d38c12}{Depth\+Stencil\+View}} () const
+\begin{DoxyCompactList}\small\item\em Gets depth stencil view descriptor. \end{DoxyCompactList}\item 
+\Hypertarget{class_d3_d_app_a147e313c7da814224b74c3e29161245d}\label{class_d3_d_app_a147e313c7da814224b74c3e29161245d} 
+void {\bfseries Calculate\+Frame\+Stats} ()
+\begin{DoxyCompactList}\small\item\em Calculates and displays frame statistics. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_d3_d_app_a64f791b345ac87edeab057c34cf17de3}{Log\+Adapters}} ()
+\begin{DoxyCompactList}\small\item\em Logs available GPU adapters. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_d3_d_app_a72d9458209b467ad1b53db8db92995ba}{Log\+Adapter\+Outputs}} (IDXGIAdapter \texorpdfstring{$\ast$}{*}adapter)
+\begin{DoxyCompactList}\small\item\em Logs outputs for a specific adapter. \end{DoxyCompactList}\item 
+void \mbox{\hyperlink{class_d3_d_app_a96563a403e9119629fff43b86d9807ea}{Log\+Output\+Display\+Modes}} (IDXGIOutput \texorpdfstring{$\ast$}{*}output, DXGI\+\_\+\+FORMAT format)
+\begin{DoxyCompactList}\small\item\em Logs display modes for an output. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_d3_d_app_a68be4559a964d5972c3e43a20d7c00a3}\label{class_d3_d_app_a68be4559a964d5972c3e43a20d7c00a3} 
+HINSTANCE {\bfseries mh\+App\+Inst} = nullptr
+\begin{DoxyCompactList}\small\item\em Application instance handle. \end{DoxyCompactList}\item 
+\Hypertarget{class_d3_d_app_ae68879f7a2cf2b770b1015ab9c0f14e5}\label{class_d3_d_app_ae68879f7a2cf2b770b1015ab9c0f14e5} 
+HWND {\bfseries mh\+Main\+Wnd} = nullptr
+\begin{DoxyCompactList}\small\item\em Main window handle. \end{DoxyCompactList}\item 
+\Hypertarget{class_d3_d_app_aa2678014bf27f35a50af237d5f9d2b3a}\label{class_d3_d_app_aa2678014bf27f35a50af237d5f9d2b3a} 
+bool {\bfseries m\+App\+Paused} = false
+\begin{DoxyCompactList}\small\item\em Application pause state. \end{DoxyCompactList}\item 
+\Hypertarget{class_d3_d_app_a042fc6ee35adee941a1ca38dc31bf517}\label{class_d3_d_app_a042fc6ee35adee941a1ca38dc31bf517} 
+bool {\bfseries m\+Minimized} = false
+\begin{DoxyCompactList}\small\item\em Window minimized state. \end{DoxyCompactList}\item 
+\Hypertarget{class_d3_d_app_a0a1a869eb2966b6d0e905902b05671c6}\label{class_d3_d_app_a0a1a869eb2966b6d0e905902b05671c6} 
+bool {\bfseries m\+Maximized} = false
+\begin{DoxyCompactList}\small\item\em Window maximized state. \end{DoxyCompactList}\item 
+\Hypertarget{class_d3_d_app_abf2dd8ed33542b683ba236a82bcc6e6f}\label{class_d3_d_app_abf2dd8ed33542b683ba236a82bcc6e6f} 
+bool {\bfseries m\+Resizing} = false
+\begin{DoxyCompactList}\small\item\em Window resize in progress. \end{DoxyCompactList}\item 
+\Hypertarget{class_d3_d_app_acf957ef460a36e91d1c9f3e23e6e4606}\label{class_d3_d_app_acf957ef460a36e91d1c9f3e23e6e4606} 
+bool {\bfseries m\+Fullscreen\+State} = false
+\begin{DoxyCompactList}\small\item\em Fullscreen enabled state. \end{DoxyCompactList}\item 
+\Hypertarget{class_d3_d_app_a6cbfb6c8fcc5edec4fb82aacaadf7fbb}\label{class_d3_d_app_a6cbfb6c8fcc5edec4fb82aacaadf7fbb} 
+bool {\bfseries m4x\+Msaa\+State} = false
+\begin{DoxyCompactList}\small\item\em 4x MSAA enabled state \end{DoxyCompactList}\item 
+\Hypertarget{class_d3_d_app_afb28a606eca768c1bb6cdc2109683dc7}\label{class_d3_d_app_afb28a606eca768c1bb6cdc2109683dc7} 
+UINT {\bfseries m4x\+Msaa\+Quality} = 0
+\begin{DoxyCompactList}\small\item\em Quality level for 4x MSAA. \end{DoxyCompactList}\item 
+\Hypertarget{class_d3_d_app_a687d7ace8230b136b6431c8697cc47fd}\label{class_d3_d_app_a687d7ace8230b136b6431c8697cc47fd} 
+\mbox{\hyperlink{class_game_timer}{Game\+Timer}} {\bfseries m\+Timer}
+\begin{DoxyCompactList}\small\item\em \doxylink{class_game}{Game} timing utility. \end{DoxyCompactList}\item 
+\Hypertarget{class_d3_d_app_a8bb5fcea3838adea2a82cd32cf641ea0}\label{class_d3_d_app_a8bb5fcea3838adea2a82cd32cf641ea0} 
+Microsoft\+::\+WRL\+::\+Com\+Ptr$<$ IDXGIFactory4 $>$ {\bfseries mdxgi\+Factory}
+\item 
+\Hypertarget{class_d3_d_app_adac97bdf38a37003abbbd7d39c2a75fb}\label{class_d3_d_app_adac97bdf38a37003abbbd7d39c2a75fb} 
+Microsoft\+::\+WRL\+::\+Com\+Ptr$<$ IDXGISwap\+Chain $>$ {\bfseries m\+Swap\+Chain}
+\item 
+\Hypertarget{class_d3_d_app_a15b84b7e76f6c705196dd6b4b5ad418d}\label{class_d3_d_app_a15b84b7e76f6c705196dd6b4b5ad418d} 
+Microsoft\+::\+WRL\+::\+Com\+Ptr$<$ ID3\+D12\+Device $>$ {\bfseries md3d\+Device}
+\item 
+\Hypertarget{class_d3_d_app_a90597e8c2902073536b6609864eaf160}\label{class_d3_d_app_a90597e8c2902073536b6609864eaf160} 
+Microsoft\+::\+WRL\+::\+Com\+Ptr$<$ ID3\+D12\+Fence $>$ {\bfseries m\+Fence}
+\item 
+\Hypertarget{class_d3_d_app_acc7041db5dcaaa0d76ed263c55d1c6b2}\label{class_d3_d_app_acc7041db5dcaaa0d76ed263c55d1c6b2} 
+UINT64 {\bfseries m\+Current\+Fence} = 0
+\begin{DoxyCompactList}\small\item\em Current fence value for GPU synchronization. \end{DoxyCompactList}\item 
+\Hypertarget{class_d3_d_app_a96ae78a6cf93ec91272032890ef65440}\label{class_d3_d_app_a96ae78a6cf93ec91272032890ef65440} 
+Microsoft\+::\+WRL\+::\+Com\+Ptr$<$ ID3\+D12\+Command\+Queue $>$ {\bfseries m\+Command\+Queue}
+\item 
+\Hypertarget{class_d3_d_app_ae00420d2e3d8305821a1a95ebc1b00bb}\label{class_d3_d_app_ae00420d2e3d8305821a1a95ebc1b00bb} 
+Microsoft\+::\+WRL\+::\+Com\+Ptr$<$ ID3\+D12\+Command\+Allocator $>$ {\bfseries m\+Direct\+Cmd\+List\+Alloc}
+\item 
+\Hypertarget{class_d3_d_app_a3d515a557287c1a8f8fcc60abc839e84}\label{class_d3_d_app_a3d515a557287c1a8f8fcc60abc839e84} 
+Microsoft\+::\+WRL\+::\+Com\+Ptr$<$ ID3\+D12\+Graphics\+Command\+List $>$ {\bfseries m\+Command\+List}
+\item 
+\Hypertarget{class_d3_d_app_ab0ef1ea8fcb85251dcd6d603a4090d62}\label{class_d3_d_app_ab0ef1ea8fcb85251dcd6d603a4090d62} 
+int {\bfseries m\+Curr\+Back\+Buffer} = 0
+\item 
+\Hypertarget{class_d3_d_app_ad84c0de388ee240f478cc14c1dc7ba24}\label{class_d3_d_app_ad84c0de388ee240f478cc14c1dc7ba24} 
+Microsoft\+::\+WRL\+::\+Com\+Ptr$<$ ID3\+D12\+Resource $>$ {\bfseries m\+Swap\+Chain\+Buffer} \mbox{[}Swap\+Chain\+Buffer\+Count\mbox{]}
+\item 
+\Hypertarget{class_d3_d_app_a5abf385ad562d607c7087a82ccf5ffef}\label{class_d3_d_app_a5abf385ad562d607c7087a82ccf5ffef} 
+Microsoft\+::\+WRL\+::\+Com\+Ptr$<$ ID3\+D12\+Resource $>$ {\bfseries m\+Depth\+Stencil\+Buffer}
+\item 
+\Hypertarget{class_d3_d_app_adb69a9972a7aa8884307b18070e0f455}\label{class_d3_d_app_adb69a9972a7aa8884307b18070e0f455} 
+Microsoft\+::\+WRL\+::\+Com\+Ptr$<$ ID3\+D12\+Descriptor\+Heap $>$ {\bfseries m\+Rtv\+Heap}
+\item 
+\Hypertarget{class_d3_d_app_a40c212366e13b47ff5858e852ca21a1e}\label{class_d3_d_app_a40c212366e13b47ff5858e852ca21a1e} 
+Microsoft\+::\+WRL\+::\+Com\+Ptr$<$ ID3\+D12\+Descriptor\+Heap $>$ {\bfseries m\+Dsv\+Heap}
+\item 
+\Hypertarget{class_d3_d_app_ab86744c66c883d3815c5d08107b16408}\label{class_d3_d_app_ab86744c66c883d3815c5d08107b16408} 
+D3\+D12\+\_\+\+VIEWPORT {\bfseries m\+Screen\+Viewport}
+\begin{DoxyCompactList}\small\item\em Current viewport configuration. \end{DoxyCompactList}\item 
+\Hypertarget{class_d3_d_app_adbf6e2922df9e6545390049968715547}\label{class_d3_d_app_adbf6e2922df9e6545390049968715547} 
+D3\+D12\+\_\+\+RECT {\bfseries m\+Scissor\+Rect}
+\begin{DoxyCompactList}\small\item\em Current scissor rectangle. \end{DoxyCompactList}\item 
+\Hypertarget{class_d3_d_app_ae164797b666d06a8f2e609a0ab1d1f75}\label{class_d3_d_app_ae164797b666d06a8f2e609a0ab1d1f75} 
+UINT {\bfseries m\+Rtv\+Descriptor\+Size} = 0
+\begin{DoxyCompactList}\small\item\em RTV descriptor size in bytes. \end{DoxyCompactList}\item 
+\Hypertarget{class_d3_d_app_a61a130cb7d4045a2ab26b486cd07edb5}\label{class_d3_d_app_a61a130cb7d4045a2ab26b486cd07edb5} 
+UINT {\bfseries m\+Dsv\+Descriptor\+Size} = 0
+\begin{DoxyCompactList}\small\item\em DSV descriptor size in bytes. \end{DoxyCompactList}\item 
+\Hypertarget{class_d3_d_app_a0e084fa045c8e46d65a37889ff5d307d}\label{class_d3_d_app_a0e084fa045c8e46d65a37889ff5d307d} 
+UINT {\bfseries m\+Cbv\+Srv\+Uav\+Descriptor\+Size} = 0
+\begin{DoxyCompactList}\small\item\em CBV/\+SRV/\+UAV descriptor size. \end{DoxyCompactList}\item 
+\Hypertarget{class_d3_d_app_afb2eb2bca9adc01c7224200eab6b14dc}\label{class_d3_d_app_afb2eb2bca9adc01c7224200eab6b14dc} 
+std\+::wstring {\bfseries m\+Main\+Wnd\+Caption} = L"{}d3d App"{}
+\begin{DoxyCompactList}\small\item\em Window caption text. \end{DoxyCompactList}\item 
+\Hypertarget{class_d3_d_app_a357a4053739265f5bfe5a8d209073fe0}\label{class_d3_d_app_a357a4053739265f5bfe5a8d209073fe0} 
+D3\+D\+\_\+\+DRIVER\+\_\+\+TYPE {\bfseries md3d\+Driver\+Type} = D3\+D\+\_\+\+DRIVER\+\_\+\+TYPE\+\_\+\+HARDWARE
+\item 
+\Hypertarget{class_d3_d_app_a025509339d4e0ec2781a8deb9d4218cc}\label{class_d3_d_app_a025509339d4e0ec2781a8deb9d4218cc} 
+DXGI\+\_\+\+FORMAT {\bfseries m\+Back\+Buffer\+Format} = DXGI\+\_\+\+FORMAT\+\_\+\+R8\+G8\+B8\+A8\+\_\+\+UNORM
+\item 
+\Hypertarget{class_d3_d_app_af2441a306c7f369256983c4f5f43395a}\label{class_d3_d_app_af2441a306c7f369256983c4f5f43395a} 
+DXGI\+\_\+\+FORMAT {\bfseries m\+Depth\+Stencil\+Format} = DXGI\+\_\+\+FORMAT\+\_\+\+D24\+\_\+\+UNORM\+\_\+\+S8\+\_\+\+UINT
+\item 
+\Hypertarget{class_d3_d_app_a3f9dae9800854a7aae8a9ca8677a4d4f}\label{class_d3_d_app_a3f9dae9800854a7aae8a9ca8677a4d4f} 
+int {\bfseries m\+Client\+Width} = 800
+\begin{DoxyCompactList}\small\item\em Initial client width. \end{DoxyCompactList}\item 
+\Hypertarget{class_d3_d_app_ad54b6af44b0c13b645f363d849230d51}\label{class_d3_d_app_ad54b6af44b0c13b645f363d849230d51} 
+int {\bfseries m\+Client\+Height} = 600
+\begin{DoxyCompactList}\small\item\em Initial client height. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsubsection*{Static Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_d3_d_app_a37175a2b8bb82d0aed153568a3789a0c}\label{class_d3_d_app_a37175a2b8bb82d0aed153568a3789a0c} 
+static \mbox{\hyperlink{class_d3_d_app}{D3\+DApp}} \texorpdfstring{$\ast$}{*} {\bfseries m\+App} = nullptr
+\begin{DoxyCompactList}\small\item\em Singleton application instance. \end{DoxyCompactList}\item 
+\Hypertarget{class_d3_d_app_af4cd47b4bb3b28e1013e861355baf8e8}\label{class_d3_d_app_af4cd47b4bb3b28e1013e861355baf8e8} 
+static const int {\bfseries Swap\+Chain\+Buffer\+Count} = 2
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+Direct3D 12 application base class. 
+
+Provides core functionality for Direct3D 12 applications including\+:
+\begin{DoxyItemize}
+\item Window management
+\item Direct3D device and swap chain initialization
+\item \doxylink{struct_command}{Command} queue/allocator management
+\item Resource descriptor heaps
+\item Main application loop 
+\end{DoxyItemize}
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\Hypertarget{class_d3_d_app_a973ca94b98dea10bf478f336f28e335f}\index{D3DApp@{D3DApp}!D3DApp@{D3DApp}}
+\index{D3DApp@{D3DApp}!D3DApp@{D3DApp}}
+\doxysubsubsection{\texorpdfstring{D3DApp()}{D3DApp()}}
+{\footnotesize\ttfamily \label{class_d3_d_app_a973ca94b98dea10bf478f336f28e335f} 
+D3\+DApp\+::\+D3\+DApp (\begin{DoxyParamCaption}\item[{HINSTANCE}]{h\+Instance}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Constructs a \doxylink{class_d3_d_app}{D3\+DApp} instance. 
+
+Constructor for the \doxylink{class_d3_d_app}{D3\+DApp} class.
+
+
+\begin{DoxyParams}{Parameters}
+{\em h\+Instance} & Handle to the application instance\\
+\hline
+{\em h\+Instance} & Handle to the application instance. \\
+\hline
+\end{DoxyParams}
+\Hypertarget{class_d3_d_app_ab58c61812da3a6c656279c79c39f0600}\index{D3DApp@{D3DApp}!````~D3DApp@{\texorpdfstring{$\sim$}{\string~}D3DApp}}
+\index{````~D3DApp@{\texorpdfstring{$\sim$}{\string~}D3DApp}!D3DApp@{D3DApp}}
+\doxysubsubsection{\texorpdfstring{\texorpdfstring{$\sim$}{\string~}D3DApp()}{\string~D3DApp()}}
+{\footnotesize\ttfamily \label{class_d3_d_app_ab58c61812da3a6c656279c79c39f0600} 
+D3\+DApp\+::\texorpdfstring{$\sim$}{\string~}\+D3\+DApp (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Destructor -\/ releases Direct3D resources. 
+
+Destructor for the \doxylink{class_d3_d_app}{D3\+DApp} class. 
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_d3_d_app_ab5fc7468412d19bae8f4e82fb634769a}\index{D3DApp@{D3DApp}!AppInst@{AppInst}}
+\index{AppInst@{AppInst}!D3DApp@{D3DApp}}
+\doxysubsubsection{\texorpdfstring{AppInst()}{AppInst()}}
+{\footnotesize\ttfamily \label{class_d3_d_app_ab5fc7468412d19bae8f4e82fb634769a} 
+HINSTANCE D3\+DApp\+::\+App\+Inst (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the application instance handle. 
+
+\begin{DoxyReturn}{Returns}
+Handle to the application instance
+
+Handle to the application instance. 
+\end{DoxyReturn}
+\Hypertarget{class_d3_d_app_ab8cf74904b14c4a2072fc020c9bc4d22}\index{D3DApp@{D3DApp}!AspectRatio@{AspectRatio}}
+\index{AspectRatio@{AspectRatio}!D3DApp@{D3DApp}}
+\doxysubsubsection{\texorpdfstring{AspectRatio()}{AspectRatio()}}
+{\footnotesize\ttfamily \label{class_d3_d_app_ab8cf74904b14c4a2072fc020c9bc4d22} 
+float D3\+DApp\+::\+Aspect\+Ratio (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the aspect ratio of the client area. 
+
+\begin{DoxyReturn}{Returns}
+Aspect ratio (width/height)
+
+Aspect ratio as a float (width/height). 
+\end{DoxyReturn}
+\Hypertarget{class_d3_d_app_a978d7c0fda3b30b09c91dc52ec99d942}\index{D3DApp@{D3DApp}!CreateCommandObjects@{CreateCommandObjects}}
+\index{CreateCommandObjects@{CreateCommandObjects}!D3DApp@{D3DApp}}
+\doxysubsubsection{\texorpdfstring{CreateCommandObjects()}{CreateCommandObjects()}}
+{\footnotesize\ttfamily \label{class_d3_d_app_a978d7c0fda3b30b09c91dc52ec99d942} 
+void D3\+DApp\+::\+Create\+Command\+Objects (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Creates command queue and command list objects. 
+
+Start off in a closed state. This is because the first time we refer to the command list we will Reset it, and it needs to be closed before calling Reset.\Hypertarget{class_d3_d_app_a4ca280598775faf38a663fb902f5b227}\index{D3DApp@{D3DApp}!CreateRtvAndDsvDescriptorHeaps@{CreateRtvAndDsvDescriptorHeaps}}
+\index{CreateRtvAndDsvDescriptorHeaps@{CreateRtvAndDsvDescriptorHeaps}!D3DApp@{D3DApp}}
+\doxysubsubsection{\texorpdfstring{CreateRtvAndDsvDescriptorHeaps()}{CreateRtvAndDsvDescriptorHeaps()}}
+{\footnotesize\ttfamily \label{class_d3_d_app_a4ca280598775faf38a663fb902f5b227} 
+void D3\+DApp\+::\+Create\+Rtv\+And\+Dsv\+Descriptor\+Heaps (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Creates RTV and DSV descriptor heaps. 
+
+Creates RTV and DSV descriptor heaps for rendering targets and depth buffers. \Hypertarget{class_d3_d_app_a93e68c33a000808033ce442cd5568dec}\index{D3DApp@{D3DApp}!CreateSwapChain@{CreateSwapChain}}
+\index{CreateSwapChain@{CreateSwapChain}!D3DApp@{D3DApp}}
+\doxysubsubsection{\texorpdfstring{CreateSwapChain()}{CreateSwapChain()}}
+{\footnotesize\ttfamily \label{class_d3_d_app_a93e68c33a000808033ce442cd5568dec} 
+void D3\+DApp\+::\+Create\+Swap\+Chain (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Creates swap chain for window. 
+
+Release the previous swapchain we will be recreating.\Hypertarget{class_d3_d_app_a851376059fec11e3a6d7535785c5d8cd}\index{D3DApp@{D3DApp}!CurrentBackBuffer@{CurrentBackBuffer}}
+\index{CurrentBackBuffer@{CurrentBackBuffer}!D3DApp@{D3DApp}}
+\doxysubsubsection{\texorpdfstring{CurrentBackBuffer()}{CurrentBackBuffer()}}
+{\footnotesize\ttfamily \label{class_d3_d_app_a851376059fec11e3a6d7535785c5d8cd} 
+ID3\+D12\+Resource \texorpdfstring{$\ast$}{*} D3\+DApp\+::\+Current\+Back\+Buffer (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Gets current back buffer resource. 
+
+\begin{DoxyReturn}{Returns}
+Pointer to current back buffer texture 
+\end{DoxyReturn}
+\Hypertarget{class_d3_d_app_ac796a8fcd1a1af0e4665e221af6981d4}\index{D3DApp@{D3DApp}!CurrentBackBufferView@{CurrentBackBufferView}}
+\index{CurrentBackBufferView@{CurrentBackBufferView}!D3DApp@{D3DApp}}
+\doxysubsubsection{\texorpdfstring{CurrentBackBufferView()}{CurrentBackBufferView()}}
+{\footnotesize\ttfamily \label{class_d3_d_app_ac796a8fcd1a1af0e4665e221af6981d4} 
+D3\+D12\+\_\+\+CPU\+\_\+\+DESCRIPTOR\+\_\+\+HANDLE D3\+DApp\+::\+Current\+Back\+Buffer\+View (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Gets current back buffer RTV descriptor. 
+
+\begin{DoxyReturn}{Returns}
+CPU descriptor handle for current back buffer 
+\end{DoxyReturn}
+\Hypertarget{class_d3_d_app_a2d2bfecf16e881f1d65f464767d38c12}\index{D3DApp@{D3DApp}!DepthStencilView@{DepthStencilView}}
+\index{DepthStencilView@{DepthStencilView}!D3DApp@{D3DApp}}
+\doxysubsubsection{\texorpdfstring{DepthStencilView()}{DepthStencilView()}}
+{\footnotesize\ttfamily \label{class_d3_d_app_a2d2bfecf16e881f1d65f464767d38c12} 
+D3\+D12\+\_\+\+CPU\+\_\+\+DESCRIPTOR\+\_\+\+HANDLE D3\+DApp\+::\+Depth\+Stencil\+View (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Gets depth stencil view descriptor. 
+
+\begin{DoxyReturn}{Returns}
+CPU descriptor handle for depth/stencil buffer 
+\end{DoxyReturn}
+\Hypertarget{class_d3_d_app_afc159e00500db82ec59edf2bc95e5e6a}\index{D3DApp@{D3DApp}!Draw@{Draw}}
+\index{Draw@{Draw}!D3DApp@{D3DApp}}
+\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}}
+{\footnotesize\ttfamily \label{class_d3_d_app_afc159e00500db82ec59edf2bc95e5e6a} 
+virtual void D3\+DApp\+::\+Draw (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_game_timer}{Game\+Timer}} \&}]{gt}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+Pure virtual render method. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gt} & \doxylink{class_game}{Game} timer reference \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_game_afc62dae28f3cd775d8110ff5386c1fe1}{Game}}.
+
+\Hypertarget{class_d3_d_app_afd141907db51f0c177ab89955e9d5de9}\index{D3DApp@{D3DApp}!FlushCommandQueue@{FlushCommandQueue}}
+\index{FlushCommandQueue@{FlushCommandQueue}!D3DApp@{D3DApp}}
+\doxysubsubsection{\texorpdfstring{FlushCommandQueue()}{FlushCommandQueue()}}
+{\footnotesize\ttfamily \label{class_d3_d_app_afd141907db51f0c177ab89955e9d5de9} 
+void D3\+DApp\+::\+Flush\+Command\+Queue (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Flushes the command queue. 
+
+Waits for GPU to finish executing all commands Advance the fence value to mark commands up to this fence point.
+
+Add an instruction to the command queue to set a new fence point. Because we are on the GPU timeline, the new fence point won\textquotesingle{}t be set until the GPU finishes processing all the commands prior to this Signal().
+
+Wait until the GPU has completed commands up to this fence point.
+
+Fire event when GPU hits current fence. ~\newline
+
+
+Wait until the GPU hits current fence event is fired.\Hypertarget{class_d3_d_app_a84b1bd8014d56b1e8c3ec9c7b486646e}\index{D3DApp@{D3DApp}!Get4xMsaaState@{Get4xMsaaState}}
+\index{Get4xMsaaState@{Get4xMsaaState}!D3DApp@{D3DApp}}
+\doxysubsubsection{\texorpdfstring{Get4xMsaaState()}{Get4xMsaaState()}}
+{\footnotesize\ttfamily \label{class_d3_d_app_a84b1bd8014d56b1e8c3ec9c7b486646e} 
+bool D3\+DApp\+::\+Get4x\+Msaa\+State (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets current 4x MSAA state. 
+
+Checks if 4x MSAA is enabled.
+
+\begin{DoxyReturn}{Returns}
+True if 4x MSAA is enabled
+
+True if 4x MSAA is enabled; otherwise false. 
+\end{DoxyReturn}
+\Hypertarget{class_d3_d_app_a66173f354ad8b3edc6c714883c7203df}\index{D3DApp@{D3DApp}!GetApp@{GetApp}}
+\index{GetApp@{GetApp}!D3DApp@{D3DApp}}
+\doxysubsubsection{\texorpdfstring{GetApp()}{GetApp()}}
+{\footnotesize\ttfamily \label{class_d3_d_app_a66173f354ad8b3edc6c714883c7203df} 
+\mbox{\hyperlink{class_d3_d_app}{D3\+DApp}} \texorpdfstring{$\ast$}{*} D3\+DApp\+::\+Get\+App (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Gets the singleton application instance. 
+
+Retrieves the singleton instance of the application.
+
+\begin{DoxyReturn}{Returns}
+Pointer to the \doxylink{class_d3_d_app}{D3\+DApp} instance
+
+Pointer to the \doxylink{class_d3_d_app}{D3\+DApp} instance. 
+\end{DoxyReturn}
+\Hypertarget{class_d3_d_app_a13ad61cbed0b9641974cc6183ba6a22b}\index{D3DApp@{D3DApp}!InitDirect3D@{InitDirect3D}}
+\index{InitDirect3D@{InitDirect3D}!D3DApp@{D3DApp}}
+\doxysubsubsection{\texorpdfstring{InitDirect3D()}{InitDirect3D()}}
+{\footnotesize\ttfamily \label{class_d3_d_app_a13ad61cbed0b9641974cc6183ba6a22b} 
+bool D3\+DApp\+::\+Init\+Direct3D (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Initializes Direct3D resources. 
+
+\begin{DoxyReturn}{Returns}
+True if Direct3D initialization succeeded 
+\end{DoxyReturn}
+DirectX Graphics Infrastructure (DXGI) is an API used along with Direct3D. The basic idea of DXGI is that some graphics related tasks are common to multiple graphics APIs.\+For example, a 2D rendering API would need swap chains and page flipping for smooth animation just as much as a 3D rendering API; therefore the swap chain interface IDXGISwap\+Chain is actually part of the DXGI API.\+DXGI handles other common graphical functionality like full -\/ screen mode transitions, enumerating graphical system information like display adapters, monitors, and supported display modes (resolution, refresh rate, and such); it also defines the various supported surface formats(\+DXGI\+\_\+\+FORMAT).
+
+I added this code to take advantage of your "{}stronger"{} GPU. sometimes your seond graphics card (like mine\+: NVDIA) is much stronger, that would stop blinking!
+
+Try to create hardware device.
+
+Fallback to WARP device.
+
+Check 4X MSAA quality support for our back buffer format. All Direct3D 12 capable devices support 4X MSAA for all render target formats, so we only need to check quality support.\Hypertarget{class_d3_d_app_a961fa79170dcbde858923a5250c322be}\index{D3DApp@{D3DApp}!Initialize@{Initialize}}
+\index{Initialize@{Initialize}!D3DApp@{D3DApp}}
+\doxysubsubsection{\texorpdfstring{Initialize()}{Initialize()}}
+{\footnotesize\ttfamily \label{class_d3_d_app_a961fa79170dcbde858923a5250c322be} 
+bool D3\+DApp\+::\+Initialize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Initializes application resources. 
+
+Initializes the application by creating a window and initializing Direct3D.
+
+\begin{DoxyReturn}{Returns}
+True if initialization succeeded
+
+True if initialization succeeds; otherwise false. 
+\end{DoxyReturn}
+
+
+Reimplemented in \mbox{\hyperlink{class_game_a16354d232327f6c21319713bf6983674}{Game}}.
+
+\Hypertarget{class_d3_d_app_a775e141865e0de4dc3f3a39281cbcf02}\index{D3DApp@{D3DApp}!InitMainWindow@{InitMainWindow}}
+\index{InitMainWindow@{InitMainWindow}!D3DApp@{D3DApp}}
+\doxysubsubsection{\texorpdfstring{InitMainWindow()}{InitMainWindow()}}
+{\footnotesize\ttfamily \label{class_d3_d_app_a775e141865e0de4dc3f3a39281cbcf02} 
+bool D3\+DApp\+::\+Init\+Main\+Window (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Initializes main application window. 
+
+\begin{DoxyReturn}{Returns}
+True if window creation succeeded 
+\end{DoxyReturn}
+Compute window rectangle dimensions based on requested client area dimensions.\Hypertarget{class_d3_d_app_a72d9458209b467ad1b53db8db92995ba}\index{D3DApp@{D3DApp}!LogAdapterOutputs@{LogAdapterOutputs}}
+\index{LogAdapterOutputs@{LogAdapterOutputs}!D3DApp@{D3DApp}}
+\doxysubsubsection{\texorpdfstring{LogAdapterOutputs()}{LogAdapterOutputs()}}
+{\footnotesize\ttfamily \label{class_d3_d_app_a72d9458209b467ad1b53db8db92995ba} 
+void D3\+DApp\+::\+Log\+Adapter\+Outputs (\begin{DoxyParamCaption}\item[{IDXGIAdapter \texorpdfstring{$\ast$}{*}}]{adapter}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Logs outputs for a specific adapter. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em adapter} & DXGI adapter to query\\
+\hline
+\end{DoxyParams}
+A system can have several monitors. A monitor is an example of a display output. An output is represented by the IDXGIOutput interface.\+Each adapter is associated with a list of outputs.\+For instance, consider a system with two graphics cardsand three monitors, where two monitors are hooked up to one graphics card, and the third monitor is hooked up to the other graphics card. Each monitor has a set of display modes it supports. A display mode refers to the following data in DXGI\+\_\+\+MODE\+\_\+\+DESC \+:\Hypertarget{class_d3_d_app_a64f791b345ac87edeab057c34cf17de3}\index{D3DApp@{D3DApp}!LogAdapters@{LogAdapters}}
+\index{LogAdapters@{LogAdapters}!D3DApp@{D3DApp}}
+\doxysubsubsection{\texorpdfstring{LogAdapters()}{LogAdapters()}}
+{\footnotesize\ttfamily \label{class_d3_d_app_a64f791b345ac87edeab057c34cf17de3} 
+void D3\+DApp\+::\+Log\+Adapters (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Logs available GPU adapters. 
+
+Display adapters implement graphical functionality. Usually, the display adapter is a physical piece of hardware(e.\+g., graphics card); however, a system can also have a software display adapter that emulates hardware graphics functionality.\+A system can have several adapters(e.\+g., if it has several graphics cards).An adapter is represented by the IDXGIAdapter interface.\+We can enumerate all the adapters on a system with the following code \+: \Hypertarget{class_d3_d_app_a96563a403e9119629fff43b86d9807ea}\index{D3DApp@{D3DApp}!LogOutputDisplayModes@{LogOutputDisplayModes}}
+\index{LogOutputDisplayModes@{LogOutputDisplayModes}!D3DApp@{D3DApp}}
+\doxysubsubsection{\texorpdfstring{LogOutputDisplayModes()}{LogOutputDisplayModes()}}
+{\footnotesize\ttfamily \label{class_d3_d_app_a96563a403e9119629fff43b86d9807ea} 
+void D3\+DApp\+::\+Log\+Output\+Display\+Modes (\begin{DoxyParamCaption}\item[{IDXGIOutput \texorpdfstring{$\ast$}{*}}]{output}{, }\item[{DXGI\+\_\+\+FORMAT}]{format}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}}
+
+
+
+Logs display modes for an output. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em output} & DXGI output to query \\
+\hline
+{\em format} & Format to enumerate modes for \\
+\hline
+\end{DoxyParams}
+Call with nullptr to get list count.\Hypertarget{class_d3_d_app_ae70e0422d916077999b25cc1b984027d}\index{D3DApp@{D3DApp}!MainWnd@{MainWnd}}
+\index{MainWnd@{MainWnd}!D3DApp@{D3DApp}}
+\doxysubsubsection{\texorpdfstring{MainWnd()}{MainWnd()}}
+{\footnotesize\ttfamily \label{class_d3_d_app_ae70e0422d916077999b25cc1b984027d} 
+HWND D3\+DApp\+::\+Main\+Wnd (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption}) const}
+
+
+
+Gets the main window handle. 
+
+\begin{DoxyReturn}{Returns}
+Handle to the application\textquotesingle{}s main window
+
+Handle to the main window. 
+\end{DoxyReturn}
+\Hypertarget{class_d3_d_app_a50a6ba535971837f61c79d7f9390dc30}\index{D3DApp@{D3DApp}!MsgProc@{MsgProc}}
+\index{MsgProc@{MsgProc}!D3DApp@{D3DApp}}
+\doxysubsubsection{\texorpdfstring{MsgProc()}{MsgProc()}}
+{\footnotesize\ttfamily \label{class_d3_d_app_a50a6ba535971837f61c79d7f9390dc30} 
+LRESULT D3\+DApp\+::\+Msg\+Proc (\begin{DoxyParamCaption}\item[{HWND}]{hwnd}{, }\item[{UINT}]{msg}{, }\item[{WPARAM}]{w\+Param}{, }\item[{LPARAM}]{l\+Param}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [virtual]}}
+
+
+
+Handles Windows messages. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em hwnd} & Window handle \\
+\hline
+{\em msg} & Message ID \\
+\hline
+{\em w\+Param} & Message parameter \\
+\hline
+{\em l\+Param} & Message parameter \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Message processing result 
+\end{DoxyReturn}
+WM\+\_\+\+ACTIVATE is sent when the window is activated or deactivated. ~\newline
+ We pause the game when the window is deactivated and unpause it when it becomes active. ~\newline
+
+
+WM\+\_\+\+SIZE is sent when the user resizes the window. ~\newline
+
+
+Save the new client area dimensions.
+
+If user is dragging the resize bars, we do not resize the buffers here because as the user continuously drags the resize bars, a stream of WM\+\_\+\+SIZE messages are sent to the window, and it would be pointless (and slow) to resize for each WM\+\_\+\+SIZE message received from dragging the resize bars. So instead, we reset after the user is done resizing the window and releases the resize bars, which sends a WM\+\_\+\+EXITSIZEMOVE message.
+
+WM\+\_\+\+EXITSIZEMOVE is sent when the user grabs the resize bars.
+
+WM\+\_\+\+EXITSIZEMOVE is sent when the user releases the resize bars. Here we reset everything based on the new window dimensions.
+
+WM\+\_\+\+DESTROY is sent when the window is being destroyed.
+
+The WM\+\_\+\+MENUCHAR message is sent when a menu is active and the user presses a key that does not correspond to any mnemonic or accelerator key. ~\newline
+
+
+Catch this message so to prevent the window from becoming too small.\Hypertarget{class_d3_d_app_ab6d221a3caba317f85d9fb3e19daa6c3}\index{D3DApp@{D3DApp}!OnKeyDown@{OnKeyDown}}
+\index{OnKeyDown@{OnKeyDown}!D3DApp@{D3DApp}}
+\doxysubsubsection{\texorpdfstring{OnKeyDown()}{OnKeyDown()}}
+{\footnotesize\ttfamily \label{class_d3_d_app_ab6d221a3caba317f85d9fb3e19daa6c3} 
+virtual void D3\+DApp\+::\+On\+Key\+Down (\begin{DoxyParamCaption}\item[{WPARAM}]{btn\+State}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Handles key down events. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em btn\+State} & Key state flags \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in \mbox{\hyperlink{class_game_a35759ff84d520ea106a53dc5d2d28b1a}{Game}}.
+
+\Hypertarget{class_d3_d_app_afa0d546d52408a9b55866e6ba065ddae}\index{D3DApp@{D3DApp}!OnMouseDown@{OnMouseDown}}
+\index{OnMouseDown@{OnMouseDown}!D3DApp@{D3DApp}}
+\doxysubsubsection{\texorpdfstring{OnMouseDown()}{OnMouseDown()}}
+{\footnotesize\ttfamily \label{class_d3_d_app_afa0d546d52408a9b55866e6ba065ddae} 
+virtual void D3\+DApp\+::\+On\+Mouse\+Down (\begin{DoxyParamCaption}\item[{WPARAM}]{btn\+State}{, }\item[{int}]{x}{, }\item[{int}]{y}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Handles mouse button down events. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em btn\+State} & Mouse button state flags \\
+\hline
+{\em x} & Cursor X position \\
+\hline
+{\em y} & Cursor Y position \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in \mbox{\hyperlink{class_game_a605e728835f29b7b320f6c9c8de05d00}{Game}}.
+
+\Hypertarget{class_d3_d_app_aa5270048920cd8a62dc07c7ed5e97622}\index{D3DApp@{D3DApp}!OnMouseMove@{OnMouseMove}}
+\index{OnMouseMove@{OnMouseMove}!D3DApp@{D3DApp}}
+\doxysubsubsection{\texorpdfstring{OnMouseMove()}{OnMouseMove()}}
+{\footnotesize\ttfamily \label{class_d3_d_app_aa5270048920cd8a62dc07c7ed5e97622} 
+virtual void D3\+DApp\+::\+On\+Mouse\+Move (\begin{DoxyParamCaption}\item[{WPARAM}]{btn\+State}{, }\item[{int}]{x}{, }\item[{int}]{y}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Handles mouse movement events. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em btn\+State} & Mouse button state flags \\
+\hline
+{\em x} & Cursor X position \\
+\hline
+{\em y} & Cursor Y position \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in \mbox{\hyperlink{class_game_ada0f3fffa1b4560465128b1eff7d1ef5}{Game}}.
+
+\Hypertarget{class_d3_d_app_a98be07429ac3ffb5f76cbe831f9d94de}\index{D3DApp@{D3DApp}!OnMouseUp@{OnMouseUp}}
+\index{OnMouseUp@{OnMouseUp}!D3DApp@{D3DApp}}
+\doxysubsubsection{\texorpdfstring{OnMouseUp()}{OnMouseUp()}}
+{\footnotesize\ttfamily \label{class_d3_d_app_a98be07429ac3ffb5f76cbe831f9d94de} 
+virtual void D3\+DApp\+::\+On\+Mouse\+Up (\begin{DoxyParamCaption}\item[{WPARAM}]{btn\+State}{, }\item[{int}]{x}{, }\item[{int}]{y}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Handles mouse button up events. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em btn\+State} & Mouse button state flags \\
+\hline
+{\em x} & Cursor X position \\
+\hline
+{\em y} & Cursor Y position \\
+\hline
+\end{DoxyParams}
+
+
+Reimplemented in \mbox{\hyperlink{class_game_a020e0c5f01a724bfef357bfe29f800c3}{Game}}.
+
+\Hypertarget{class_d3_d_app_a4c1b99cd01576c413d3a50d1435f1b8a}\index{D3DApp@{D3DApp}!OnResize@{OnResize}}
+\index{OnResize@{OnResize}!D3DApp@{D3DApp}}
+\doxysubsubsection{\texorpdfstring{OnResize()}{OnResize()}}
+{\footnotesize\ttfamily \label{class_d3_d_app_a4c1b99cd01576c413d3a50d1435f1b8a} 
+void D3\+DApp\+::\+On\+Resize (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [virtual]}}
+
+
+
+Handles window resize events. 
+
+Handles resizing of swap chain buffers and depth/stencil buffers when window size changes. Flush before changing any resources.
+
+Release the previous resources we will be recreating.
+
+Resize the swap chain.
+
+Create the depth/stencil buffer and view.
+
+the depth buffer. Therefore, because we need to create two views to the same resource\+:
+\begin{DoxyEnumerate}
+\item SRV format\+: DXGI\+\_\+\+FORMAT\+\_\+\+R24\+\_\+\+UNORM\+\_\+\+X8\+\_\+\+TYPELESS
+\item DSV Format\+: DXGI\+\_\+\+FORMAT\+\_\+\+D24\+\_\+\+UNORM\+\_\+\+S8\+\_\+\+UINT we need to create the depth buffer resource with a typeless format. ~\newline
+
+\end{DoxyEnumerate}
+
+Create descriptor to mip level 0 of entire resource using the format of the resource.
+
+Transition the resource from its initial state to be used as a depth buffer.
+
+Execute the resize commands.
+
+Wait until resize is complete.
+
+Update the viewport transform to cover the client area.
+
+Reimplemented in \mbox{\hyperlink{class_game_a7bd6d8d7aa09aa1196b4fa463d2ac41b}{Game}}.
+
+\Hypertarget{class_d3_d_app_a0a2ed8f09bb1ae3a97f3b9a5067c905f}\index{D3DApp@{D3DApp}!Run@{Run}}
+\index{Run@{Run}!D3DApp@{D3DApp}}
+\doxysubsubsection{\texorpdfstring{Run()}{Run()}}
+{\footnotesize\ttfamily \label{class_d3_d_app_a0a2ed8f09bb1ae3a97f3b9a5067c905f} 
+int D3\+DApp\+::\+Run (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})}
+
+
+
+Runs the main application loop. 
+
+\begin{DoxyReturn}{Returns}
+Application exit code
+
+Exit code of the application. 
+\end{DoxyReturn}
+\Hypertarget{class_d3_d_app_a74ce23c1a7b775c3af6c67522abaa2bd}\index{D3DApp@{D3DApp}!Set4xMsaaState@{Set4xMsaaState}}
+\index{Set4xMsaaState@{Set4xMsaaState}!D3DApp@{D3DApp}}
+\doxysubsubsection{\texorpdfstring{Set4xMsaaState()}{Set4xMsaaState()}}
+{\footnotesize\ttfamily \label{class_d3_d_app_a74ce23c1a7b775c3af6c67522abaa2bd} 
+void D3\+DApp\+::\+Set4x\+Msaa\+State (\begin{DoxyParamCaption}\item[{bool}]{value}{}\end{DoxyParamCaption})}
+
+
+
+Enables/disables 4x MSAA. 
+
+Enables or disables 4x MSAA and recreates buffers if necessary.
+
+
+\begin{DoxyParams}{Parameters}
+{\em value} & True to enable 4x MSAA, false to disable\\
+\hline
+{\em value} & True to enable 4x MSAA; false to disable it. \\
+\hline
+\end{DoxyParams}
+Recreate the swapchain and buffers with new multisample settings.\Hypertarget{class_d3_d_app_ae31029e118e14ee3ae4649f1c6f8d2dd}\index{D3DApp@{D3DApp}!Update@{Update}}
+\index{Update@{Update}!D3DApp@{D3DApp}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily \label{class_d3_d_app_ae31029e118e14ee3ae4649f1c6f8d2dd} 
+virtual void D3\+DApp\+::\+Update (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_game_timer}{Game\+Timer}} \&}]{gt}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [protected]}, {\ttfamily [pure virtual]}}
+
+
+
+Pure virtual update method for frame logic. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em gt} & \doxylink{class_game}{Game} timer reference \\
+\hline
+\end{DoxyParams}
+
+
+Implemented in \mbox{\hyperlink{class_game_ab9244991993b5a1cbde3f1f2d73f2745}{Game}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Common/d3d\+App.\+h\item 
+Common/d3d\+App.\+cpp\end{DoxyCompactItemize}

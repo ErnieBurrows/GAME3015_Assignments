@@ -1,0 +1,201 @@
+\doxysection{d3d\+Util Class Reference}
+\hypertarget{classd3d_util}{}\label{classd3d_util}\index{d3dUtil@{d3dUtil}}
+\doxysubsubsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+static bool \mbox{\hyperlink{classd3d_util_a2e43ccad934a5f8de92c10de835e7d14}{Is\+Key\+Down}} (int vkey\+Code)
+\begin{DoxyCompactList}\small\item\em Checks if a key is currently pressed. \end{DoxyCompactList}\item 
+\Hypertarget{classd3d_util_ae0b7d841076df11833db2564c86faefe}\label{classd3d_util_ae0b7d841076df11833db2564c86faefe} 
+static std\+::string {\bfseries To\+String} (HRESULT hr)
+\item 
+static UINT \mbox{\hyperlink{classd3d_util_a0883e0848cae813b2bc71570f3303e92}{Calc\+Constant\+Buffer\+Byte\+Size}} (UINT byte\+Size)
+\begin{DoxyCompactList}\small\item\em Calculates the required byte size for a constant buffer. \end{DoxyCompactList}\item 
+static Microsoft\+::\+WRL\+::\+Com\+Ptr$<$ ID3\+DBlob $>$ \mbox{\hyperlink{classd3d_util_a374c360bb2668c34223e74fbf0f1402b}{Load\+Binary}} (const std\+::wstring \&filename)
+\begin{DoxyCompactList}\small\item\em Loads a binary file into a blob. \end{DoxyCompactList}\item 
+static Microsoft\+::\+WRL\+::\+Com\+Ptr$<$ ID3\+D12\+Resource $>$ \mbox{\hyperlink{classd3d_util_ae4a68e5b73f032619ee5c2db64f57899}{Create\+Default\+Buffer}} (ID3\+D12\+Device \texorpdfstring{$\ast$}{*}device, ID3\+D12\+Graphics\+Command\+List \texorpdfstring{$\ast$}{*}cmd\+List, const void \texorpdfstring{$\ast$}{*}init\+Data, UINT64 byte\+Size, Microsoft\+::\+WRL\+::\+Com\+Ptr$<$ ID3\+D12\+Resource $>$ \&upload\+Buffer)
+\begin{DoxyCompactList}\small\item\em Creates a default buffer on the GPU and uploads data to it. \end{DoxyCompactList}\item 
+static Microsoft\+::\+WRL\+::\+Com\+Ptr$<$ ID3\+DBlob $>$ \mbox{\hyperlink{classd3d_util_acac6acd838913d63466e4f0159bfe8b0}{Compile\+Shader}} (const std\+::wstring \&filename, const D3\+D\+\_\+\+SHADER\+\_\+\+MACRO \texorpdfstring{$\ast$}{*}defines, const std\+::string \&entrypoint, const std\+::string \&target)
+\begin{DoxyCompactList}\small\item\em Compiles a shader from file. \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{classd3d_util_a0883e0848cae813b2bc71570f3303e92}\index{d3dUtil@{d3dUtil}!CalcConstantBufferByteSize@{CalcConstantBufferByteSize}}
+\index{CalcConstantBufferByteSize@{CalcConstantBufferByteSize}!d3dUtil@{d3dUtil}}
+\doxysubsubsection{\texorpdfstring{CalcConstantBufferByteSize()}{CalcConstantBufferByteSize()}}
+{\footnotesize\ttfamily \label{classd3d_util_a0883e0848cae813b2bc71570f3303e92} 
+static UINT d3d\+Util\+::\+Calc\+Constant\+Buffer\+Byte\+Size (\begin{DoxyParamCaption}\item[{UINT}]{byte\+Size}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}, {\ttfamily [static]}}
+
+
+
+Calculates the required byte size for a constant buffer. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em byte\+Size} & Requested byte size \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Aligned byte size (multiple of 256) 
+\end{DoxyReturn}
+\Hypertarget{classd3d_util_acac6acd838913d63466e4f0159bfe8b0}\index{d3dUtil@{d3dUtil}!CompileShader@{CompileShader}}
+\index{CompileShader@{CompileShader}!d3dUtil@{d3dUtil}}
+\doxysubsubsection{\texorpdfstring{CompileShader()}{CompileShader()}}
+{\footnotesize\ttfamily \label{classd3d_util_acac6acd838913d63466e4f0159bfe8b0} 
+Com\+Ptr$<$ ID3\+DBlob $>$ d3d\+Util\+::\+Compile\+Shader (\begin{DoxyParamCaption}\item[{const std\+::wstring \&}]{filename}{, }\item[{const D3\+D\+\_\+\+SHADER\+\_\+\+MACRO \texorpdfstring{$\ast$}{*}}]{defines}{, }\item[{const std\+::string \&}]{entrypoint}{, }\item[{const std\+::string \&}]{target}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Compiles a shader from file. 
+
+Compiles a HLSL shader from file.
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & Filename of the shader \\
+\hline
+{\em defines} & Shader macros \\
+\hline
+{\em entrypoint} & Entry point of the shader \\
+\hline
+{\em target} & Shader target (e.\+g., vs\+\_\+5\+\_\+0) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Com\+Ptr to the compiled shader blob
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & Path to shader source file \\
+\hline
+{\em defines} & Optional preprocessor macros \\
+\hline
+{\em entrypoint} & Shader entry point function \\
+\hline
+{\em target} & Shader model target (e.\+g., "{}vs\+\_\+5\+\_\+0"{}) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Com\+Ptr to compiled shader bytecode 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \doxylink{class_dx_exception}{Dx\+Exception}} & if compilation fails\\
+\hline
+\end{DoxyExceptions}
+\begin{DoxyNote}{Note}
+In debug builds, enables debug flags and skips optimizations 
+\end{DoxyNote}
+\Hypertarget{classd3d_util_ae4a68e5b73f032619ee5c2db64f57899}\index{d3dUtil@{d3dUtil}!CreateDefaultBuffer@{CreateDefaultBuffer}}
+\index{CreateDefaultBuffer@{CreateDefaultBuffer}!d3dUtil@{d3dUtil}}
+\doxysubsubsection{\texorpdfstring{CreateDefaultBuffer()}{CreateDefaultBuffer()}}
+{\footnotesize\ttfamily \label{classd3d_util_ae4a68e5b73f032619ee5c2db64f57899} 
+Microsoft\+::\+WRL\+::\+Com\+Ptr$<$ ID3\+D12\+Resource $>$ d3d\+Util\+::\+Create\+Default\+Buffer (\begin{DoxyParamCaption}\item[{ID3\+D12\+Device \texorpdfstring{$\ast$}{*}}]{device}{, }\item[{ID3\+D12\+Graphics\+Command\+List \texorpdfstring{$\ast$}{*}}]{cmd\+List}{, }\item[{const void \texorpdfstring{$\ast$}{*}}]{init\+Data}{, }\item[{UINT64}]{byte\+Size}{, }\item[{Microsoft\+::\+WRL\+::\+Com\+Ptr$<$ ID3\+D12\+Resource $>$ \&}]{upload\+Buffer}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Creates a default buffer on the GPU and uploads data to it. 
+
+Creates a default GPU buffer and initializes it with data.
+
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em device} & Direct3D 12 device \\
+\hline
+ & {\em cmd\+List} & \doxylink{struct_command}{Command} list to execute the upload \\
+\hline
+ & {\em init\+Data} & Pointer to the initial data \\
+\hline
+ & {\em byte\+Size} & Size of the data in bytes \\
+\hline
+\mbox{\texttt{ out}}  & {\em upload\+Buffer} & Upload buffer that must persist until command list execution \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Com\+Ptr to the created default buffer
+\end{DoxyReturn}
+
+\begin{DoxyParams}[1]{Parameters}
+ & {\em device} & Direct3D device \\
+\hline
+ & {\em cmd\+List} & \doxylink{struct_command}{Command} list for upload commands \\
+\hline
+ & {\em init\+Data} & Pointer to initialization data \\
+\hline
+ & {\em byte\+Size} & Size of data in bytes \\
+\hline
+\mbox{\texttt{ out}}  & {\em upload\+Buffer} & Reference to receive upload buffer resource \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Com\+Ptr to the created default buffer resource
+\end{DoxyReturn}
+\begin{DoxyNote}{Note}
+Upload buffer must remain alive until command list execution completes 
+\end{DoxyNote}
+\Hypertarget{classd3d_util_a2e43ccad934a5f8de92c10de835e7d14}\index{d3dUtil@{d3dUtil}!IsKeyDown@{IsKeyDown}}
+\index{IsKeyDown@{IsKeyDown}!d3dUtil@{d3dUtil}}
+\doxysubsubsection{\texorpdfstring{IsKeyDown()}{IsKeyDown()}}
+{\footnotesize\ttfamily \label{classd3d_util_a2e43ccad934a5f8de92c10de835e7d14} 
+bool d3d\+Util\+::\+Is\+Key\+Down (\begin{DoxyParamCaption}\item[{int}]{vkey\+Code}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Checks if a key is currently pressed. 
+
+Checks if a virtual key is currently pressed.
+
+
+\begin{DoxyParams}{Parameters}
+{\em vkey\+Code} & Virtual key code to check \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if key is pressed, false otherwise
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em vkey\+Code} & The virtual key code to check (e.\+g., VK\+\_\+\+SPACE) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the key is currently down, false otherwise 
+\end{DoxyReturn}
+\Hypertarget{classd3d_util_a374c360bb2668c34223e74fbf0f1402b}\index{d3dUtil@{d3dUtil}!LoadBinary@{LoadBinary}}
+\index{LoadBinary@{LoadBinary}!d3dUtil@{d3dUtil}}
+\doxysubsubsection{\texorpdfstring{LoadBinary()}{LoadBinary()}}
+{\footnotesize\ttfamily \label{classd3d_util_a374c360bb2668c34223e74fbf0f1402b} 
+Com\+Ptr$<$ ID3\+DBlob $>$ d3d\+Util\+::\+Load\+Binary (\begin{DoxyParamCaption}\item[{const std\+::wstring \&}]{filename}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [static]}}
+
+
+
+Loads a binary file into a blob. 
+
+Loads binary data from file into a Direct3D blob.
+
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & Filename to load \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Com\+Ptr to the loaded blob
+\end{DoxyReturn}
+
+\begin{DoxyParams}{Parameters}
+{\em filename} & Path to the binary file \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+Com\+Ptr to ID3\+DBlob containing loaded data 
+\end{DoxyReturn}
+
+\begin{DoxyExceptions}{Exceptions}
+{\em \doxylink{class_dx_exception}{Dx\+Exception}} & if file cannot be read or blob creation fails \\
+\hline
+\end{DoxyExceptions}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Common/d3d\+Util.\+h\item 
+Common/d3d\+Util.\+cpp\end{DoxyCompactItemize}

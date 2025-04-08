@@ -1,0 +1,108 @@
+\doxysection{Title\+State Class Reference}
+\hypertarget{class_title_state}{}\label{class_title_state}\index{TitleState@{TitleState}}
+Inheritance diagram for Title\+State\+:\begin{figure}[H]
+\begin{center}
+\leavevmode
+\includegraphics[height=2.000000cm]{class_title_state}
+\end{center}
+\end{figure}
+\doxysubsubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\Hypertarget{class_title_state_aad68d2a0aece65492974d3ee448ff71f}\label{class_title_state_aad68d2a0aece65492974d3ee448ff71f} 
+{\bfseries Title\+State} (\mbox{\hyperlink{class_state_stack}{State\+Stack}} \texorpdfstring{$\ast$}{*}stack, \mbox{\hyperlink{struct_state_1_1_context}{Context}} \texorpdfstring{$\ast$}{*}context)
+\item 
+virtual void \mbox{\hyperlink{class_title_state_a5eecfe12209566cde54dfef5c7838ba3}{Draw}} () override
+\item 
+virtual bool \mbox{\hyperlink{class_title_state_afe2570c09d674abbd9da9e1977961ee9}{Update}} (const \mbox{\hyperlink{class_game_timer}{Game\+Timer}} \&gt) override
+\item 
+virtual bool \mbox{\hyperlink{class_title_state_a50c14fa4e90b8ff58b1b3d58e9236b61}{Handle\+Event}} (WPARAM btn\+State) override
+\item 
+virtual bool \mbox{\hyperlink{class_title_state_aff631336fdc49e45d14663cb79f5ff79}{Handle\+Real\+Time\+Input}} () override
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Member Functions inherited from \mbox{\hyperlink{class_state}{State}}}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries State} (\mbox{\hyperlink{class_state_stack}{State\+Stack}} \texorpdfstring{$\ast$}{*}stack, \mbox{\hyperlink{struct_state_1_1_context}{Context}} \texorpdfstring{$\ast$}{*}context)
+\item 
+virtual bool {\bfseries Is\+Transparent} () const
+\item 
+std\+::vector$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{struct_render_item}{Render\+Item}} $>$ $>$ \& {\bfseries get\+Render\+Items} ()
+\item 
+\mbox{\hyperlink{struct_state_1_1_context}{Context}} \texorpdfstring{$\ast$}{*} {\bfseries Get\+Context} () const
+\end{DoxyCompactItemize}
+\doxysubsubsection*{Additional Inherited Members}
+\doxysubsection*{Public Types inherited from \mbox{\hyperlink{class_state}{State}}}
+\begin{DoxyCompactItemize}
+\item 
+typedef std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_state}{State}} $>$ {\bfseries State\+Ptr}
+\begin{DoxyCompactList}\small\item\em Unique pointer type for automatic state management. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Protected Member Functions inherited from \mbox{\hyperlink{class_state}{State}}}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries Request\+Stack\+Push} (States\+::\+ID state\+ID)
+\item 
+void {\bfseries Request\+Stack\+Pop} ()
+\item 
+void {\bfseries Request\+State\+Clear} ()
+\end{DoxyCompactItemize}
+\doxysubsection*{Protected Attributes inherited from \mbox{\hyperlink{class_state}{State}}}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_state_stack}{State\+Stack}} \texorpdfstring{$\ast$}{*} {\bfseries m\+Stack}
+\item 
+\mbox{\hyperlink{struct_state_1_1_context}{Context}} \texorpdfstring{$\ast$}{*} {\bfseries m\+Context}
+\item 
+std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{class_scene_node}{Scene\+Node}} $>$ {\bfseries m\+Scene\+Graph}
+\item 
+std\+::vector$<$ std\+::unique\+\_\+ptr$<$ \mbox{\hyperlink{struct_render_item}{Render\+Item}} $>$ $>$ {\bfseries m\+All\+Ritems}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Member Function Documentation}
+\Hypertarget{class_title_state_a5eecfe12209566cde54dfef5c7838ba3}\index{TitleState@{TitleState}!Draw@{Draw}}
+\index{Draw@{Draw}!TitleState@{TitleState}}
+\doxysubsubsection{\texorpdfstring{Draw()}{Draw()}}
+{\footnotesize\ttfamily \label{class_title_state_a5eecfe12209566cde54dfef5c7838ba3} 
+void Title\+State\+::\+Draw (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_state}{State}}.
+
+\Hypertarget{class_title_state_a50c14fa4e90b8ff58b1b3d58e9236b61}\index{TitleState@{TitleState}!HandleEvent@{HandleEvent}}
+\index{HandleEvent@{HandleEvent}!TitleState@{TitleState}}
+\doxysubsubsection{\texorpdfstring{HandleEvent()}{HandleEvent()}}
+{\footnotesize\ttfamily \label{class_title_state_a50c14fa4e90b8ff58b1b3d58e9236b61} 
+bool Title\+State\+::\+Handle\+Event (\begin{DoxyParamCaption}\item[{WPARAM}]{btn\+State}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_state}{State}}.
+
+\Hypertarget{class_title_state_aff631336fdc49e45d14663cb79f5ff79}\index{TitleState@{TitleState}!HandleRealTimeInput@{HandleRealTimeInput}}
+\index{HandleRealTimeInput@{HandleRealTimeInput}!TitleState@{TitleState}}
+\doxysubsubsection{\texorpdfstring{HandleRealTimeInput()}{HandleRealTimeInput()}}
+{\footnotesize\ttfamily \label{class_title_state_aff631336fdc49e45d14663cb79f5ff79} 
+bool Title\+State\+::\+Handle\+Real\+Time\+Input (\begin{DoxyParamCaption}{}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_state}{State}}.
+
+\Hypertarget{class_title_state_afe2570c09d674abbd9da9e1977961ee9}\index{TitleState@{TitleState}!Update@{Update}}
+\index{Update@{Update}!TitleState@{TitleState}}
+\doxysubsubsection{\texorpdfstring{Update()}{Update()}}
+{\footnotesize\ttfamily \label{class_title_state_afe2570c09d674abbd9da9e1977961ee9} 
+bool Title\+State\+::\+Update (\begin{DoxyParamCaption}\item[{const \mbox{\hyperlink{class_game_timer}{Game\+Timer}} \&}]{gt}{}\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [override]}, {\ttfamily [virtual]}}
+
+
+
+Implements \mbox{\hyperlink{class_state}{State}}.
+
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+Solution/\+Initialize\+Direct3\+D/Title\+State.\+hpp\item 
+Solution/\+Initialize\+Direct3\+D/Title\+State.\+cpp\end{DoxyCompactItemize}

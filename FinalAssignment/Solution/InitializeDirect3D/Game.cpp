@@ -300,11 +300,8 @@ void Game::LoadTextures()
 	//gamescreen text
 	CreateTexture("GameTextTex", L"../../Textures/gameScreen.dds");
 
-	//wasd
-	CreateTexture("WASDTex", L"../../Textures/WASD.dds");
-	//back text
+	CreateTexture("InsturctionsTex", L"../../Textures/Instructions.dds");
 	CreateTexture("BackTex", L"../../Textures/backScreen.dds");
-
 }
 
 void Game::BuildRootSignature()
@@ -362,7 +359,7 @@ void Game::BuildDescriptorHeaps()
 	auto PauseTextTex = mTextures["PauseTextTex"]->Resource;
 	auto GameTextTex = mTextures["GameTextTex"]->Resource;
 	
-	auto WASDTex = mTextures["WASDTex"]->Resource;
+	auto InstructionsTex = mTextures["InsturctionsTex"]->Resource;
 	auto BackTex = mTextures["BackTex"]->Resource;
 
 	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
@@ -405,12 +402,10 @@ void Game::BuildDescriptorHeaps()
 	md3dDevice->CreateShaderResourceView(GameTextTex.Get(), &srvDesc, hDescriptor);
 
 
-	//WASD Descriptor
 	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
-	srvDesc.Format = WASDTex->GetDesc().Format;
-	md3dDevice->CreateShaderResourceView(WASDTex.Get(), &srvDesc, hDescriptor);
+	srvDesc.Format = InstructionsTex->GetDesc().Format;
+	md3dDevice->CreateShaderResourceView(InstructionsTex.Get(), &srvDesc, hDescriptor);
 
-	//Back Descriptor
 	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
 	srvDesc.Format = BackTex->GetDesc().Format;
 	md3dDevice->CreateShaderResourceView(BackTex.Get(), &srvDesc, hDescriptor);
@@ -586,7 +581,7 @@ void Game::BuildMaterials()
 	CreateMaterials("PauseText", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
 	CreateMaterials("GameText", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
 
-	CreateMaterials("WASD", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
+	CreateMaterials("Instructions", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
 	CreateMaterials("Back", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
 }
 

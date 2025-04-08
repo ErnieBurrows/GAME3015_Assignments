@@ -17,16 +17,16 @@ InstructionsState::InstructionsState(StateStack* stack, Context* context)
     backgroundSprite->setPosition(0, 0, 0);
     mSceneGraph->attachChild(std::move(backgroundSprite));
 
-    std::unique_ptr<SpriteNode> WASDSprite = std::make_unique<SpriteNode>(this);
-    WASDSprite->SetDrawName("WASD", "boxGeo", "box");
-    WASDSprite->setScale(3.5, 3.0, 3.0);
-    WASDSprite->setPosition(0, 1, 0);
-    mSceneGraph->attachChild(std::move(WASDSprite));
+    std::unique_ptr<SpriteNode> InstructionsSprite = std::make_unique<SpriteNode>(this);
+    InstructionsSprite->SetDrawName("Instructions", "boxGeo", "box");
+    InstructionsSprite->setScale(4.0, 1.0, 4.0);
+    InstructionsSprite->setPosition(0, 1, 0);
+    mSceneGraph->attachChild(std::move(InstructionsSprite));
 
     std::unique_ptr<SpriteNode> BackSprite = std::make_unique<SpriteNode>(this);
     BackSprite->SetDrawName("Back", "boxGeo", "box");
     BackSprite->setScale(3.0, 3.0, 3.0);
-    BackSprite->setPosition(2.2, 1, -2.2);
+    BackSprite->setPosition(-2.2, 1, 2.2);
     mSceneGraph->attachChild(std::move(BackSprite));
 
     mSceneGraph->build();

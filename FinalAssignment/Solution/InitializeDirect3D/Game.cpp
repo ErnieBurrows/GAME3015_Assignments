@@ -301,7 +301,6 @@ void Game::LoadTextures()
 	CreateTexture("GameTextTex", L"../../Textures/gameScreen.dds");
 
 	CreateTexture("InsturctionsTex", L"../../Textures/Instructions.dds");
-	CreateTexture("BackTex", L"../../Textures/backScreen.dds");
 }
 
 void Game::BuildRootSignature()
@@ -360,7 +359,6 @@ void Game::BuildDescriptorHeaps()
 	auto GameTextTex = mTextures["GameTextTex"]->Resource;
 	
 	auto InstructionsTex = mTextures["InsturctionsTex"]->Resource;
-	auto BackTex = mTextures["BackTex"]->Resource;
 
 	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
 
@@ -405,10 +403,6 @@ void Game::BuildDescriptorHeaps()
 	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
 	srvDesc.Format = InstructionsTex->GetDesc().Format;
 	md3dDevice->CreateShaderResourceView(InstructionsTex.Get(), &srvDesc, hDescriptor);
-
-	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
-	srvDesc.Format = BackTex->GetDesc().Format;
-	md3dDevice->CreateShaderResourceView(BackTex.Get(), &srvDesc, hDescriptor);
 }
 
 void Game::BuildShadersAndInputLayout()
@@ -582,7 +576,6 @@ void Game::BuildMaterials()
 	CreateMaterials("GameText", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
 
 	CreateMaterials("Instructions", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
-	CreateMaterials("Back", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
 }
 
 void Game::CreateMaterials(std::string Name, XMFLOAT4 DiffuseAlbedo, XMFLOAT3 FresnelR0, float Roughness)

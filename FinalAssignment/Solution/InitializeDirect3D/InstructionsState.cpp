@@ -19,15 +19,10 @@ InstructionsState::InstructionsState(StateStack* stack, Context* context)
 
     std::unique_ptr<SpriteNode> InstructionsSprite = std::make_unique<SpriteNode>(this);
     InstructionsSprite->SetDrawName("Instructions", "boxGeo", "box");
-    InstructionsSprite->setScale(4.0, 1.0, 4.0);
+    InstructionsSprite->setScale(7.0, 1.0, 5.0);
     InstructionsSprite->setPosition(0, 1, 0);
     mSceneGraph->attachChild(std::move(InstructionsSprite));
 
-    std::unique_ptr<SpriteNode> BackSprite = std::make_unique<SpriteNode>(this);
-    BackSprite->SetDrawName("Back", "boxGeo", "box");
-    BackSprite->setScale(3.0, 3.0, 3.0);
-    BackSprite->setPosition(-2.2, 1, 2.2);
-    mSceneGraph->attachChild(std::move(BackSprite));
 
     mSceneGraph->build();
     mContext->game->BuildFrameResources(mAllRitems.size());
@@ -54,7 +49,7 @@ bool InstructionsState::Update(const GameTimer& gt)
 
 bool InstructionsState::HandleEvent(WPARAM btnState)
 {
-    if (d3dUtil::IsKeyDown('Q'))
+    if (d3dUtil::IsKeyDown(VK_BACK))
     {
         RequestStackPop();
         RequestStackPush(States::Menu);

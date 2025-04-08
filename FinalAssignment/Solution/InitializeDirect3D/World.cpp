@@ -59,17 +59,16 @@ void World::buildScene()
 	mBackground->setVelocity(0, 0, -mScrollSpeed); 
 	mSceneGraph->attachChild(std::move(backgroundSprite));
 
-	// Create and set up instruct sprite
 	std::unique_ptr<SpriteNode> InstructionSprite(new SpriteNode(mState));
 	InstructionSprite->SetDrawName("GameText", "boxGeo", "box");
-	mBackground = backgroundSprite.get();
+	//mBackground = backgroundSprite.get();
 	//mBackground->setPosition(mWorldBounds.left, mWorldBounds.top);
 	InstructionSprite->setPosition(0, 1.0, 2.4);
 	InstructionSprite->setScale(2.0, 0, 2.0);
-	InstructionSprite->setVelocity(0, 0, 0); //background scrolling enabled
+	InstructionSprite->setVelocity(0, 0, 0);
 	mSceneGraph->attachChild(std::move(InstructionSprite));
 
-	// Build the scene graph
+
 	mSceneGraph->build();
 }
 
@@ -88,9 +87,7 @@ void World::PlayerPosition()
 	mPlayerAircraft->setPosition(position.x, position.y, position.z);
 }
 
-/**
- * @brief Normalizes player velocity for diagonal movement
- */
+
 void World::PlayerVelocity()
 {
 	XMFLOAT3 velocity = mPlayerAircraft->getVelocity();

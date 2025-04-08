@@ -13,11 +13,11 @@ GameState::GameState(StateStack* stack, Context* context)
 
 	mWorld.buildScene();
 
-	std::unique_ptr<SpriteNode> PauseSprite = std::make_unique<SpriteNode>(this);
-	PauseSprite->SetDrawName("PauseText", "boxGeo", "box");
-	PauseSprite->setScale(3, 1, 3);
-	PauseSprite->setPosition(0, 1, 0);
-	mPauseStateSceneGraph->attachChild(std::move(PauseSprite));
+	std::unique_ptr<SpriteNode> PauseScreenSprite = std::make_unique<SpriteNode>(this);
+	PauseScreenSprite->SetDrawName("PauseScreen", "boxGeo", "box");
+	PauseScreenSprite->setScale(3, 1, 3);
+	PauseScreenSprite->setPosition(0, 1, 0);
+	mPauseStateSceneGraph->attachChild(std::move(PauseScreenSprite));
 	
 	mPauseStateSceneGraph->build();
 
@@ -41,7 +41,7 @@ bool GameState::Update(const GameTimer& gt)
 
 bool GameState::HandleEvent(WPARAM btnState)
 {
-	if (d3dUtil::IsKeyDown('P'))
+	if (d3dUtil::IsKeyDown(VK_ESCAPE))
 	{
 		RequestStackPush(States::Pause);
 	}

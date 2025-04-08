@@ -420,7 +420,7 @@ LRESULT D3DApp::MsgProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 		OnKeyDown(wParam);
 		return 0;
     case WM_KEYUP:
-        if(wParam == VK_ESCAPE)
+        if(wParam == VK_F1)
         {
             PostQuitMessage(0);
         }

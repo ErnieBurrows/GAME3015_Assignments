@@ -13,25 +13,38 @@ World::World(State* state)
 {
 }
 
-#pragma region Step 14
 CommandQueue& World::getCommandQueue()
 {
 	return mCommandQueue;
 }
-#pragma endregion
+
 
 void World::update(const GameTimer& gt)
 {
-#pragma region Step 15
+
 	mPlayerAircraft->setVelocity(0.0f, 0.0f, 0.0f);
 	while (!mCommandQueue.isEmpty())
 		mSceneGraph->onCommand(mCommandQueue.pop(), gt);
 
 	PlayerPosition();
 	mSceneGraph->update(gt);
-	PlayerVelocity();
 
-#pragma endregion
+	float backgroundLength = 7.0f; // Match the Z-length of your background scale
+
+	auto wrapBackground = [backgroundLength](SpriteNode* bg, SpriteNode* otherBg)
+		{
+			XMFLOAT3 pos = bg->getWorldPosition();
+			if (pos.z <= -backgroundLength)
+			{
+				float newZ = otherBg->getWorldPosition().z + backgroundLength;
+				bg->setPosition(pos.x, pos.y, newZ);
+			}
+		};
+
+	wrapBackground(mBackground, mBackground2);
+	wrapBackground(mBackground2, mBackground);
+
+	PlayerVelocity();
 
 }
 
@@ -51,18 +64,24 @@ void World::buildScene()
 	mPlayerAircraft->setVelocity(mScrollSpeed, 0.0, 0.0);
 	mSceneGraph->attachChild(std::move(player));
 
-	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(mState));
-	backgroundSprite->SetDrawName("Desert", "boxGeo", "box");
-	mBackground = backgroundSprite.get();
-	mBackground->setPosition(0, 0, 0.0);
-	mBackground->setScale(10.0, 1.0, 7.0);
-	mBackground->setVelocity(0, 0, -mScrollSpeed); 
-	mSceneGraph->attachChild(std::move(backgroundSprite));
+	std::unique_ptr<SpriteNode> backgroundSprite1(new SpriteNode(mState));
+	backgroundSprite1->SetDrawName("Desert", "boxGeo", "box");
+	backgroundSprite1->setPosition(0, 0, 0.0f);
+	backgroundSprite1->setScale(10.0f, 1.0f, 7.0f);
+	backgroundSprite1->setVelocity(0, 0, -mScrollSpeed);
+	mBackground = backgroundSprite1.get();
+	mSceneGraph->attachChild(std::move(backgroundSprite1));
+
+	std::unique_ptr<SpriteNode> backgroundSprite2(new SpriteNode(mState));
+	backgroundSprite2->SetDrawName("Desert", "boxGeo", "box");
+	backgroundSprite2->setPosition(0, 0, 7.0f); 
+	backgroundSprite2->setScale(10.0f, 1.0f, 7.0f);
+	backgroundSprite2->setVelocity(0, 0, -mScrollSpeed);
+	mBackground2 = backgroundSprite2.get();
+	mSceneGraph->attachChild(std::move(backgroundSprite2));
 
 	std::unique_ptr<SpriteNode> PausePromptSprite(new SpriteNode(mState));
 	PausePromptSprite->SetDrawName("PausePrompt", "boxGeo", "box");
-	//mBackground = backgroundSprite.get();
-	//mBackground->setPosition(mWorldBounds.left, mWorldBounds.top);
 	PausePromptSprite->setPosition(-1.75, 1.0, 1.75);
 	PausePromptSprite->setScale(2.0, 0, 2.0);
 	PausePromptSprite->setVelocity(0, 0, 0);

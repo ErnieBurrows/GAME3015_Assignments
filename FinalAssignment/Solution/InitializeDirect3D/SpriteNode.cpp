@@ -1,20 +1,11 @@
 #include "SpriteNode.h"
 #include "Game.hpp"
 
-/**
- * @brief Constructor for SpriteNode.
- * @param game Pointer to the Game object.
- */
 SpriteNode::SpriteNode(State* state) : Entity(state), mIsVisible(true)
 {
 }
 
-/**
- * @brief Draws the current sprite node.a
- *
- * This method handles the rendering of the sprite node, including setting up
- * the necessary DirectX 12 commands and resources.
- */
+
 void SpriteNode::drawCurrent() const
 {
 	if (!mIsVisible) return;
@@ -50,12 +41,7 @@ void SpriteNode::drawCurrent() const
 	}
 }
 
-/**
- * @brief Builds the current sprite node.
- *
- * This method sets up the RenderItem for the sprite node, including its
- * world transform, material, geometry, and other rendering properties.
- */
+
 void SpriteNode::buildCurrent()
 {
 	Game* game = mState->GetContext()->game;
@@ -89,5 +75,5 @@ std::string SpriteNode::GetDrawName()
 
 void SpriteNode::SetVisible(bool visible)
 {
-	mIsVisible = visible;  // Set the visibility flag
+	mIsVisible = visible; 
 }

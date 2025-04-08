@@ -202,5 +202,6 @@ private:
 
 	std::vector<Ptr>		mChildren; ///< Vector of child nodes
 	SceneNode*				mParent; ///< Pointer to the parent node
+
 };
 

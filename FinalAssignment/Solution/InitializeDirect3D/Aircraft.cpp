@@ -8,13 +8,13 @@ Aircraft::Aircraft(Type type, State* state) : Entity(state)
 	switch (type)
 	{
 	case (Eagle):
-		mSprite = "Eagle";
+		mSprite = "PlayerPlane";
 		break;
 	case (Raptor):
-		mSprite = "Raptor";
+		mSprite = "PlayerPlane";
 		break;
 	default:
-		mSprite = "Eagle";
+		mSprite = "PlayerPlane";
 		break;
 	}
 }

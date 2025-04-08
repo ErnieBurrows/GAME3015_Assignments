@@ -6,14 +6,6 @@
 InstructionsState::InstructionsState(StateStack* stack, Context* context)
     : State(stack, context)
 {
-    if (!mSceneGraph)
-    {
-        OutputDebugStringA("Error: mSceneGraph is nullptr!\n");
-    }
-    else
-    {
-        OutputDebugStringA("mSceneGraph initialized.\n");
-    }
 
     // Reset rendering resources
     mAllRitems.clear();
@@ -22,7 +14,7 @@ InstructionsState::InstructionsState(StateStack* stack, Context* context)
 
     // Background Galaxy Sprite
     std::unique_ptr<SpriteNode> backgroundSprite = std::make_unique<SpriteNode>(this);
-    backgroundSprite->SetDrawName("Galaxy", "boxGeo", "box");
+    backgroundSprite->SetDrawName("Desert", "boxGeo", "box");
     backgroundSprite->setScale(10.0, 1.0, 7.0);
     backgroundSprite->setPosition(0, 0, 0);
     mSceneGraph->attachChild(std::move(backgroundSprite));
@@ -53,8 +45,6 @@ InstructionsState::~InstructionsState()
 
 void InstructionsState::Draw()
 {
-    OutputDebugStringA("Drawing Instructions...\n");
-
     mSceneGraph->draw();
 }
 

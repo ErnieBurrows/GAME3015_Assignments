@@ -8,7 +8,6 @@ public:
 
     InstructionsState(StateStack* stack, Context* context);
 
-
     virtual ~InstructionsState();
     virtual void Draw() override;
     virtual bool Update(const GameTimer& gt) override;

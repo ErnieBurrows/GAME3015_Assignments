@@ -24,6 +24,7 @@
     <ProjectGuid>{83d3c7a0-2c62-4d85-a13c-38689288e782}</ProjectGuid>
     <RootNamespace>InitializeDirect3D</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <ProjectName>FinalProject</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -151,7 +152,6 @@
     <ClCompile Include="SpriteNode.cpp" />
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateStack.cpp" />
-    <ClCompile Include="Text.cpp" />
     <ClCompile Include="tiny_obj_loader.cc" />
     <ClCompile Include="TitleState.cpp" />
     <ClCompile Include="World.cpp" />
@@ -182,7 +182,6 @@
     <ClInclude Include="SpriteNode.h" />
     <ClInclude Include="State.hpp" />
     <ClInclude Include="StateStack.hpp" />
-    <ClInclude Include="Text.h" />
     <ClInclude Include="tiny_obj_loader.h" />
     <ClInclude Include="TitleState.hpp" />
     <ClInclude Include="World.hpp" />

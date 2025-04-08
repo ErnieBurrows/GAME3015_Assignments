@@ -81,9 +81,6 @@
     <ClCompile Include="State.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Text.cpp">
-      <Filter>GameEngine</Filter>
-    </ClCompile>
     <ClCompile Include="TitleState.cpp">
       <Filter>GameEngine\StateSystem\States</Filter>
     </ClCompile>
@@ -165,9 +162,6 @@
       <Filter>GameEngine</Filter>
     </ClInclude>
     <ClInclude Include="Player.hpp">
-      <Filter>GameEngine</Filter>
-    </ClInclude>
-    <ClInclude Include="Text.h">
       <Filter>GameEngine</Filter>
     </ClInclude>
     <ClInclude Include="TitleState.hpp">

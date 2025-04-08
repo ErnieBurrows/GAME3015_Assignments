@@ -1,16 +1,13 @@
 #define NOMINMAX
 #include "World.hpp"
 
-/**
- * @brief Constructor for World.
- * @param game Pointer to the Game object.
- */
+
 World::World(State* state)
 	: mSceneGraph(new SceneNode(state))
 	, mState(state)
 	, mPlayerAircraft(nullptr)
 	, mBackground(nullptr)
-	, mWorldBounds(-3.25f, 3.25f, -1.5f, 2.5f) //Left, Right, Down, Up - this can be changed depending on where you want the player to be
+	, mWorldBounds(-3.25f, 3.25f, -1.5f, 2.5f) 
 	, mSpawnPosition(0.f, 0.f)
 	, mScrollSpeed(1.0f)
 {
@@ -23,13 +20,6 @@ CommandQueue& World::getCommandQueue()
 }
 #pragma endregion
 
-/**
- * @brief Updates the game world.
- *
- * This method updates the scene graph and handles player aircraft movement within world bounds.
- *
- * @param gt const reference to GameTimer object.
- */
 void World::update(const GameTimer& gt)
 {
 #pragma region Step 15
@@ -45,25 +35,14 @@ void World::update(const GameTimer& gt)
 
 }
 
-/**
- * @brief Draws the game world.
- *
- * This method calls the draw method of the scene graph to render all game objects.
- */
 void World::draw()
 {
 	mSceneGraph->draw();
 }
 
-/**
- * @brief Builds the scene graph and initializes game objects.
- *
- * This method creates and positions the player aircraft, enemy aircraft, and background sprite.
- * It also sets up the initial velocities and rotations of these objects.
- */
+
 void World::buildScene()
 {
-	// Create and set up player aircraft
 	std::unique_ptr<Aircraft> player(new Aircraft(Aircraft::Eagle, mState));
 	mPlayerAircraft = player.get();
 	mPlayerAircraft->setPosition(0, 0.1, 0.0);
@@ -72,32 +51,12 @@ void World::buildScene()
 	mPlayerAircraft->setVelocity(mScrollSpeed, 0.0, 0.0);
 	mSceneGraph->attachChild(std::move(player));
 
-	//// Create and set up first enemy aircraft
-	//std::unique_ptr<Aircraft> enemy1(new Aircraft(Aircraft::Raptor, mState));
-	//auto raptor = enemy1.get();
-	//raptor->setPosition(0.5, 0, -1);
-	//raptor->setScale(0.0002, 0.0002, 0.0002);
-	//raptor->setWorldRotation(XMConvertToRadians(270), XMConvertToRadians(270), 0.0f);
-	//mPlayerAircraft->attachChild(std::move(enemy1));
-
-	//// Create and set up second enemy aircraft
-	//std::unique_ptr<Aircraft> enemy2(new Aircraft(Aircraft::Raptor, mState));
-	//auto raptor2 = enemy2.get();
-	////raptor2->setPosition(-0.5, 0, 1);
-	//raptor2->setPosition(-0.5, 0, -1);
-	//raptor2->setScale(0.0002, 0.0002, 0.0002);
-	////raptor2->setWorldRotation(0, XM_PI, 0);
-	//raptor2->setWorldRotation(XMConvertToRadians(270), XMConvertToRadians(270), 0.0f);
-	//mPlayerAircraft->attachChild(std::move(enemy2));
-
-	// Create and set up background sprite
 	std::unique_ptr<SpriteNode> backgroundSprite(new SpriteNode(mState));
-	backgroundSprite->SetDrawName("Galaxy", "boxGeo", "box");
+	backgroundSprite->SetDrawName("Desert", "boxGeo", "box");
 	mBackground = backgroundSprite.get();
-	//mBackground->setPosition(mWorldBounds.left, mWorldBounds.top);
 	mBackground->setPosition(0, 0, 0.0);
 	mBackground->setScale(10.0, 1.0, 200.0);
-	mBackground->setVelocity(0, 0, -mScrollSpeed); //background scrolling enabled
+	mBackground->setVelocity(0, 0, -mScrollSpeed); 
 	mSceneGraph->attachChild(std::move(backgroundSprite));
 
 	// Create and set up instruct sprite

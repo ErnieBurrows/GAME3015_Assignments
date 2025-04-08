@@ -12,55 +12,32 @@
 
 const int gNumFrameResources = 3;
 
-/**
- * @brief Constructor for the Game class.
- * @param hInstance The HINSTANCE of the application.
- */
 Game::Game(HINSTANCE hInstance)
 	: D3DApp(hInstance)
-	//, mWorld(this) // Pass 'this' pointer to the World constructor
 	, mPlayer()
 	, mStateStack(State::Context(this, &mPlayer))
 {
 }
 
-/**
- * @brief Destructor for the Game class.
- *
- * Flushes the command queue to ensure all GPU commands are completed
- * before releasing resources.
- */
 Game::~Game()
 {
 	if (md3dDevice != nullptr)
 		FlushCommandQueue();
 }
 
-/**
- * @brief Initializes the game.
- *
- * This method initializes D3D, creates resources, loads textures,
- * builds the root signature, descriptor heaps, shaders, geometry,
- * materials, render items, frame resources, and pipeline state objects.
- *
- * @return true if initialization was successful, false otherwise.
- */
+
 bool Game::Initialize()
 {
 	if (!D3DApp::Initialize())
 		return false;
 
-	// Set initial camera position and orientation
 	mCamera.SetPosition(0, 8, 0);
 	mCamera.Pitch(3.14 / 2);
 
-	// Reset the command list to prep for initialization commands.
 	ThrowIfFailed(mCommandList->Reset(mDirectCmdListAlloc.Get(), nullptr));
 
-	// Get the increment size of a descriptor in this heap type
 	mCbvSrvDescriptorSize = md3dDevice->GetDescriptorHandleIncrementSize(D3D12_DESCRIPTOR_HEAP_TYPE_CBV_SRV_UAV);
 
-	// Build the core game resources
 	LoadTextures();
 	BuildRootSignature();
 	BuildDescriptorHeaps();
@@ -73,49 +50,24 @@ bool Game::Initialize()
 
 	BuildPSOs();
 
-	// Execute the initialization commands.
 	ThrowIfFailed(mCommandList->Close());
 	ID3D12CommandList* cmdsLists[] = { mCommandList.Get() };
 	mCommandQueue->ExecuteCommandLists(_countof(cmdsLists), cmdsLists);
 
-	// Wait until initialization is complete.
 	FlushCommandQueue();
 
 	return true;
 }
 
-/**
- * @brief Handles window resizing.
- *
- * Updates the aspect ratio and recomputes the projection matrix
- * based on the new window dimensions.
- */
 void Game::OnResize()
 {
 	D3DApp::OnResize();
 
-	// The window resized, so update the aspect ratio and recompute the projection matrix.
-	//XMMATRIX P = XMMatrixPerspectiveFovLH(0.25f * MathHelper::Pi, AspectRatio(), 1.0f, 1000.0f);
-	//XMStoreFloat4x4(&mProj, P);
-
-	// Update the camera projection matrix
 	mCamera.SetLens(0.25f * MathHelper::Pi, AspectRatio(), 1.0f, 1000.0f);
 }
 
-/**
- * @brief Updates the game state.
- *
- * This method processes input, updates the game world, updates the camera,
- * cycles through frame resources, waits for the GPU to complete previous
- * commands, animates materials, and updates constant buffers.
- *
- * @param gt A const reference to a GameTimer object.
- */
 void Game::Update(const GameTimer& gt)
 {
-	// Handle input and game world updates
-	//ProcessInput();
-	//mWorld.update(gt);
 	mStateStack.Update(gt);
 	mStateStack.handleRealTimeInput();
 
@@ -127,11 +79,9 @@ void Game::Update(const GameTimer& gt)
 
 	UpdateCamera(gt);
 
-	// Cycle through the circular frame resource array.
 	mCurrFrameResourceIndex = (mCurrFrameResourceIndex + 1) % gNumFrameResources;
 	mCurrFrameResource = mFrameResources[mCurrFrameResourceIndex].get();
 
-	// Wait for GPU completion
 	if (mCurrFrameResource->Fence != 0 && mFence->GetCompletedValue() < mCurrFrameResource->Fence)
 	{
 		HANDLE eventHandle = CreateEventEx(nullptr, nullptr, false, EVENT_ALL_ACCESS);
@@ -140,95 +90,59 @@ void Game::Update(const GameTimer& gt)
 		CloseHandle(eventHandle);
 	}
 
-	// Update scene-dependent constant buffers
 	AnimateMaterials(gt);
 	UpdateObjectCBs(gt);
 	UpdateMaterialCBs(gt);
 	UpdateMainPassCB(gt);
 }
 
-/**
- * @brief Draws the game scene.
- *
- * This method draws the game scene by resetting the command list,
- * setting the viewport and scissor rectangles, transitioning the
- * back buffer to the render target state, clearing the back buffer
- * and depth buffer, setting render targets, setting descriptor heaps,
- * setting the root signature, setting the pass constant buffer,
- * drawing the game world, drawing render items, transitioning the
- * back buffer to the present state, executing the command list,
- * presenting the back buffer, and advancing the fence value.
- *
- * @param gt A const reference to a GameTimer object.
- */
 void Game::Draw(const GameTimer& gt)
 {
 	auto cmdListAlloc = mCurrFrameResource->CmdListAlloc;
 
-	// Reuse the memory associated with command recording.
-	// We can only reset when the associated command lists have finished execution on the GPU.
 	ThrowIfFailed(cmdListAlloc->Reset());
 
-	// Reuse the command list
-	// A command list can be reset after it has been added to the command queue via ExecuteCommandList.
-	// Reusing the command list reuses memory.
 	ThrowIfFailed(mCommandList->Reset(cmdListAlloc.Get(), mOpaquePSO.Get()));
 
-	// Set the viewport and scissor rectangle
 	mCommandList->RSSetViewports(1, &mScreenViewport);
 	mCommandList->RSSetScissorRects(1, &mScissorRect);
 
-	// Indicate a state transition on the resource usage.
 	auto transition1 = CD3DX12_RESOURCE_BARRIER::Transition(CurrentBackBuffer(),
 		D3D12_RESOURCE_STATE_PRESENT, D3D12_RESOURCE_STATE_RENDER_TARGET);
 	mCommandList->ResourceBarrier(1, &transition1);
 
-	// Clear the back buffer and depth buffer.
 	mCommandList->ClearRenderTargetView(CurrentBackBufferView(), Colors::LightSteelBlue, 0, nullptr);
 	mCommandList->ClearDepthStencilView(DepthStencilView(), D3D12_CLEAR_FLAG_DEPTH | D3D12_CLEAR_FLAG_STENCIL, 1.0f, 0, 0, nullptr);
 
-	// Specify render targets
 	auto dsv = DepthStencilView();
 
-	// Specify the buffers we are going to render to.
 	auto buffer = CurrentBackBufferView();
 	mCommandList->OMSetRenderTargets(1, &buffer, true, &dsv);
 
-	// Set descriptor heaps
 	ID3D12DescriptorHeap* descriptorHeaps[] = { mSrvDescriptorHeap.Get() };
 	mCommandList->SetDescriptorHeaps(_countof(descriptorHeaps), descriptorHeaps);
 
-	// Set root signature
 	mCommandList->SetGraphicsRootSignature(mRootSignature.Get());
 
-	// Set pass constant buffer
 	auto passCB = mCurrFrameResource->PassCB->Resource();
 	mCommandList->SetGraphicsRootConstantBufferView(2, passCB->GetGPUVirtualAddress());
 
 	mStateStack.Draw();
 
-	// Transition the back buffer to the present state
 	auto transition2 = CD3DX12_RESOURCE_BARRIER::Transition(CurrentBackBuffer(),
 		D3D12_RESOURCE_STATE_RENDER_TARGET, D3D12_RESOURCE_STATE_PRESENT);
 	mCommandList->ResourceBarrier(1, &transition2);
 
-	// Done recording commands.
 	ThrowIfFailed(mCommandList->Close());
 
-	// Add the command list to the queue for execution.
 	ID3D12CommandList* cmdsLists[] = { mCommandList.Get() };
 	mCommandQueue->ExecuteCommandLists(_countof(cmdsLists), cmdsLists);
 
-	// Present the back buffer
 	ThrowIfFailed(mSwapChain->Present(0, 0));
 	mCurrBackBuffer = (mCurrBackBuffer + 1) % SwapChainBufferCount;
 
-	// Advance the fence value to mark commands up to this fence point.
 	mCurrFrameResource->Fence = ++mCurrentFence;
 
-	// Add an instruction to the command queue to set a new fence point. 
-	// Because we are on the GPU timeline, the new fence point won't be 
-	// set until the GPU finishes processing all the commands prior to this Signal().
 	mCommandQueue->Signal(mFence.Get(), mCurrentFence);
 
 }
@@ -250,14 +164,12 @@ void Game::OnMouseMove(WPARAM btnState, int x, int y)
 {
 	if ((btnState & MK_LBUTTON) != 0)
 	{
-		// Make each pixel correspond to a quarter of a degree.
 		float dx = XMConvertToRadians(0.25f * static_cast<float>(x - mLastMousePos.x));
 		float dy = XMConvertToRadians(0.25f * static_cast<float>(y - mLastMousePos.y));
 
 		mCamera.Pitch(dy);
 		mCamera.RotateY(dx);
 	}
-	//to do: add another mouse input?
 
 	mLastMousePos.x = x;
 	mLastMousePos.y = y;
@@ -268,37 +180,16 @@ void Game::OnKeyDown(WPARAM btnState)
 	mStateStack.HandleEvent(btnState);
 }
 
-/**
- * @brief Updates the camera.
- *
- * Updates the view matrix of the camera.
- *
- */
 void Game::UpdateCamera(const GameTimer& gt)
 {
 	mCamera.UpdateViewMatrix();
 }
 
-/**
- * @brief Animates the materials.
- *
- * Currently, this method is empty.
- *
- * @param gt A const reference to a GameTimer object.
- */
 void Game::AnimateMaterials(const GameTimer& gt)
 {
 	//No Implementation as of right now.
 }
 
-/**
- * @brief Updates the object constant buffers.
- *
- * Updates the object constant buffers for each render item if the
- * constants have changed.
- *
- * @param gt A const reference to a GameTimer object.
- */
 void Game::UpdateObjectCBs(const GameTimer& gt)
 {
 	State* currentState = mStateStack.GetCurrentState();
@@ -306,7 +197,6 @@ void Game::UpdateObjectCBs(const GameTimer& gt)
 	auto currObjectCB = mCurrFrameResource->ObjectCB.get();
 	for (auto& e : currentState->getRenderItems())
 	{
-		// Only update the cbuffer data if the constants have changed.  
 		if (e->NumFramesDirty > 0)
 		{
 			XMMATRIX world = XMLoadFloat4x4(&e->World);
@@ -318,27 +208,16 @@ void Game::UpdateObjectCBs(const GameTimer& gt)
 
 			currObjectCB->CopyData(e->ObjCBIndex, objConstants);
 
-			// Next FrameResource need to be updated too.
 			e->NumFramesDirty--;
 		}
 	}
 }
 
-/**
- * @brief Updates the material constant buffers.
- *
- * Updates the material constant buffers for each material if the
- * constants have changed.
- *
- * @param gt A const reference to a GameTimer object.
- */
 void Game::UpdateMaterialCBs(const GameTimer& gt)
 {
 	auto currMaterialCB = mCurrFrameResource->MaterialCB.get();
 	for (auto& e : mMaterials)
 	{
-		// Only update the cbuffer data if the constants have changed.  If the cbuffer
-		// data changes, it needs to be updated for each FrameResource.
 		Material* mat = e.second.get();
 		if (mat->NumFramesDirty > 0)
 		{
@@ -352,30 +231,18 @@ void Game::UpdateMaterialCBs(const GameTimer& gt)
 
 			currMaterialCB->CopyData(mat->MatCBIndex, matConstants);
 
-			// Next FrameResource need to be updated too.
 			mat->NumFramesDirty--;
 		}
 	}
 }
 
-/**
- * @brief Updates the main pass constant buffer.
- *
- * Updates the main pass constant buffer with view, projection, and
- * lighting information.
- *
- * @param gt A const reference to a GameTimer object.
- */
 void Game::UpdateMainPassCB(const GameTimer& gt)
 {
-	// Get the view and projection matrices from the camera
 	XMMATRIX view = mCamera.GetView();
 	XMMATRIX proj = mCamera.GetProj();
 
-	// Calculate the view-projection matrix
 	XMMATRIX viewProj = XMMatrixMultiply(view, proj);
 
-	// Calculate the inverse view, projection, and view-projection matrices
 	auto detView = XMMatrixDeterminant(view);
 	auto detProj = XMMatrixDeterminant(proj);
 	auto detViewProj = XMMatrixDeterminant(viewProj);
@@ -384,7 +251,6 @@ void Game::UpdateMainPassCB(const GameTimer& gt)
 	XMMATRIX invProj = XMMatrixInverse(&detProj, proj);
 	XMMATRIX invViewProj = XMMatrixInverse(&detViewProj, viewProj);
 
-	// Store the matrices in the main pass constant buffer
 	XMStoreFloat4x4(&mMainPassCB.View, XMMatrixTranspose(view));
 	XMStoreFloat4x4(&mMainPassCB.InvView, XMMatrixTranspose(invView));
 	XMStoreFloat4x4(&mMainPassCB.Proj, XMMatrixTranspose(proj));
@@ -392,7 +258,6 @@ void Game::UpdateMainPassCB(const GameTimer& gt)
 	XMStoreFloat4x4(&mMainPassCB.ViewProj, XMMatrixTranspose(viewProj));
 	XMStoreFloat4x4(&mMainPassCB.InvViewProj, XMMatrixTranspose(invViewProj));
 
-	// Set other pass constants
 	mMainPassCB.EyePosW = mCamera.GetPosition3f();
 	mMainPassCB.RenderTargetSize = XMFLOAT2((float)mClientWidth, (float)mClientHeight);
 	mMainPassCB.InvRenderTargetSize = XMFLOAT2(1.0f / mClientWidth, 1.0f / mClientHeight);
@@ -408,16 +273,10 @@ void Game::UpdateMainPassCB(const GameTimer& gt)
 	mMainPassCB.Lights[2].Direction = { 0.0f, -0.707f, -0.707f };
 	mMainPassCB.Lights[2].Strength = { 0.15f, 0.15f, 0.15f };
 
-	// Copy the pass constant buffer data
 	auto currPassCB = mCurrFrameResource->PassCB.get();
 	currPassCB->CopyData(0, mMainPassCB);
 }
 
-/**
- * @brief Loads the textures.
- *
- * Loads texture resources from files and stores them in the texture map.
- */
 void Game::CreateTexture(std::string Name, std::wstring FileName)
 {
 	auto texture = std::make_unique<Texture>();
@@ -429,23 +288,14 @@ void Game::CreateTexture(std::string Name, std::wstring FileName)
 	mTextures[texture->Name] = std::move(texture);
 }
 
-/**
- * @brief Loads all textures used in the game.
- *
- * This method creates texture resources for various game assets.
- */
 void Game::LoadTextures()
 {
-	//Eagle
-	CreateTexture("EagleTex", L"../../Textures/Airplane_Metal.dds");
-	//Raptor
-	CreateTexture("RaptorTex", L"../../Textures/Raptor.dds");
-	//Desert
+	CreateTexture("PlaneTex", L"../../Textures/Airplane_Metal.dds");
 	CreateTexture("DesertTex", L"../../Textures/Desert.dds");
-	//galaxy
-	CreateTexture("GalaxyTex", L"../../Textures/galaxy.dds");
+
 	//title text
 	CreateTexture("TitleTex", L"../../Textures/pressToStart.dds");
+
 	//mainmenu text
 	CreateTexture("MenuTextTex", L"../../Textures/mmScreen2.dds");
 	//pauseScreen text
@@ -514,10 +364,9 @@ void Game::BuildDescriptorHeaps()
 
 	CD3DX12_CPU_DESCRIPTOR_HANDLE hDescriptor(mSrvDescriptorHeap->GetCPUDescriptorHandleForHeapStart());
 
-	auto EagleTex = mTextures["EagleTex"]->Resource;
-	auto RaptorTex = mTextures["RaptorTex"]->Resource;
+	auto PlaneTex = mTextures["PlaneTex"]->Resource;
 	auto DesertTex = mTextures["DesertTex"]->Resource;
-	auto GalaxyTex = mTextures["GalaxyTex"]->Resource;
+
 	auto TitleTex = mTextures["TitleTex"]->Resource;
 	auto MMTextTex = mTextures["MenuTextTex"]->Resource;
 	auto PauseTextTex = mTextures["PauseTextTex"]->Resource;
@@ -533,30 +382,20 @@ void Game::BuildDescriptorHeaps()
 
 	srvDesc.Shader4ComponentMapping = D3D12_DEFAULT_SHADER_4_COMPONENT_MAPPING;
 
-	srvDesc.Format = EagleTex->GetDesc().Format;
+	srvDesc.Format = PlaneTex->GetDesc().Format;
 
 	srvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE2D;
 	srvDesc.Texture2D.MostDetailedMip = 0;
 
-	srvDesc.Texture2D.MipLevels = EagleTex->GetDesc().MipLevels;
+	srvDesc.Texture2D.MipLevels = PlaneTex->GetDesc().MipLevels;
 
 	srvDesc.Texture2D.ResourceMinLODClamp = 0.0f;
-	md3dDevice->CreateShaderResourceView(EagleTex.Get(), &srvDesc, hDescriptor);
+	md3dDevice->CreateShaderResourceView(PlaneTex.Get(), &srvDesc, hDescriptor);
 
-	//Raptor Descriptor
-	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
-	srvDesc.Format = RaptorTex->GetDesc().Format;
-	md3dDevice->CreateShaderResourceView(RaptorTex.Get(), &srvDesc, hDescriptor);
 
-	//Desert Descriptor
 	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
 	srvDesc.Format = DesertTex->GetDesc().Format;
 	md3dDevice->CreateShaderResourceView(DesertTex.Get(), &srvDesc, hDescriptor);
-
-	//Galaxy Descriptor
-	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
-	srvDesc.Format = GalaxyTex->GetDesc().Format;
-	md3dDevice->CreateShaderResourceView(GalaxyTex.Get(), &srvDesc, hDescriptor);
 
 	//Title Descriptor
 	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
@@ -619,12 +458,9 @@ void Game::BuildShadersAndInputLayout()
 	{
 		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
 		{ "NORMAL", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 12, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
-		//step3
-		//The texture coordinates determine what part of the texture gets mapped on the triangles.
 		{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 24, D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA, 0 },
 	};
 }
-
 
 void Game::BuildShapeGeometry()
 {
@@ -679,11 +515,6 @@ void Game::BuildShapeGeometry()
 
 }
 
-/**
- * @brief Builds the hill geometry.
- *
- * Creates the vertex and index buffers for the hills used in the scene.
- */
 void Game::BuildHillGeometry()
 {
 	GeometryGenerator geoGen;
@@ -703,10 +534,6 @@ void Game::BuildHillGeometry()
 		vertices[i].Pos = p;
 		vertices[i].Pos.y = GetHillsHeight(p.x, p.z);
 		vertices[i].Normal = GetHillsNormal(p.x, p.z);
-		//vertices[i].TexC = grid.Vertices[i].TexC;
-
-		//vertices[k].Pos = grid.Vertices[i].Position;
-		//vertices[k].Normal = grid.Vertices[i].Normal;
 		vertices[i].TexC = grid.Vertices[i].TexC;
 	}
 
@@ -738,21 +565,12 @@ void Game::BuildHillGeometry()
 	geo->DrawArgs["grid"] = gridSubmesh;
 
 	mGeometries[geo->Name] = std::move(geo);
-
 }
 
-/**
- * @brief Builds the pipeline state objects (PSOs).
- *
- * Creates the PSOs for different rendering techniques.
- */
 void Game::BuildPSOs()
 {
 	D3D12_GRAPHICS_PIPELINE_STATE_DESC opaquePsoDesc;
 
-	//
-	// PSO for opaque objects.
-	//
 	ZeroMemory(&opaquePsoDesc, sizeof(D3D12_GRAPHICS_PIPELINE_STATE_DESC));
 	opaquePsoDesc.InputLayout = { mInputLayout.data(), (UINT)mInputLayout.size() };
 	opaquePsoDesc.pRootSignature = mRootSignature.Get();
@@ -779,11 +597,6 @@ void Game::BuildPSOs()
 	ThrowIfFailed(md3dDevice->CreateGraphicsPipelineState(&opaquePsoDesc, IID_PPV_ARGS(&mOpaquePSO)));
 }
 
-/**
- * @brief Builds the frame resources.
- *
- * Creates the frame resources used for double buffering.
- */
 void Game::BuildFrameResources(int renderItemCount)
 {
 	for (int i = 0; i < gNumFrameResources; ++i)
@@ -793,22 +606,13 @@ void Game::BuildFrameResources(int renderItemCount)
 	}
 }
 
-/**
- * @brief Builds the materials.
- *
- * Creates the materials used in the scene.
- */
-//step13
 void Game::BuildMaterials()
 {
-	//mWorld.buildMaterials(mMaterials);
-	OutputDebugStringA("Building materials...\n");
 	mCurrentMaterialCBIndex = 0;
 	mCurrentDiffuseSrvHeapIndex = 0;
-	CreateMaterials("Eagle", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
-	CreateMaterials("Raptor", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
+	CreateMaterials("PlayerPlane", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
 	CreateMaterials("Desert", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
-	CreateMaterials("Galaxy", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
+
 	CreateMaterials("Title", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
 	CreateMaterials("MMText", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
 	CreateMaterials("PauseText", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
@@ -821,16 +625,6 @@ void Game::BuildMaterials()
 	CreateMaterials("Back", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
 }
 
-/**
- * @brief Creates a material.
- *
- * Creates a material with the specified properties and adds it to the materials map.
- *
- * @param Name The name of the material.
- * @param DiffuseAlbedo The diffuse albedo color of the material.
- * @param FresnelR0 The Fresnel reflectance at normal incidence.
- * @param Roughness The roughness of the material.
- */
 void Game::CreateMaterials(std::string Name, XMFLOAT4 DiffuseAlbedo, XMFLOAT3 FresnelR0, float Roughness)
 {
 	auto material = std::make_unique<Material>();
@@ -844,11 +638,6 @@ void Game::CreateMaterials(std::string Name, XMFLOAT4 DiffuseAlbedo, XMFLOAT3 Fr
 	mMaterials[Name] = std::move(material);
 }
 
-/**
- * @brief Registers the game states.
- *
- * Registers the game states with the state stack.
- */
 void Game::RegisterStates()
 {
 	mStateStack.registerState<TitleState>(States::Title);
@@ -858,12 +647,6 @@ void Game::RegisterStates()
 	mStateStack.registerState<PauseState>(States::Pause);
 }
 
-/**
- * @brief Waits for the GPU to finish processing.
- *
- * This method blocks the CPU until the GPU has completed all commands
- * up to the specified fence point.
- */
 void Game::WaitForGPU()
 {
 	// Schedule a Signal command in the queue
@@ -882,11 +665,6 @@ void Game::WaitForGPU()
 	mCurrentFence++;
 }
 
-/**
- * @brief Resets the frame resources.
- *
- * Clears the frame resources and waits for the GPU to finish processing.
- */
 void Game::ResetFrameResources()
 {
 	WaitForGPU();
@@ -895,18 +673,8 @@ void Game::ResetFrameResources()
 	
 }
 
-/**
- * @brief Gets the static samplers.
- *
- * Returns an array of static sampler descriptions.
- *
- * @return An array of const CD3DX12_STATIC_SAMPLER_DESC objects.
- */
 std::array<const CD3DX12_STATIC_SAMPLER_DESC, 6> Game::GetStaticSamplers()
 {
-	// Applications usually only need a handful of samplers.  So just define them all up front
-	// and keep them available as part of the root signature.  
-
 	const CD3DX12_STATIC_SAMPLER_DESC pointWrap(
 		0, // shaderRegister
 		D3D12_FILTER_MIN_MAG_MIP_POINT, // filter
@@ -959,32 +727,13 @@ std::array<const CD3DX12_STATIC_SAMPLER_DESC, 6> Game::GetStaticSamplers()
 		anisotropicWrap, anisotropicClamp };
 }
 
-/**
- * @brief Gets the height of the hills.
- *
- * Calculates the height of the hills at the specified coordinates.
- *
- * @param x The x-coordinate.
- * @param z The z-coordinate.
- * @return The height of the hills at the specified coordinates.
- */
 float Game::GetHillsHeight(float x, float z)const
 {
 	return 0.1f * (z * sinf(0.1f * x) + x * cosf(0.1f * z));
 }
 
-/**
- * @brief Gets the normal vector of the hills.
- *
- * Calculates the normal vector of the hills at the specified coordinates.
- *
- * @param x The x-coordinate.
- * @param z The z-coordinate.
- * @return The normal vector of the hills at the specified coordinates.
- */
 XMFLOAT3 Game::GetHillsNormal(float x, float z)const
 {
-	// n = (-df/dx, 1, -df/dz)
 	XMFLOAT3 n(
 		-0.03f * z * cosf(0.1f * x) - 0.3f * cosf(0.1f * z),
 		1.0f,

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "State.h"
+#include "../../Common/GameTimer.h"
 #include <iostream>
 
 class MainMenuState : public State
@@ -16,7 +17,7 @@ public:
 		std::cout << "MainMenuState: Drawing...\n";
 	}
 
-	virtual bool Update(float dt)
+	virtual bool Update(const GameTimer& gt)
 	{
 		std::cout << "MainMenuState: Updating...\n";
 		return true;

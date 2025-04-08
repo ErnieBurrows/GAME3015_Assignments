@@ -27,12 +27,12 @@ public:
 		};
 	}
 
-	void Update(float dt)
+	void Update(const GameTimer& gt)
 	{
 		// Upate from the top state downward until one returns false
 		for (auto i = mStack.rbegin(); i != mStack.rend(); ++i)
 		{
-			if (!(*i)->Update(dt))
+			if (!(*i)->Update(gt))
 				break;
 		}
 		ApplyPendingChanges();

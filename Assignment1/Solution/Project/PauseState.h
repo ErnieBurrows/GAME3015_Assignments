@@ -21,7 +21,7 @@ public:
 		std::cout << "PauseState: Drawing...\n";
 	}
 
-	virtual bool Update(float dt)
+	virtual bool Update(const GameTimer& gt)
 	{
 		std::cout << "PauseState: Updating...\n";
 		return false;

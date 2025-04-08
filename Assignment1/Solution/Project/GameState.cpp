@@ -72,7 +72,7 @@ void GameState::Draw()
 	}
 }
 
-bool GameState::Update(float dt)
+bool GameState::Update(const GameTimer& gt)
 {
 	mCurrFrameResourceIndex = (mCurrFrameResourceIndex + 1) % gNumFrameResources;
 	mCurrFrameResource = mFrameResources[mCurrFrameResourceIndex].get();
@@ -86,7 +86,6 @@ bool GameState::Update(float dt)
 		CloseHandle(eventHandle);
 	}
 
-	GameTimer gt;
 	UpdateMainPassCB(gt);
 	mWorld->Update(gt);
 	return true;

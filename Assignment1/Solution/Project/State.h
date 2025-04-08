@@ -1,5 +1,6 @@
 #pragma once
 #include <memory>
+#include "../../Common/GameTimer.h"
 #include<Windows.h>
 
 class StateStack;
@@ -21,7 +22,7 @@ public:
 	virtual ~State() {}
 
 	virtual void Draw() = 0;
-	virtual bool Update(float dt) = 0;
+	virtual bool Update(const GameTimer& gt) = 0;
 	virtual bool HandleEvent(WPARAM btnState, int x, int y) = 0;
 
 protected:

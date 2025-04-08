@@ -112,7 +112,7 @@ void Game::Update(const GameTimer& gt)
 	//UpdateMainPassCB(gt);
 
 	// Update the state stack
-	mStateStack.Update(mTimer.DeltaTime());
+	mStateStack.Update(gt);
 }
 
 void Game::Draw(const GameTimer& gt)

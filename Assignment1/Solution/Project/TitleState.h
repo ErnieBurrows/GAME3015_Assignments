@@ -15,9 +15,9 @@ public:
 		std::cout << "TitleState: Drawing...\n";
 	}
 
-	virtual bool Update(float dt)
+	virtual bool Update(const GameTimer& gt)
 	{
-		mElapsedTime += dt;
+		//mElapsedTime += dt;
 
 		if (mElapsedTime > 2.0f)
 		{

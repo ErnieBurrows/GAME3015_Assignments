@@ -3,7 +3,6 @@
 #include "State.h"
 #include "World.hpp"
 #include "FrameResource.h"
-#include "../../Common/GameTimer.h"
 #include <memory>
 #include <vector>
 
@@ -15,7 +14,7 @@ public:
 	virtual ~GameState();
 
 	virtual void Draw();
-	virtual bool Update(float dt);
+	virtual bool Update(const GameTimer& gt);
 	virtual bool HandleEvent(WPARAM btnState, int x, int y);
 	
 private:

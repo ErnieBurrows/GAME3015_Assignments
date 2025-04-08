@@ -2,7 +2,9 @@
 
 #include "State.h"
 #include "World.hpp"
+#include "FrameResource.h"
 #include <memory>
+#include <vector>
 
 class GameState : public State
 {
@@ -16,6 +18,11 @@ public:
 	virtual bool HandleEvent(WPARAM btnState, int x, int y);
 	
 private:
+	void BuildFrameResources();
+
 	std::unique_ptr<World> mWorld;
+	std::vector<std::unique_ptr<FrameResource>> mFrameResources;
+	int mCurrFrameResourceIndex;
+	FrameResource* mCurrFrameResource;
 
 };

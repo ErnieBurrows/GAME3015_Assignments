@@ -6,34 +6,29 @@
 InstructionsState::InstructionsState(StateStack* stack, Context* context)
     : State(stack, context)
 {
-
-    // Reset rendering resources
     mAllRitems.clear();
     mContext->game->ResetFrameResources();
     mContext->game->BuildMaterials();
 
-    // Background Galaxy Sprite
+
     std::unique_ptr<SpriteNode> backgroundSprite = std::make_unique<SpriteNode>(this);
     backgroundSprite->SetDrawName("Desert", "boxGeo", "box");
     backgroundSprite->setScale(10.0, 1.0, 7.0);
     backgroundSprite->setPosition(0, 0, 0);
     mSceneGraph->attachChild(std::move(backgroundSprite));
 
-    // Control Scheme Visualization
     std::unique_ptr<SpriteNode> WASDSprite = std::make_unique<SpriteNode>(this);
     WASDSprite->SetDrawName("WASD", "boxGeo", "box");
     WASDSprite->setScale(3.5, 3.0, 3.0);
     WASDSprite->setPosition(0, 1, 0);
     mSceneGraph->attachChild(std::move(WASDSprite));
 
-    // Return to Menu Button
     std::unique_ptr<SpriteNode> BackSprite = std::make_unique<SpriteNode>(this);
     BackSprite->SetDrawName("Back", "boxGeo", "box");
     BackSprite->setScale(3.0, 3.0, 3.0);
     BackSprite->setPosition(2.2, 1, -2.2);
     mSceneGraph->attachChild(std::move(BackSprite));
 
-    // Finalize scene setup
     mSceneGraph->build();
     mContext->game->BuildFrameResources(mAllRitems.size());
 }
@@ -59,7 +54,6 @@ bool InstructionsState::Update(const GameTimer& gt)
 
 bool InstructionsState::HandleEvent(WPARAM btnState)
 {
-    //input goes here
     if (d3dUtil::IsKeyDown('Q'))
     {
         RequestStackPop();

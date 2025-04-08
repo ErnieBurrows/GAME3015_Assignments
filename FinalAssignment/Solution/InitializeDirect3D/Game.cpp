@@ -292,9 +292,7 @@ void Game::LoadTextures()
 {
 	CreateTexture("PlaneTex", L"../../Textures/Airplane_Metal.dds");
 	CreateTexture("DesertTex", L"../../Textures/Desert.dds");
-
-	//title text
-	CreateTexture("TitleTex", L"../../Textures/pressToStart.dds");
+	CreateTexture("StartPromptTextTex", L"../../Textures/StartPrompt.dds");
 
 	//mainmenu text
 	CreateTexture("MenuTextTex", L"../../Textures/mmScreen2.dds");
@@ -302,14 +300,7 @@ void Game::LoadTextures()
 	CreateTexture("PauseTextTex", L"../../Textures/pauseScreen.dds");
 	//gamescreen text
 	CreateTexture("GameTextTex", L"../../Textures/gameScreen.dds");
-	//planet image
-	CreateTexture("PlanetTex", L"../../Textures/planet_One.dds");
-	//planet image 2 
-	CreateTexture("PlanetTex2", L"../../Textures/planet_Two.dds");
-	//star image
-	CreateTexture("StarTex", L"../../Textures/star_One.dds");
-	//ship MM image
-	CreateTexture("ShipMM", L"../../Textures/spaceShipMM.dds");
+
 	//wasd
 	CreateTexture("WASDTex", L"../../Textures/WASD.dds");
 	//back text
@@ -366,15 +357,12 @@ void Game::BuildDescriptorHeaps()
 
 	auto PlaneTex = mTextures["PlaneTex"]->Resource;
 	auto DesertTex = mTextures["DesertTex"]->Resource;
+	auto StartPromptTex = mTextures["StartPromptTextTex"]->Resource;
 
-	auto TitleTex = mTextures["TitleTex"]->Resource;
 	auto MMTextTex = mTextures["MenuTextTex"]->Resource;
 	auto PauseTextTex = mTextures["PauseTextTex"]->Resource;
 	auto GameTextTex = mTextures["GameTextTex"]->Resource;
-	auto PlanetTex = mTextures["PlanetTex"]->Resource;
-	auto PlanetTex2 = mTextures["PlanetTex2"]->Resource;
-	auto StarTex = mTextures["StarTex"]->Resource;
-	auto ShipMMTex = mTextures["ShipMM"]->Resource;
+	
 	auto WASDTex = mTextures["WASDTex"]->Resource;
 	auto BackTex = mTextures["BackTex"]->Resource;
 
@@ -399,8 +387,8 @@ void Game::BuildDescriptorHeaps()
 
 	//Title Descriptor
 	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
-	srvDesc.Format = TitleTex->GetDesc().Format;
-	md3dDevice->CreateShaderResourceView(TitleTex.Get(), &srvDesc, hDescriptor);
+	srvDesc.Format = StartPromptTex->GetDesc().Format;
+	md3dDevice->CreateShaderResourceView(StartPromptTex.Get(), &srvDesc, hDescriptor);
 
 	//MM TExt Descriptor
 	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
@@ -416,26 +404,6 @@ void Game::BuildDescriptorHeaps()
 	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
 	srvDesc.Format = GameTextTex->GetDesc().Format;
 	md3dDevice->CreateShaderResourceView(GameTextTex.Get(), &srvDesc, hDescriptor);
-
-	//Planet One Descriptor
-	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
-	srvDesc.Format = PlanetTex->GetDesc().Format;
-	md3dDevice->CreateShaderResourceView(PlanetTex.Get(), &srvDesc, hDescriptor);
-
-	//Planet Two Descriptor
-	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
-	srvDesc.Format = PlanetTex2->GetDesc().Format;
-	md3dDevice->CreateShaderResourceView(PlanetTex2.Get(), &srvDesc, hDescriptor);
-
-	//Star Descriptor
-	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
-	srvDesc.Format = StarTex->GetDesc().Format;
-	md3dDevice->CreateShaderResourceView(StarTex.Get(), &srvDesc, hDescriptor);
-	
-	//Ship Descriptor
-	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
-	srvDesc.Format = ShipMMTex->GetDesc().Format;
-	md3dDevice->CreateShaderResourceView(ShipMMTex.Get(), &srvDesc, hDescriptor);
 
 
 	//WASD Descriptor
@@ -610,17 +578,15 @@ void Game::BuildMaterials()
 {
 	mCurrentMaterialCBIndex = 0;
 	mCurrentDiffuseSrvHeapIndex = 0;
+
 	CreateMaterials("PlayerPlane", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
 	CreateMaterials("Desert", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
+	CreateMaterials("StartPrompt", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
 
-	CreateMaterials("Title", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
 	CreateMaterials("MMText", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
 	CreateMaterials("PauseText", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
 	CreateMaterials("GameText", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
-	CreateMaterials("PlanetOne", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
-	CreateMaterials("PlanetTwo", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
-	CreateMaterials("Star", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
-	CreateMaterials("ShipMM", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
+
 	CreateMaterials("WASD", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
 	CreateMaterials("Back", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
 }

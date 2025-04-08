@@ -55,7 +55,7 @@ void World::buildScene()
 	backgroundSprite->SetDrawName("Desert", "boxGeo", "box");
 	mBackground = backgroundSprite.get();
 	mBackground->setPosition(0, 0, 0.0);
-	mBackground->setScale(10.0, 1.0, 200.0);
+	mBackground->setScale(10.0, 1.0, 7.0);
 	mBackground->setVelocity(0, 0, -mScrollSpeed); 
 	mSceneGraph->attachChild(std::move(backgroundSprite));
 

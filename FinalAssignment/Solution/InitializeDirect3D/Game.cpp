@@ -294,12 +294,8 @@ void Game::LoadTextures()
 	CreateTexture("DesertTex", L"../../Textures/Desert.dds");
 	CreateTexture("StartPromptTextTex", L"../../Textures/StartPrompt.dds");
 	CreateTexture("MainMenuPromptTextTex", L"../../Textures/MainMenuPrompt.dds");
-
-	//pauseScreen text
 	CreateTexture("PauseScreenTex", L"../../Textures/PauseScreen.dds");
-	//gamescreen text
-	CreateTexture("GameTextTex", L"../../Textures/gameScreen.dds");
-
+	CreateTexture("PausePromptTex", L"../../Textures/PausePrompt.dds");
 	CreateTexture("InsturctionsTex", L"../../Textures/Instructions.dds");
 }
 
@@ -355,9 +351,7 @@ void Game::BuildDescriptorHeaps()
 	auto StartPromptTex = mTextures["StartPromptTextTex"]->Resource;
 	auto MainMenuPromptTex = mTextures["MainMenuPromptTextTex"]->Resource;
 	auto PauseScreenTex = mTextures["PauseScreenTex"]->Resource;
-
-	auto GameTextTex = mTextures["GameTextTex"]->Resource;
-	
+	auto PausePromptTex = mTextures["PausePromptTex"]->Resource;
 	auto InstructionsTex = mTextures["InsturctionsTex"]->Resource;
 
 	D3D12_SHADER_RESOURCE_VIEW_DESC srvDesc = {};
@@ -373,7 +367,6 @@ void Game::BuildDescriptorHeaps()
 
 	srvDesc.Texture2D.ResourceMinLODClamp = 0.0f;
 	md3dDevice->CreateShaderResourceView(PlaneTex.Get(), &srvDesc, hDescriptor);
-
 
 	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
 	srvDesc.Format = DesertTex->GetDesc().Format;
@@ -391,11 +384,9 @@ void Game::BuildDescriptorHeaps()
 	srvDesc.Format = PauseScreenTex->GetDesc().Format;
 	md3dDevice->CreateShaderResourceView(PauseScreenTex.Get(), &srvDesc, hDescriptor);
 
-	//Game Descriptor
 	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
-	srvDesc.Format = GameTextTex->GetDesc().Format;
-	md3dDevice->CreateShaderResourceView(GameTextTex.Get(), &srvDesc, hDescriptor);
-
+	srvDesc.Format = PausePromptTex->GetDesc().Format;
+	md3dDevice->CreateShaderResourceView(PausePromptTex.Get(), &srvDesc, hDescriptor);
 
 	hDescriptor.Offset(1, mCbvSrvDescriptorSize);
 	srvDesc.Format = InstructionsTex->GetDesc().Format;
@@ -569,9 +560,7 @@ void Game::BuildMaterials()
 	CreateMaterials("StartPrompt", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
 	CreateMaterials("MainMenuPrompt", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
 	CreateMaterials("PauseScreen", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
-
-	CreateMaterials("GameText", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
-
+	CreateMaterials("PausePrompt", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
 	CreateMaterials("Instructions", XMFLOAT4(1.0f, 1.0f, 1.0f, 1.0f), XMFLOAT3(0.05f, 0.05f, 0.05f), 0.2f);
 }
 

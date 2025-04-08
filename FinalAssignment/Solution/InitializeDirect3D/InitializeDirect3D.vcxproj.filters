@@ -161,9 +161,6 @@
     <ClInclude Include="Command.hpp">
       <Filter>GameEngine</Filter>
     </ClInclude>
-    <ClInclude Include="Player.hpp">
-      <Filter>GameEngine</Filter>
-    </ClInclude>
     <ClInclude Include="TitleState.hpp">
       <Filter>GameEngine\StateSystem\States</Filter>
     </ClInclude>
@@ -190,6 +187,9 @@
     </ClInclude>
     <ClInclude Include="Game.hpp">
       <Filter>GameEngine</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.hpp">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

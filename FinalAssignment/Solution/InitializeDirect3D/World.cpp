@@ -59,22 +59,19 @@ void World::buildScene()
 	mBackground->setVelocity(0, 0, -mScrollSpeed); 
 	mSceneGraph->attachChild(std::move(backgroundSprite));
 
-	std::unique_ptr<SpriteNode> InstructionSprite(new SpriteNode(mState));
-	InstructionSprite->SetDrawName("GameText", "boxGeo", "box");
+	std::unique_ptr<SpriteNode> PausePromptSprite(new SpriteNode(mState));
+	PausePromptSprite->SetDrawName("PausePrompt", "boxGeo", "box");
 	//mBackground = backgroundSprite.get();
 	//mBackground->setPosition(mWorldBounds.left, mWorldBounds.top);
-	InstructionSprite->setPosition(0, 1.0, 2.4);
-	InstructionSprite->setScale(2.0, 0, 2.0);
-	InstructionSprite->setVelocity(0, 0, 0);
-	mSceneGraph->attachChild(std::move(InstructionSprite));
+	PausePromptSprite->setPosition(-1.75, 1.0, 1.75);
+	PausePromptSprite->setScale(2.0, 0, 2.0);
+	PausePromptSprite->setVelocity(0, 0, 0);
+	mSceneGraph->attachChild(std::move(PausePromptSprite));
 
 
 	mSceneGraph->build();
 }
 
-/**
- * @brief Adjusts player position to stay within world bounds
- */
 void World::PlayerPosition()
 {
 	const float borderDistance = 10.f;
@@ -86,7 +83,6 @@ void World::PlayerPosition()
 	position.z = std::min(position.z, mWorldBounds.w);
 	mPlayerAircraft->setPosition(position.x, position.y, position.z);
 }
-
 
 void World::PlayerVelocity()
 {

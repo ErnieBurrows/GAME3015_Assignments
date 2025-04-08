@@ -181,6 +181,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Player2.h" />
     <ClInclude Include="PlayerBase.h" />
+    <ClInclude Include="RenderItem.h" />
     <ClInclude Include="SceneNode.hpp" />
     <ClInclude Include="SpriteNode.h" />
     <ClInclude Include="State.h" />

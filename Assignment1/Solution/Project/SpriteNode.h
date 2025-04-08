@@ -1,12 +1,19 @@
 #pragma once
 #include "Entity.hpp"
+#include <string>
 
 class SpriteNode : public Entity
 {
 public:
-	SpriteNode(Game* game);
+    explicit SpriteNode(Game* game);
+
+    virtual void DrawCurrent() const override;
+    virtual void BuildCurrent() override;
+
+    void SetMaterial(const std::string& materialName);
+    void SetGeometry(const std::string& geoName);
 
 private:
-	virtual void DrawCurrent() const;
-	virtual void BuildCurrent();
+    std::string mMaterialName;
+    std::string mGeoName;
 };

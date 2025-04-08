@@ -1,4 +1,4 @@
-#include "Game.hpp"
+﻿#include "Game.hpp"
 #include "tiny_obj_loader.h"
 
 #include "TitleState.h"
@@ -77,11 +77,6 @@ bool Game::Initialize()
 void Game::OnResize()
 {
 	D3DApp::OnResize();
-
-	// The window resized, so update the aspect ratio and recompute the projection matrix.
-	//XMMATRIX P = XMMatrixPerspectiveFovLH(0.25f * MathHelper::Pi, AspectRatio(), 1.0f, 1000.0f);
-	//XMStoreFloat4x4(&mProj, P);
-
 	mCamera.SetLens(0.25f * MathHelper::Pi, AspectRatio(), 1.0f, 1000.0f);
 }
 
@@ -89,38 +84,13 @@ void Game::Update(const GameTimer& gt)
 {
 	OnKeyboardInput(gt);
 
-	//mWorld.Update(gt);
-	//UpdateCamera(gt);
-
-	// Cycle through the circular frame resource array.
-	/*mCurrFrameResourceIndex = (mCurrFrameResourceIndex + 1) % gNumFrameResources;
-	mCurrFrameResource = mFrameResources[mCurrFrameResourceIndex].get();*/
-
-	// Has the GPU finished processing the commands of the current frame resource?
-	// If not, wait until the GPU has completed commands up to this fence point.
-	/*if (mCurrFrameResource->Fence != 0 && mFence->GetCompletedValue() < mCurrFrameResource->Fence)
-	{
-		HANDLE eventHandle = CreateEventEx(nullptr, nullptr, false, EVENT_ALL_ACCESS);
-		ThrowIfFailed(mFence->SetEventOnCompletion(mCurrFrameResource->Fence, eventHandle));
-		WaitForSingleObject(eventHandle, INFINITE);
-		CloseHandle(eventHandle);
-	}*/
-
-	//AnimateMaterials(gt);
-	//UpdateObjectCBs(gt);
-	//UpdateMaterialCBs(gt);
-	//UpdateMainPassCB(gt);
-
-	// Update the state stack
 	mStateStack.Update(gt);
 }
 
 void Game::Draw(const GameTimer& gt)
 {
-	// Ensure that all commands from the previous frame have finished.
 	FlushCommandQueue();
 
-	// Now it's safe to reset the allocator and command list.
 	ThrowIfFailed(mDirectCmdListAlloc->Reset());
 	ThrowIfFailed(mCommandList->Reset(mDirectCmdListAlloc.Get(), mOpaquePSO.Get()));
 
@@ -147,7 +117,7 @@ void Game::Draw(const GameTimer& gt)
 	mCommandList->SetDescriptorHeaps(_countof(descriptorHeaps), descriptorHeaps);
 	mCommandList->SetGraphicsRootSignature(mRootSignature.Get());
 
-	// Delegate drawing to the active state.
+	// ✅ Draw current state (command list is ready)
 	mStateStack.Draw();
 
 	auto barrierRTtoPresent = CD3DX12_RESOURCE_BARRIER::Transition(
@@ -163,6 +133,7 @@ void Game::Draw(const GameTimer& gt)
 	ThrowIfFailed(mSwapChain->Present(0, 0));
 	mCurrBackBuffer = (mCurrBackBuffer + 1) % SwapChainBufferCount;
 }
+
 
 void Game::OnMouseDown(WPARAM btnState, int x, int y)
 {
@@ -210,19 +181,6 @@ void Game::OnKeyboardInput(const GameTimer& gt)
 
 void Game::UpdateCamera(const GameTimer& gt)
 {
-	// Convert Spherical to Cartesian coordinates.
-	//mEyePos.x = mRadius * sinf(mPhi) * cosf(mTheta);
-	//mEyePos.z = mRadius * sinf(mPhi) * sinf(mTheta);
-	//mEyePos.y = mRadius * cosf(mPhi);
-
-	//// Build the view matrix.
-	//XMVECTOR pos = XMVectorSet(mEyePos.x, mEyePos.y, mEyePos.z, 1.0f);
-	//XMVECTOR target = XMVectorZero();
-	//XMVECTOR up = XMVectorSet(0.0f, 1.0f, 0.0f, 0.0f);
-
-	//XMMATRIX view = XMMatrixLookAtLH(pos, target, up);
-	//XMStoreFloat4x4(&mView, view);
-
 
 }
 

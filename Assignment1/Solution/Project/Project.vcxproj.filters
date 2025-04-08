@@ -200,6 +200,9 @@
     <ClInclude Include="PauseState.h">
       <Filter>GameEngine\StateSystem\States</Filter>
     </ClInclude>
+    <ClInclude Include="RenderItem.h">
+      <Filter>GameEngine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <FxCompile Include="Shaders\Default.hlsl">

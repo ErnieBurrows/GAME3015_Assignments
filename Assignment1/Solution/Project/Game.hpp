@@ -24,11 +24,11 @@ public:
 
 	Microsoft::WRL::ComPtr<ID3D12Fence> GetFence() const { return mFence; }
 
+	void UpdateMaterialCBs(UploadBuffer<MaterialConstants>* currMaterialCB);
 private:
 	void UpdateCamera(const GameTimer& gt);
 	void AnimateMaterials(const GameTimer& gt);
 	void UpdateObjectCBs(const GameTimer& gt);
-	void UpdateMaterialCBs(const GameTimer& gt);
 	void UpdateMainPassCB(const GameTimer& gt);
 
 	Microsoft::WRL::ComPtr<ID3D12Fence> mFence;

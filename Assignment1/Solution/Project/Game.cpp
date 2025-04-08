@@ -255,9 +255,8 @@ void Game::UpdateObjectCBs(const GameTimer& gt)
 	}
 }
 
-void Game::UpdateMaterialCBs(const GameTimer& gt)
+void Game::UpdateMaterialCBs(UploadBuffer<MaterialConstants> *currMaterialCB)
 {
-	auto currMaterialCB = mCurrFrameResource->MaterialCB.get();
 	for (auto& e : mMaterials)
 	{
 		// Only update the cbuffer data if the constants have changed.  If the cbuffer

@@ -1,2 +1,24 @@
-﻿  GameState.cpp
+﻿  Aircraft.cpp
+  Game.cpp
+  GameState.cpp
+  SceneNode.cpp
+  SpriteNode.cpp
+  World.cpp
+  main.cpp
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\World.cpp(39,42): warning C4305: 'argument': truncation from 'double' to 'float'
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\World.cpp(39,35): warning C4305: 'argument': truncation from 'double' to 'float'
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\World.cpp(39,28): warning C4305: 'argument': truncation from 'double' to 'float'
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\World.cpp(48,43): warning C4305: 'argument': truncation from 'double' to 'float'
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\World.cpp(48,36): warning C4305: 'argument': truncation from 'double' to 'float'
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\World.cpp(48,29): warning C4305: 'argument': truncation from 'double' to 'float'
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\Aircraft.cpp(64,52): warning C4267: '=': conversion from 'size_t' to 'UINT', possible loss of data
+D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\Project\SpriteNode.cpp(20,52): warning C4267: '=': conversion from 'size_t' to 'UINT', possible loss of data
+  LINK : D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\x64\Debug\Project.exe not found or not built by the last incremental link; performing full link
+MainMenuState.obj : warning LNK4099: PDB '' was not found with 'MainMenuState.obj' or at ''; linking object as if no debug info
+Player.obj : warning LNK4099: PDB '' was not found with 'Player.obj' or at ''; linking object as if no debug info
+Player2.obj : warning LNK4099: PDB '' was not found with 'Player2.obj' or at ''; linking object as if no debug info
+PlayerBase.obj : warning LNK4099: PDB '' was not found with 'PlayerBase.obj' or at ''; linking object as if no debug info
+State.obj : warning LNK4099: PDB '' was not found with 'State.obj' or at ''; linking object as if no debug info
+StateStack.obj : warning LNK4099: PDB '' was not found with 'StateStack.obj' or at ''; linking object as if no debug info
+tiny_obj_loader.obj : warning LNK4099: PDB '' was not found with 'tiny_obj_loader.obj' or at ''; linking object as if no debug info
   Project.vcxproj -> D:\School\GAME_ENGINE_DEV_II_GAME3015\GAME3015_Assignments\Assignment1\Solution\x64\Debug\Project.exe

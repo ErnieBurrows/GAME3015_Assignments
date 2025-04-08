@@ -24,6 +24,8 @@ void GameState::Draw()
 	std::cout << "GameState: Drawing...\n";
 	mWorld->Draw();
 
+	GetContext().game->UpdateMaterialCBs(mCurrFrameResource->MaterialCB.get());
+
 	std::vector<RenderItem*> renderItems;
 	mWorld->CollectRenderItems(renderItems);
 

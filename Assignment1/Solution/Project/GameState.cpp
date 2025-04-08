@@ -29,7 +29,7 @@ bool GameState::Update(float dt)
 	return true;
 }
 
-bool GameState::HandleEvent(WPARAM btnState)
+bool GameState::HandleEvent(WPARAM btnState, int x, int y)
 {
 	std::cout << "GameState: Handling event...\n";
 	if (btnState != 0)

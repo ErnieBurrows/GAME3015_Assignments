@@ -22,7 +22,7 @@ public:
 		return true;
 	}
 
-	virtual bool HandleEvent(WPARAM btnState)
+	virtual bool HandleEvent(WPARAM btnState, int x, int y)
 	{
 		std::cout << "MainMenuState: Handling event...\n";
 

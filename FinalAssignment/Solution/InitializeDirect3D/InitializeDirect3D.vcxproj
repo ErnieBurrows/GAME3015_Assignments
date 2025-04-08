@@ -152,6 +152,7 @@
     <ClCompile Include="State.cpp" />
     <ClCompile Include="StateStack.cpp" />
     <ClCompile Include="Text.cpp" />
+    <ClCompile Include="tiny_obj_loader.cc" />
     <ClCompile Include="TitleState.cpp" />
     <ClCompile Include="World.cpp" />
   </ItemGroup>
@@ -182,6 +183,7 @@
     <ClInclude Include="State.hpp" />
     <ClInclude Include="StateStack.hpp" />
     <ClInclude Include="Text.h" />
+    <ClInclude Include="tiny_obj_loader.h" />
     <ClInclude Include="TitleState.hpp" />
     <ClInclude Include="World.hpp" />
   </ItemGroup>

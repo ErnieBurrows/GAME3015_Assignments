@@ -9,10 +9,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="Resource Files">
-      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
-      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
-    </Filter>
     <Filter Include="Common">
       <UniqueIdentifier>{4da73e88-7b09-42c1-b89e-7222bf705633}</UniqueIdentifier>
     </Filter>
@@ -24,6 +20,10 @@
     </Filter>
     <Filter Include="GameEngine\StateSystem\States">
       <UniqueIdentifier>{321e981c-895a-4f8a-9088-4d281b3572db}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ExternalCode">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -52,9 +52,6 @@
       <Filter>Common</Filter>
     </ClCompile>
     <ClCompile Include="FrameResource.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="SceneNode.cpp">
@@ -105,6 +102,12 @@
     <ClCompile Include="StateStack.cpp">
       <Filter>GameEngine\StateSystem</Filter>
     </ClCompile>
+    <ClCompile Include="tiny_obj_loader.cc">
+      <Filter>ExternalCode</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>GameEngine</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\Common\UploadBuffer.h">
@@ -135,9 +138,6 @@
       <Filter>Common</Filter>
     </ClInclude>
     <ClInclude Include="FrameResource.h">
-      <Filter>Source Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.hpp">
       <Filter>Source Files</Filter>
     </ClInclude>
     <ClInclude Include="SceneNode.hpp">
@@ -190,6 +190,12 @@
     </ClInclude>
     <ClInclude Include="State.hpp">
       <Filter>GameEngine\StateSystem</Filter>
+    </ClInclude>
+    <ClInclude Include="tiny_obj_loader.h">
+      <Filter>ExternalCode</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.hpp">
+      <Filter>GameEngine</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

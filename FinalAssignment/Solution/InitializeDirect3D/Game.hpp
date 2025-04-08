@@ -113,6 +113,9 @@ public:
 	void BuildMaterials();  ///< Initializes default materials
 	void ResetFrameResources();  ///< Resets frame resource allocation
 
+
+	void LoadObJModel(const std::string& filename, std::unique_ptr<MeshGeometry>& mesh);
+
 	//-------------------------------------------------------------------------
 	// Camera & View
 	//-------------------------------------------------------------------------

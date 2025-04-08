@@ -1,11 +1,7 @@
 #include "Aircraft.hpp"
 #include "Game.hpp"
 
-/**
- * @brief Constructor for Aircraft.
- * @param type The type of aircraft.
- * @param game Pointer to the Game object.
- */
+
 Aircraft::Aircraft(Type type, State* state) : Entity(state)
 	, mType(type)
 {
@@ -23,13 +19,6 @@ Aircraft::Aircraft(Type type, State* state) : Entity(state)
 	}
 }
 
-/**
- * @brief Gets collision category flags for this aircraft
- * @return unsigned int Category flag from Category enumeration
- *
- * @retval Category::PlayerAircraft If aircraft type is Eagle
- * @retval Category::EnemyAircraft For all other types (including Raptor)
- */
 unsigned int Aircraft::getCategory() const
 {
 	switch (mType)
@@ -41,18 +30,6 @@ unsigned int Aircraft::getCategory() const
 	}
 }
 
-/**
- * @brief Executes DirectX 12 rendering commands for the aircraft
- *
- * Configures and submits draw calls using current frame resources:
- * 1. Retrieves constant buffer resources
- * 2. Sets up vertex/index buffers
- * 3. Binds shader resources (textures, materials)
- * 4. Submits indexed draw call
- *
- * @note Skips rendering if mAircraftRitem is null. Requires valid
- *       frame resource setup in Game class.
- */
 void Aircraft::drawCurrent() const
 {	
 	UINT objCBByteSize = d3dUtil::CalcConstantBufferByteSize(sizeof(ObjectConstants));
@@ -86,34 +63,22 @@ void Aircraft::drawCurrent() const
 	}
 }
 
-/**
- * @brief Constructs render data for the aircraft
- *
- * Creates and configures a RenderItem that contains:
- * - World transformation matrix
- * - Object CBV index
- * - Material reference
- * - Geometry data (currently using placeholder 'boxGeo')
- * - Draw parameters for indexed rendering
- *
- * @note The created RenderItem is added to Game's render item list.
- *       Geometry is currently hardcoded to 'boxGeo' - consider making
- *       this configurable based on aircraft type if using different meshes.
- */
 void Aircraft::buildCurrent()
 {
 	Game* game = mState->GetContext()->game;
 
 	auto render = std::make_unique<RenderItem>();
 	renderer = render.get();
+
 	renderer->World = getTransform();
 	renderer->ObjCBIndex = (UINT)mState->getRenderItems().size();
 	renderer->Mat = game->getMaterials()[mSprite].get();
-	renderer->Geo = game->getGeometries()["boxGeo"].get();
+	renderer->Geo = game->getGeometries()["planeGeo"].get();
 	renderer->PrimitiveType = D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
-	renderer->IndexCount = renderer->Geo->DrawArgs["box"].IndexCount;
-	renderer->StartIndexLocation = renderer->Geo->DrawArgs["box"].StartIndexLocation;
-	renderer->BaseVertexLocation = renderer->Geo->DrawArgs["box"].BaseVertexLocation;
+
+	renderer->IndexCount = renderer->Geo->DrawArgs["obj"].IndexCount;
+	renderer->StartIndexLocation = renderer->Geo->DrawArgs["obj"].StartIndexLocation;
+	renderer->BaseVertexLocation = renderer->Geo->DrawArgs["obj"].BaseVertexLocation;
 	mAircraftRitem = render.get();
 	mState->getRenderItems().push_back(std::move(render));
 }
